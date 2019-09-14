@@ -6,11 +6,11 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:14:27 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/14 17:25:07 by bwebb            ###   ########.fr       */
+/*   Updated: 2019/09/14 17:56:09 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemon.h"
+#include "../includes/lemon.h"
 
 int main(void)
 {
@@ -22,4 +22,6 @@ int main(void)
 	if (!checkinput(input))
 		erexit;
 	initrooms(&input, &rooms);
+	putinput(input);
+	putrooms(rooms);
 }

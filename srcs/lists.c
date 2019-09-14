@@ -6,11 +6,11 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 14:43:02 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/14 17:25:01 by bwebb            ###   ########.fr       */
+/*   Updated: 2019/09/14 17:56:29 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemon.h"
+#include "../includes/lemon.h"
 
 t_room	**nodeaddroom(t_room **node, char **line, char bstart, char bend)
 {
@@ -74,7 +74,7 @@ int		initroomlist(t_in **inlist, t_room **roomlist)
 	}	
 }
 
-char	*nodeaddin(t_in **node)
+char	**nodeaddin(t_in **node)
 {
 	t_in	*nd;
 	t_in	*prevnode;
@@ -94,5 +94,5 @@ char	*nodeaddin(t_in **node)
 		*node = nd;
 	if (prevnode)
 		prevnode->next = nd;
-	return ((*node)->line);
+	return (&(*node)->line);
 }

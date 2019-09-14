@@ -6,11 +6,11 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 17:23:00 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/14 17:24:20 by bwebb            ###   ########.fr       */
+/*   Updated: 2019/09/14 17:56:32 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemon.h"
+#include "../includes/lemon.h"
 
 void	erexit(void)
 {

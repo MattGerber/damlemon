@@ -6,11 +6,11 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 16:01:40 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/14 17:17:36 by bwebb            ###   ########.fr       */
+/*   Updated: 2019/09/14 17:56:35 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemon.h"
+#include "../includes/lemon.h"
 
 int		isroom(char *s)
 {
