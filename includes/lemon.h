@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/10 17:23:13 by bwebb            ###   ########.fr       */
+/*   Updated: 2019/09/14 11:02:21 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@ typedef struct	s_input
 }				t_in;
 
 
+typedef struct	s_room
+{
+	char		*rname;
+	int			xcord;
+	int			ycord;
+	char		bant : 1;
+	t_room		**links;
+	
+}				t_room;
 
 
 #endif
