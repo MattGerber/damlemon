@@ -14,7 +14,7 @@ FLAGS = -Wall -Werror -Wextra
 SRC_DIR = ./srcs/
 INC_DIR = ./includes/
 OBJ_DIR = ./srcs/
-OPTIONS = -I$(INC_DIR) -I./libft -lft -L./libft
+OPTIONS = -I$(INC_DIR) -I./Libft -lft -L./Libft
 HDR = ./includes/lemon.h
 
 OBJ_LEM = $(OBJ_DIR)lemon.o $(OBJ_DIR)lists.o $(OBJ_DIR)sauce.o
@@ -43,10 +43,10 @@ fclean: clean fcleanlib
 re: fclean all
 
 relib:
-	@$(MAKE) -C ./libft re
+	@$(MAKE) -C ./Libft re
 
 cleanlib:
-	@$(MAKE) -C ./libft clean
+	@$(MAKE) -C ./Libft clean
 
 fcleanlib: cleanlib
-	@$(MAKE) -C ./libft fclean
+	@$(MAKE) -C ./Libft fclean

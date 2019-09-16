@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/14 17:58:58 by bwebb            ###   ########.fr       */
+/*   Updated: 2019/09/16 17:41:43 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,18 @@ typedef struct		s_room
 	int				xcord;
 	int				ycord;
 	int				bant;
-	char			bstart : 1;
-	char			bend : 1;
+	int				bstart;
+	int				bend;
 	struct s_room	**links;
-	struct s_room	*next
+	struct s_room	*next;
 }					t_room;
 
 void				erexit(void);
 void				putinput(t_in *listin);
 void				putrooms(t_room *rooms);
-void				initroom(t_room **room, char **line, char bstart, char bend);
-char				**nodeaddin(t_in **node);
+void				initroom(t_room **room, char **line, int bstart, int bend);
+int					nodeaddin(t_in **node, char *buff);
 int					checkinput(t_in *inlist);
+void				initroomlist(t_in **inlist, t_room **roomlist);
 
 #endif

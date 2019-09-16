@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 16:01:40 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/14 17:56:35 by bwebb            ###   ########.fr       */
+/*   Updated: 2019/09/16 17:05:37 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int		islink(char *s)
 	int		i;
 	
 	bout = 1;
-	if (!s || s[0] == '\0' || s[0] == '-' || ft_charcount(s, '-') != 2)
+	if (!s || s[0] == '\0' || s[0] == '-' || ft_charcount(s, '-') != 1)
 		return (0);
 	split = ft_strsplit(s, '-');
 	i = 0;
 	while (split[i])
 		i++;
-	if (i != 2 || !ft_isonly(split[0], ft_isdigit) || !ft_isonly(split[1], ft_isdigit))
+	if (i != 2)//need to add check for valid rooms
 		bout = 0;
 	while (i)
 		free(split[i-- - 1]);
@@ -72,20 +72,20 @@ int		checkinput(t_in *inlist)
 	start = 0;
 	end = 0;
 	link = 0;	
-	if (!isonly(inlist->line, ft_isdigit))
+	if (!ft_isonly(inlist->line, ft_isdigit))
 		return (0);
 	inlist = inlist->next;
 	while (inlist)
 	{
-		if (!(islink(inlist->line) || isroom(inlist->line) || isins(inlist->line) || inlist->line[0] == '#'))
+		if ((!(islink(inlist->line)) && !isroom(inlist->line) && !isins(inlist) && !(inlist->line[0] == '#')) || ((isins(inlist) == 1  && start) || ((isins(inlist) == 2 && end))))
 			return (0);
 		if (islink(inlist->line))
 			link = 1;
-		if (isins(inlist->line) == 1)
+		if (isins(inlist) == 1)//need to add check for order. ants>rooms>links
 			start = 1;
-		if (isins(inlist->line) == 2)
+		if (isins(inlist) == 2)
 			end = 1;
-		inlist->next;
+		inlist = inlist->next;
 	}
 	return ((start && end && link) ? 1 : 0);
 }

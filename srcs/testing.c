@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 17:27:28 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/14 17:56:25 by bwebb            ###   ########.fr       */
+/*   Updated: 2019/09/16 17:42:59 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void	putinput(t_in *listin)
 	while (listin)
 	{
 		printf("%s\n", listin->line);
-		listin = listin->line;
+		listin = listin->next;
 	}
+	printf("\n\n");
 }
 
 void	putrooms(t_room *rooms)
@@ -28,10 +29,11 @@ void	putrooms(t_room *rooms)
 	int j;
 
 	i = 0;
+	printf("Rooms: \n\n");
 	while (rooms)
 	{
 		i++;
-		printf("Rooms: \n\nlist number: %i\nname: %s\nx cord: %i\ny cord: %i\nants: %i\nstart: %i\nend: %i\n", i, rooms->rname, rooms->xcord, rooms->xcord, rooms->bant, rooms->bstart, rooms->bend);
+		printf("list number: %i\nname: %s\nx cord: %i\ny cord: %i\nants: %i\nstart: %i\nend: %i\n\n", i, rooms->rname, rooms->xcord, rooms->xcord, rooms->bant, rooms->bstart, rooms->bend);
 		if (rooms->links)
 		{
 			printf("links: \n");
@@ -41,5 +43,4 @@ void	putrooms(t_room *rooms)
 		}
 		rooms = rooms->next;
 	}
-	printf("\n\n\n\n");
 }
