@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/17 16:04:41 by bwebb            ###   ########.fr       */
+/*   Updated: 2019/09/17 16:37:17 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 typedef struct		s_cluster
 {
 	struct s_input	*input;
-	struct s_links			*links;
-	struct s_routes		*routes;
-	struct s_room			*rooms;
+	struct s_links	*links;
+	struct s_routes	*routes;
+	struct s_room	*rooms;
 }					t_cluster;
 
 typedef struct		s_input
@@ -68,6 +68,7 @@ int					checkinput(t_in *inlist);
 void				initroomlist(t_cluster **cluster);
 void    			initcluster(t_cluster **cluster);
 int					isins(t_in *inlist);
+int					islink(char *s);
 t_room				*findroom(t_room *roomlist, char *name);
 void				putlinks(t_links *linkslist);
 void				putallthethings(t_cluster *cluster);

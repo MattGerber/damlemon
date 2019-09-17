@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 15:15:11 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/17 16:07:01 by bwebb            ###   ########.fr       */
+/*   Updated: 2019/09/17 16:38:03 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void    initlinkslist(t_cluster **cluster)
         tin = tin->next;
     while (tin)
     {
-        if (isins(tin))
+        if (islink(tin->line))
         {
             split = ft_strsplit(tin->line, '-');
             linksaddnode(cluster, findroom((*cluster)->rooms, split[0]), findroom((*cluster)->rooms, split[1]));
