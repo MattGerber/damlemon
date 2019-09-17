@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:14:27 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/17 16:38:18 by bwebb            ###   ########.fr       */
+/*   Updated: 2019/09/17 17:20:01 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ int main(void)
 	putallthethings(cluster);
 	return (1);
 }
-//check that ive used the isrooms function for initrooms 
+//check that ive used the isrooms function for initrooms
+//dups in links

@@ -1,36 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lists.c                                            :+:      :+:    :+:   */
+/*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/14 14:43:02 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/17 17:15:21 by bwebb            ###   ########.fr       */
+/*   Created: 2019/09/17 17:27:39 by bwebb             #+#    #+#             */
+/*   Updated: 2019/09/17 18:08:29 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
 
-int		nodeaddin(t_in **node, char *buff)
+void	delpath(t_path **path)
 {
-	t_in	*nd;
-	t_in	*prevnode;
+	if ((*path)->next)
+		delpath(&((*path)->next));
+	free(*path);
+}
 
-	nd = *node;
+int    pathaddnode(t_path **path, t_room *room)
+{
+	t_path	*nd;
+	t_path	*prevnode;
+
+	nd = *path;
 	prevnode = NULL;
 	while (nd)
 	{
 		prevnode = nd;
 		nd = nd->next;
 	}
-	if (!(nd = (t_in *)malloc(sizeof(t_in))))
+	if (!(nd = (t_path *)malloc(sizeof(t_path))))
 		return (0);
-	nd->line = buff;
-	nd->next = NULL;
-	if (!*node)
-		*node = nd;
+	nd->room = room;
+    nd->next = NULL;
+	if (!path)
+		path = nd;
 	if (prevnode)
 		prevnode->next = nd;
-	return (1);
+    return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/17 16:37:17 by bwebb            ###   ########.fr       */
+/*   Updated: 2019/09/17 18:12:07 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ typedef struct		s_cluster
 {
 	struct s_input	*input;
 	struct s_links	*links;
-	struct s_routes	*routes;
+	struct s_artery	*artery;
 	struct s_room	*rooms;
 }					t_cluster;
 
@@ -37,16 +37,17 @@ typedef struct		s_links
 
 typedef struct 		s_path
 {
-	struct s_room			*room;
+	struct s_room	*room;
+	struct s_room	*start;
 	struct	s_path	*next;
 }					t_path;
 
-typedef struct		s_routes
+typedef struct		s_artery
 {
 	int				moves;
-	struct s_path			*path;
-	struct s_routes	*next;
-}					t_routes;
+	struct s_path	*path;
+	struct s_artery	*next;
+}					t_artery;
 
 typedef struct		s_room
 {
@@ -73,6 +74,10 @@ t_room				*findroom(t_room *roomlist, char *name);
 void				putlinks(t_links *linkslist);
 void				putallthethings(t_cluster *cluster);
 void				initlinkslist(t_cluster **cluster);
+int  				pathaddnode(t_path **path, t_room *room);
+void				delpath(t_path **path);
+
+
 
 
 #endif
