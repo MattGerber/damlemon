@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lists.c                                            :+:      :+:    :+:   */
+/*   cluster.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/14 14:43:02 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/17 15:37:22 by bwebb            ###   ########.fr       */
+/*   Created: 2019/09/17 15:01:40 by bwebb             #+#    #+#             */
+/*   Updated: 2019/09/17 15:05:54 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
 
-
-
-int		nodeaddin(t_in **node, char *buff)
+void    initcluster(t_cluster **cluster)
 {
-	t_in	*nd;
-	t_in	*prevnode;
-
-	nd = *node;
-	prevnode = NULL;
-	while (nd)
-	{
-		prevnode = nd;
-		nd = nd->next;
-	}
-	if (!(nd = (t_in *)malloc(sizeof(t_in))))
-		return (0);
-	nd->line = buff;
-	nd->next = NULL;
-	if (!*node)
-		*node = nd;
-	if (prevnode)
-		prevnode->next = nd;
-	return (1);
+    (*cluster)->input = NULL;
+    (*cluster)->links = NULL;
+    (*cluster)->routes = NULL;
+    (*cluster)->rooms = NULL;
 }

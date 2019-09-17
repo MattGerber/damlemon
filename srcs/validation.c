@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 16:01:40 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/16 17:05:37 by bwebb            ###   ########.fr       */
+/*   Updated: 2019/09/17 14:52:20 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		checkinput(t_in *inlist)
 			start = 1;
 		if (isins(inlist) == 2)
 			end = 1;
-		inlist = inlist->next;
+		inlist = inlist->next;//check for room dupes
 	}
 	return ((start && end && link) ? 1 : 0);
 }

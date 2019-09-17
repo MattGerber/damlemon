@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:14:27 by bwebb             #+#    #+#             */
-/*   Updated: 2019/09/16 17:21:11 by bwebb            ###   ########.fr       */
+/*   Updated: 2019/09/17 16:03:47 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 int main(void)
 {
-	t_in	*input;
-	t_room	*rooms;
-	char	**buff;
+	t_cluster	*cluster;
+	char		**buff;
 
-	input = NULL;
-	rooms = NULL;
+	cluster = (t_cluster*)malloc(sizeof(t_cluster));
+	initcluster(&cluster);
 	buff = malloc(0);
 	while (get_next_line(0, buff) > 0)
-		if (!nodeaddin(&input, *buff))
+		if (!nodeaddin(&(cluster->input), *buff))
 			erexit();
-	if (!checkinput(input))
+	if (!checkinput(cluster->input))
 		erexit();
-	initroomlist(&input, &rooms);
-	putinput(input);
-	putrooms(rooms);
+	initroomlist(&cluster);
+	initlinkslist(&cluster);
+	putallthethings(cluster);
 	return (1);
 }
+//check that ive used the isrooms function for initrooms 
