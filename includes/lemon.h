@@ -14,6 +14,7 @@
 # define LEMON_H
 # include "../Libft/libft.h"
 
+/* old lemons
 typedef struct		s_cluster
 {
 	struct s_input	*input;
@@ -76,7 +77,7 @@ void				putallthethings(t_cluster *cluster);
 void				initlinkslist(t_cluster **cluster);
 int  				pathaddnode(t_path **path, t_room *room);
 void				delpath(t_path **path);
-
+*/
 
 
 
