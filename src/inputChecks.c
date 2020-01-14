@@ -6,9 +6,11 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:05 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/13 17:34:12 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/14 13:24:13 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../includes/lemon.h"
 
 int	isAnts(char *line)
 {
@@ -23,10 +25,10 @@ int	isRoom(char *line)
 	char **arr;
 	
 	arr = ft_strsplit(line, ' ');
-	if ((ft_arrlen(arr) != 3) || (arr[1] == 'L') || !(ft_isonly(arr[1], ft_isdigit())) || !(ft_isonly(arr[2], ft_isdigit())))
+	if ((ft_arrlen(arr) != 3) || (arr[0][0] == 'L') || !(ft_isonly(arr[1], ft_isdigit)) || !(ft_isonly(arr[2], ft_isdigit)))
 		return (0);
 	while (arr)
-		free(arr++);
+		free(arr);
 	return (1);
 }//tests if line is a valid room
 
@@ -35,9 +37,9 @@ int	isLink(char *line)
 	char **arr;
 	
 	arr = ft_strsplit(line, '-');
-	if ((ft_arrlen(arr) != 2) || !(ft_isonly(arr[0], ft_isdigit())) || !(ft_isonly(arr[1], ft_isdigit())))
+	if ((ft_arrlen(arr) != 2) || !(ft_isonly(arr[0], ft_isdigit)) || !(ft_isonly(arr[1], ft_isdigit)))
 		return (0);//checks for 1 dash in link
 	while (arr)
-		free(arr++);
+		free(arr);
 	return (1);
 }
