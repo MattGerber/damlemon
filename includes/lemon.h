@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/16 16:14:08 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/16 22:40:39 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void				delpath(t_path **path);
 typedef	struct		s_input
 {
 	char			*line;
+	t_network			*roomnode;
 	struct s_input	*next;
 }					t_input;
 
@@ -93,6 +94,43 @@ typedef struct		s_inputChecks
 	int				links;
 }					t_inputChecks;
 
+typedef struct		s_network
+{
+	int				id;
+	char			*name;
+	char			**links;
+	int				x;
+	int				y;
+	int				start;
+	int				end;
+}					t_network;
+
+typedef struct		s_vein
+{
+	struct s_network	*node;
+	struct s_vein	*next;
+}					t_vein;
+
+typedef struct		s_artery
+{
+	int				id;
+	struct s_vein	*vein;
+	int				totnodes;
+	struct s_artery	*next;
+};
+
+
+typedef struct		s_heart
+{
+	int				ants;
+	char			*buff;
+	struct s_input	*input;
+	struct s_inputChecks	*inputChecks;
+	struct s_network	*network;
+}					t_heart;
+
+
+
 
 int					addInputNode(t_input **inputList, char *line);
 void				freeInputList(t_input **inputList);
@@ -101,7 +139,7 @@ int	isRoom(char *line);
 int	isLink(char *line, t_input *roomNames);
 int		validateInput(t_input *inputNode);
 void	erexit(char *errMsg);
-void	putInputList(t_input **inputList);
+void	putInputList(t_input *inputList);
 void	putInputChecks(t_inputChecks *checks);
 
 

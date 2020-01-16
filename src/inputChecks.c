@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:05 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/16 16:47:51 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/16 21:30:23 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	isLink(char *line, t_input *roomNames)
 	char **arr;
 	
 	arr = ft_strsplit(line, '-');
-	if ((ft_arrlen(arr) != 2) || !(roomNameExists(arr[0], roomNames)) || !(roomNameExists(arr[1], roomNames)))
+	if ((ft_arrlen(arr) != 2) || (roomNames && ((!(roomNameExists(arr[0], roomNames))) || (!roomNameExists(arr[1], roomNames)))))
 		return (0);//checks for 1 dash in link
 	while (arr[0])
     	free((arr++)[0]);

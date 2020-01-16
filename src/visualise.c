@@ -6,17 +6,14 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 09:47:52 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/16 17:25:08 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/16 20:14:45 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
 
-void	putInputList(t_input **inputList)
+void	putInputList(t_input *curNode)
 {
-	t_input *curNode;
-
-	curNode = *inputList;
 	while (curNode)
 	{
 		ft_putendl(curNode->line);

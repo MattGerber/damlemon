@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/16 14:35:58 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/16 22:06:01 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,21 @@ char	*test(char *str)
 
 int	main(void)
 {
-	char	*buff;
-	t_input	*inputHead;
+	t_heart	*heart;
 	
-	inputHead = NULL;
-	while (get_next_line(0, &buff)) {
-			addInputNode(&inputHead, buff);
+	heart = (t_heart*)malloc(sizeof(t_heart));
+	
+	heart->input = NULL;
+	while (get_next_line(0, &(heart->buff))) {
+			addInputNode(&(heart->input), heart->buff);
 	}
-	putInputList(&inputHead);
+	putInputList(heart->input);
+	ft_putendl(validateInput(heart->input) ? "input OK!" : "bad validation");
+
+	initroomnodes(&heart);
+	
+	
 	// freeInputList(&inputHead);
-	ft_putendl(validateInput(inputHead) ? "input OK!" : "bad validation");
-		// erexit("Bad map file");
 	// while (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 09:36:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/16 18:01:51 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/16 20:48:18 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int		runInputChecks(t_input *inputNode, t_inputChecks **inputChecks)
 	roomNames = NULL;
 	while (inputNode)
 	{
-		printf("%s\n", inputNode->line);
 		if (isAnts(inputNode->line))
 		{
 			if ((*inputChecks)->links || (*inputChecks)->rooms || (*inputChecks)->ants )
@@ -80,7 +79,6 @@ int		runInputChecks(t_input *inputNode, t_inputChecks **inputChecks)
 		}
 		else if (ft_strequ(inputNode->line, "##start") == 1)
 		{
-			ft_putendl("test start");
 			if ((!inputNode->next) || (!isRoom(inputNode->next->line)) || (*inputChecks)->start)
 				return (0);
 			(*inputChecks)->start = 1;
@@ -107,7 +105,10 @@ int		validateInput(t_input *inputNode)
 	checks = (t_inputChecks*)malloc(sizeof(t_inputChecks));
 	initChecks(&checks);
 	ret = runInputChecks(inputNode, &checks);
-	putInputChecks(checks);
+	// putInputChecks(checks);
 	free (checks);
 	return (ret);
+	//todo
+	//name dupes in rooms
+	//dupe links
 }
