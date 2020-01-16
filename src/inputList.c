@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 09:36:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/16 16:25:20 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/16 16:34:03 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		runInputChecks(t_input *inputNode, t_inputChecks **inputChecks)
 {
 	t_input	*roomNames;
 	
+	roomNames = NULL;
 	while (inputNode)
 	{
 		if (isAnts(inputNode->line))
@@ -68,7 +69,7 @@ int		runInputChecks(t_input *inputNode, t_inputChecks **inputChecks)
 			if (!(*inputChecks)->ants || (*inputChecks)->links || ((inputNode->line)[0] == 'L'))
 				return (0);
 			(*inputChecks)->rooms = 1;
-			// addInputNode(&roomNames, ft_strsub(inputNode->line, 0, ft_strnchr(inputNode->line, ' ')));
+			addInputNode(&roomNames, ft_strsub(inputNode->line, 0, ft_strnchr(inputNode->line, ' ')));
 		}
 		else if (isLink(inputNode->line, roomNames))
 		{
