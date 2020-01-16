@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemon.c                                            :+:      :+:    :+:   */
+/*   visualise.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/16 14:35:58 by bwebb            ###   ########.fr       */
+/*   Created: 2020/01/16 09:47:52 by bwebb             #+#    #+#             */
+/*   Updated: 2020/01/16 15:45:54 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
 
-char	*test(char *str)
+void	putInputList(t_input **inputList)
 {
-	str = "test";
-	return (str);
+	t_input *curNode;
+
+	curNode = *inputList;
+	while (curNode)
+	{
+		ft_putendl(curNode->line);
+		curNode = curNode->next;
+	};
 }
 
-int	main(void)
+void	putInputChecks(t_inputChecks *checks)
 {
-	char	*buff;
-	t_input	*inputHead;
-	
-	inputHead = NULL;
-	while (get_next_line(0, &buff)) {
-			addInputNode(&inputHead, buff);
-	}
-	putInputList(&inputHead);
-	// freeInputList(&inputHead);
-	ft_putendl(validateInput(inputHead) ? "input OK!" : "bad validation");
-		// erexit("Bad map file");
-	// while (1);
-	return (0);
+	ft_putnbr(checks->ants);
+	ft_putendl("");
+	ft_putnbr(checks->end);
+	ft_putendl("");
+	ft_putnbr(checks->links);
+	ft_putendl("");
+	ft_putnbr(checks->rooms);
+	ft_putendl("");
+	ft_putnbr(checks->start);
+	ft_putendl("");
 }

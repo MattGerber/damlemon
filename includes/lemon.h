@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/14 15:42:15 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/16 16:14:08 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void				delpath(t_path **path);
 typedef	struct		s_input
 {
 	char			*line;
-	int				num;
 	struct s_input	*next;
 }					t_input;
 
@@ -96,12 +95,14 @@ typedef struct		s_inputChecks
 
 
 int					addInputNode(t_input **inputList, char *line);
-// void				freeInputList(t_input *inputList);
+void				freeInputList(t_input **inputList);
 int	isAnts(char *line);
 int	isRoom(char *line);
-int	isLink(char *line);
+int	isLink(char *line, t_input *roomNames);
 int		validateInput(t_input *inputNode);
 void	erexit(char *errMsg);
+void	putInputList(t_input **inputList);
+void	putInputChecks(t_inputChecks *checks);
 
 
 #endif
