@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/16 22:40:39 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/16 23:02:51 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,9 @@ typedef struct		s_artery
 {
 	int				id;
 	struct s_vein	*vein;
-	int				totnodes;
+	int				veinlen;
 	struct s_artery	*next;
-};
+}					t_artery;
 
 
 typedef struct		s_heart
@@ -127,6 +127,7 @@ typedef struct		s_heart
 	struct s_input	*input;
 	struct s_inputChecks	*inputChecks;
 	struct s_network	*network;
+	struct s_artery	*artery;
 }					t_heart;
 
 
