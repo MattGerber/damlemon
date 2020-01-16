@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 09:36:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/16 16:34:03 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/16 18:01:51 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ int		runInputChecks(t_input *inputNode, t_inputChecks **inputChecks)
 	roomNames = NULL;
 	while (inputNode)
 	{
+		printf("%s\n", inputNode->line);
 		if (isAnts(inputNode->line))
 		{
-			if ((*inputChecks)->links || (*inputChecks)->rooms)
+			if ((*inputChecks)->links || (*inputChecks)->rooms || (*inputChecks)->ants )
 				return (0);
 			(*inputChecks)->ants = 1;	
 		}
@@ -77,14 +78,18 @@ int		runInputChecks(t_input *inputNode, t_inputChecks **inputChecks)
 				return (0);
 			(*inputChecks)->links = 1;
 		}
-		else if (ft_strcmp(inputNode->line, "##start") || ft_strcmp(inputNode->line, "##end"))
+		else if (ft_strequ(inputNode->line, "##start") == 1)
 		{
-			if ((!inputNode->next) || (!isRoom(inputNode->next->line)))
+			ft_putendl("test start");
+			if ((!inputNode->next) || (!isRoom(inputNode->next->line)) || (*inputChecks)->start)
 				return (0);
-			if (ft_strcmp(inputNode->line, "##start"))
-				(*inputChecks)->start = 1;
-			else
-				(*inputChecks)->end = 1;
+			(*inputChecks)->start = 1;
+		}
+		else if (ft_strequ(inputNode->line, "##end") == 1)
+		{
+			if ((!inputNode->next) || (!isRoom(inputNode->next->line)) || (*inputChecks)->end)
+				return (0);
+			(*inputChecks)->end = 1;
 		}
 		else if ((inputNode->line)[0] != '#')
 			return (0);
