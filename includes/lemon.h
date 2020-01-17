@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/16 23:02:51 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/17 13:53:03 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ typedef struct		s_vein
 typedef struct		s_artery
 {
 	int				id;
+	int				ants;
 	struct s_vein	*vein;
-	int				veinlen;
 	struct s_artery	*next;
 }					t_artery;
 
@@ -128,7 +128,17 @@ typedef struct		s_heart
 	struct s_inputChecks	*inputChecks;
 	struct s_network	*network;
 	struct s_artery	*artery;
+	struct s_traffic	*traffic;
 }					t_heart;
+
+typedef struct		s_traffic
+{
+	int				id;
+	struct s_traffic	*parent;
+	struct s_vein	*veinnode;
+	struct s_traffic	*next;
+}					t_traffic;
+
 
 
 
@@ -142,6 +152,8 @@ int		validateInput(t_input *inputNode);
 void	erexit(char *errMsg);
 void	putInputList(t_input *inputList);
 void	putInputChecks(t_inputChecks *checks);
+int		veinlen(t_vein *vein);
+int		addant(t_traffic **traffic, int	id, t_vein	*veinnode);
 
 
 #endif

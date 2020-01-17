@@ -6,71 +6,104 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/16 23:29:06 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/17 14:29:38 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
 
-int		arterylen(t_artery *artery)
+void	initants(t_heart **heart)
 {
-	int	i;
-
-	i = 0;
-	while (artery)
+	t_artery	*artrunner;
+	t_artery	*shortvein;
+	
+	artrunner = (*heart)->artery;
+	while (artrunner)
 	{
-		i++;
-		artery = artery->next;
-	};
-	return (i);
-}
-
-void	initveinlen(int **veins, t_artery *artery)
-{
-	int i;
-
-	i = 0;
-	while (artery)
-	{
-		(*veins)[i] = artery->veinlen;
-		artery = artery->next;
-		i++;
-	};
-	(*veins)[i] = NULL;
-}
-
-void	stackants(int ants, int **veins,  t_artery *artery)
-{
-	int	i;
-	int	k;
-
-	while (ants)
-	{
-		i = 0;
-		k = 0;
-		while ((*veins)[++i])
-			if ((*veins)[i] < (*veins)[k])
-				k = i;
-		(*veins)[k]++;
-		ants--;
+		artrunner->ants = veinlen(artrunner->vein);
+		artrunner = artrunner->next;
 	}
-	i = 0;
-	while (artery)
+	while ((*heart)->ants)
 	{
-		(*veins)[i] -= artery->veinlen;
-		artery = artery->next;
-		i++;
-	};
+		shortvein = (*heart)->artery;
+		artrunner = shortvein->next;
+		while (artrunner)
+		{
+			if (artrunner->ants < shortvein->ants)
+				shortvein = artrunner;
+			artrunner = artrunner->next;
+		}
+	}
+	artrunner = (*heart)->artery;
+	while (artrunner)
+	{
+		artrunner->ants -= veinlen(artrunner->vein);
+		artrunner = artrunner->next;
+	}	
+}
+
+//write removeparkedants
+void	removeparkedants(t_heart **heart)
+{
+	t_traffic	*valve;
+	t_traffic	*temp;
+
+	valve = (*heart)->traffic;
+	temp = NULL;
+	while (valve)
+	{
+		if (valve->veinnode->node->end)
+		{
+			if (!temp)
+			{
+				temp = valve;
+				valve = valve->next;
+				(*heart)->traffic = valve;
+				free(temp);
+				temp = NULL;
+			}
+			else
+			{
+				temp->next = valve->next;
+				free(valve);
+				valve = temp->next;
+			}
+		}
+	}
 }
 
 void	beat(t_heart **heart)
 {
-	int		*veins;
+	t_artery	*blood;
+	t_traffic	*valve;
+	int	i;
 	
-	veins = (int*)malloc(sizeof(int) * arterylen((*heart)->artery));
-	initveinlen(&veins, (*heart)->artery);
-	stackants((*heart)->ants, &veins, (*heart)->artery);
-	
-	
-	
+	initants(heart);
+	blood = (*heart)->artery;
+	i = 1;
+	while (1)
+	{
+		blood = (*heart)->artery;
+		while (blood)
+		{
+			if (blood->ants)
+				addant((*heart)->traffic, i++, blood->vein);
+			blood = blood->next;
+		}
+		valve = (*heart)->traffic;
+		while (valve)
+		{
+			removeparkedants(&((*heart)->traffic));
+			valve->veinnode = valve->veinnode->next;
+			ft_putchar('L');
+			ft_putnbr(valve->id);
+			ft_putchar('-');
+			ft_putstr(valve->veinnode->node->name);
+			if (valve->next)
+				ft_putchar(' ');
+			valve = valve->next;
+		}
+		if (!(*heart)->traffic)
+			break ;
+	}
 }

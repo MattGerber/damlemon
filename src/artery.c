@@ -6,8 +6,21 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/16 22:45:16 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/17 12:49:15 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
+
+int		veinlen(t_vein *vein)
+{
+	int	i;
+
+	i = 0;
+	while (vein)
+	{
+		i++;
+		vein = vein->next;
+	}
+	return (i);
+}
