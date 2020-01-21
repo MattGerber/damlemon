@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 20:18:59 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/16 22:26:03 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/21 16:50:33 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	initroomnodes(t_heart **heart)
 			input->roomnode->y = arr[2];
 			input->roomnode->start = 0;
 			input->roomnode->end = 0;
+			input->roomnode->visited = 0;
 			while (arr[0])
     			free((arr++)[0]);
 			poplinks(&(input->roomnode), input);

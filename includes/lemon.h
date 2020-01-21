@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/17 13:53:03 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/21 17:48:30 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,13 @@ typedef	struct		s_input
 	struct s_input	*next;
 }					t_input;
 
+typedef struct		s_veinids
+{
+	int				id;
+	struct s_veinids	*next;
+}					t_veinids;
+
+
 typedef struct		s_inputChecks
 {
 	int				start;
@@ -97,8 +104,9 @@ typedef struct		s_inputChecks
 typedef struct		s_network
 {
 	int				id;
+	int				visited;
 	char			*name;
-	char			**links;
+	t_network		**links;
 	int				x;
 	int				y;
 	int				start;
@@ -129,6 +137,7 @@ typedef struct		s_heart
 	struct s_network	*network;
 	struct s_artery	*artery;
 	struct s_traffic	*traffic;
+	struct s_queue			*queue;
 }					t_heart;
 
 typedef struct		s_traffic
@@ -138,6 +147,14 @@ typedef struct		s_traffic
 	struct s_vein	*veinnode;
 	struct s_traffic	*next;
 }					t_traffic;
+
+typedef struct			s_queue
+{
+	struct s_network	*node;
+	struct s_queue		*parent;
+	struct s_queue		*next;
+}						t_queue;
+
 
 
 
@@ -154,6 +171,7 @@ void	putInputList(t_input *inputList);
 void	putInputChecks(t_inputChecks *checks);
 int		veinlen(t_vein *vein);
 int		addant(t_traffic **traffic, int	id, t_vein	*veinnode);
+int		pushq(t_queue **queue, t_queue **parent, t_network **node);
 
 
 #endif
