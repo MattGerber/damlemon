@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:36:38 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/22 10:16:31 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/22 17:31:49 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 int		pushq(t_queue **queue, t_queue **parent, t_network **node)
 {
-	t_queue *curNode;
-	t_queue *newNode;
+	t_queue *curnode;
+	t_queue *newnode;
 
-	curNode = *queue;
-	while (curNode && curNode->next)
-		curNode = curNode->next;
-	if (!(newNode = (t_queue*)malloc(sizeof(t_queue))))
+	curnode = *queue;
+	while (curnode && curnode->next)
+		curnode = curnode->next;
+	if (!(newnode = (t_queue*)malloc(sizeof(t_queue))))
 		return (0);
-	newNode->parent = (*parent) ? *parent : NULL;
-	newNode->node = *node;
-	newNode->next = NULL;
+	newnode->parent = (*parent) ? *parent : NULL;
+	newnode->node = *node;
+	newnode->next = NULL;
 	if (*queue)
-		curNode->next = newNode;
+		curnode->next = newnode;
 	else
-		*queue = newNode;
-	// *((*queue) ? queue : &(curNode->next)) = newNode;
+		*queue = newnode;
+	// *((*queue) ? queue : &(curnode->next)) = newnode;
 	return (1);
 }
 

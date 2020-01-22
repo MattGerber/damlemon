@@ -6,22 +6,22 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 09:47:52 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/16 20:14:45 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/22 17:40:51 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
 
-void	putInputList(t_input *curNode)
+void	putinputlist(t_input *curnode)
 {
-	while (curNode)
+	while (curnode)
 	{
-		ft_putendl(curNode->line);
-		curNode = curNode->next;
+		ft_putendl(curnode->line);
+		curnode = curnode->next;
 	};
 }
 
-void	putInputChecks(t_inputChecks *checks)
+void	putinputchecks(t_inputchecks *checks)
 {
 	ft_putnbr(checks->ants);
 	ft_putendl(" ants");

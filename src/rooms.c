@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 20:18:59 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/22 17:01:35 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/22 17:42:09 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ void	poplinks(t_network **node, t_input *links)
 	i = 0;
 	while (links)
 	{
-		if (isLink(links, NULL))
+		if (islink(links, NULL))
 		{
 			arr = ft_strsplit(links->line, ' ');
 			if (ft_strequ(arr[0], (*node)->name))
 			{
-				addInputNode(&linked, ft_strdup(arr[1]));
+				addinputnode(&linked, ft_strdup(arr[1]));
 				i++;
 			}
 			if (ft_strequ(arr[1], (*node)->name))
 			{
-				addInputNode(&linked, ft_strdup(arr[0]));
+				addinputnode(&linked, ft_strdup(arr[0]));
 				i++;
 			}
 			while (arr[0])
@@ -47,7 +47,7 @@ void	poplinks(t_network **node, t_input *links)
 		arr++;
 		links = links->next;
 	}
-	freeInputList(&linked);
+	freeinputlist(&linked);
 	(*node)->links = arr;
 }
 
@@ -56,7 +56,7 @@ void	setstartend(t_heart **heart)
 	t_input *input;
 
 	input = (*heart)->input;
-	while (!isLink(input->line, NULL));
+	while (!islink(input->line, NULL))
 	{
 		if (ft_strequ(input->line, "##start") == 1)
 		{
@@ -77,15 +77,15 @@ void	initroomnodes(t_heart **heart)
 	(*heart)->ants = ft_atoi((*heart)->input->line);
 	input = (*heart)->input->next;
 
-	while (!islink(input->line))
+	while (!islink(input->line, NULL))
 	{
-		if (isRoom(input->line))
+		if (isroom(input->line))
 		{
 			input->roomnode = (t_network*)malloc(sizeof(t_network));
 			arr = ft_strsplit(input->line, ' ');
 			input->roomnode->name = arr[0];
-			input->roomnode->x = arr[1];
-			input->roomnode->y = arr[2];
+			input->roomnode->x = ft_atoi(arr[1]);
+			input->roomnode->y = ft_atoi(arr[2]);
 			input->roomnode->start = 0;
 			input->roomnode->end = 0;
 			input->roomnode->visited = 0;

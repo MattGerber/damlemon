@@ -6,43 +6,43 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 09:36:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/21 15:24:49 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/22 17:35:28 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
 
-int		addInputNode(t_input **inputList, char *line)
+int		addinputnode(t_input **inputList, char *line)
 {
-	t_input *curNode;
-	t_input *newNode;
+	t_input *curnode;
+	t_input *newnode;
 
-	curNode = *inputList;
-	while (curNode && curNode->next)
-		curNode = curNode->next;
-	if (!(newNode = (t_input*)malloc(sizeof(t_input))))
+	curnode = *inputList;
+	while (curnode && curnode->next)
+		curnode = curnode->next;
+	if (!(newnode = (t_input*)malloc(sizeof(t_input))))
 		return (0);
-	newNode->line = line;
-	newNode->next = NULL;
+	newnode->line = line;
+	newnode->next = NULL;
 	if (*inputList)
-		curNode->next = newNode;
+		curnode->next = newnode;
 	else
-		*inputList = newNode;
-	// *((*inputList) ? inputList : &(curNode->next)) = newNode;
+		*inputList = newnode;
+	// *((*inputList) ? inputList : &(curnode->next)) = newnode;
 	return (1);
 }
 
-void	freeInputList(t_input **inputList)
+void	freeinputlist(t_input **inputList)
 {
 	if (*inputList)
 	{
 		if ((*inputList)->next != NULL)
-			freeInputList(&((*inputList)->next));
+			freeinputlist(&((*inputList)->next));
 		free(*inputList);
 	}
 }
 
-void	initChecks(t_inputChecks **checks)
+void	initchecks(t_inputchecks **checks)
 {
 	(*checks)->ants = 0;
 	(*checks)->end = 0;
@@ -51,61 +51,61 @@ void	initChecks(t_inputChecks **checks)
 	(*checks)->start = 0;
 }
 
-int		runInputChecks(t_input *inputNode, t_inputChecks **inputChecks)
+int		runinputchecks(t_input *inputnode, t_inputchecks **inputchecks)
 {
-	t_input	*roomNames;
+	t_input	*roomnames;
 	
-	roomNames = NULL;
-	while (inputNode)
+	roomnames = NULL;
+	while (inputnode)
 	{
-		if (isAnts(inputNode->line))
+		if (isants(inputnode->line))
 		{
-			if ((*inputChecks)->links || (*inputChecks)->rooms || (*inputChecks)->ants )
+			if ((*inputchecks)->links || (*inputchecks)->rooms || (*inputchecks)->ants )
 				return (0);
-			(*inputChecks)->ants = 1;	
+			(*inputchecks)->ants = 1;	
 		}
-		else if (isRoom(inputNode->line))
+		else if (isroom(inputnode->line))
 		{
-			if (!(*inputChecks)->ants || (*inputChecks)->links || ((inputNode->line)[0] == 'L'))
+			if (!(*inputchecks)->ants || (*inputchecks)->links || ((inputnode->line)[0] == 'L'))
 				return (0);
-			(*inputChecks)->rooms = 1;
-			addInputNode(&roomNames, ft_strsub(inputNode->line, 0, ft_strnchr(inputNode->line, ' ')));
+			(*inputchecks)->rooms = 1;
+			addinputnode(&roomnames, ft_strsub(inputnode->line, 0, ft_strnchr(inputnode->line, ' ')));
 		}
-		else if (isLink(inputNode->line, roomNames))
+		else if (isLink(inputnode->line, roomnames))
 		{
-			if (!(*inputChecks)->ants || !(*inputChecks)->rooms)
+			if (!(*inputchecks)->ants || !(*inputchecks)->rooms)
 				return (0);
-			(*inputChecks)->links = 1;
+			(*inputchecks)->links = 1;
 		}
-		else if (ft_strequ(inputNode->line, "##start") == 1)
+		else if (ft_strequ(inputnode->line, "##start") == 1)
 		{
-			if ((!inputNode->next) || (!isRoom(inputNode->next->line)) || (*inputChecks)->start)
+			if ((!inputnode->next) || (!isroom(inputnode->next->line)) || (*inputchecks)->start)
 				return (0);
-			(*inputChecks)->start = 1;
+			(*inputchecks)->start = 1;
 		}
-		else if (ft_strequ(inputNode->line, "##end") == 1)
+		else if (ft_strequ(inputnode->line, "##end") == 1)
 		{
-			if ((!inputNode->next) || (!isRoom(inputNode->next->line)) || (*inputChecks)->end)
+			if ((!inputnode->next) || (!isroom(inputnode->next->line)) || (*inputchecks)->end)
 				return (0);
-			(*inputChecks)->end = 1;
+			(*inputchecks)->end = 1;
 		}
-		else if ((inputNode->line)[0] != '#')
+		else if ((inputnode->line)[0] != '#')
 			return (0);
-		inputNode = inputNode->next;
+		inputnode = inputnode->next;
 	}
-	freeInputList(&roomNames);
-	return ((*inputChecks)->ants && (*inputChecks)->rooms && (*inputChecks)->links && (*inputChecks)->start && (*inputChecks)->end);
+	freeinputlist(&roomnames);
+	return ((*inputchecks)->ants && (*inputchecks)->rooms && (*inputchecks)->links && (*inputchecks)->start && (*inputchecks)->end);
 }
 
-int		validateInput(t_input *inputNode)
+int		validateInput(t_input *inputnode)
 {
-	t_inputChecks	*checks;
+	t_inputchecks	*checks;
 	int				ret;
 
-	checks = (t_inputChecks*)malloc(sizeof(t_inputChecks));
-	initChecks(&checks);
-	ret = runInputChecks(inputNode, &checks);
-	// putInputChecks(checks);
+	checks = (t_inputchecks*)malloc(sizeof(t_inputchecks));
+	initchecks(&checks);
+	ret = runinputchecks(inputnode, &checks);
+	// putInputchecks(checks);
 	free (checks);
 	return (ret);
 	//todo

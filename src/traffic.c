@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:35:46 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/17 13:56:12 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/22 17:33:19 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 int		addant(t_traffic **traffic, int	id, t_vein	*veinnode)
 {
-	t_traffic *curNode;
-	t_traffic *newNode;
+	t_traffic *curnode;
+	t_traffic *newnode;
 
-	curNode = *traffic;
-	while (curNode && curNode->next)
-		curNode = curNode->next;
-	if (!(newNode = (t_traffic*)malloc(sizeof(t_traffic))))
+	curnode = *traffic;
+	while (curnode && curnode->next)
+		curnode = curnode->next;
+	if (!(newnode = (t_traffic*)malloc(sizeof(t_traffic))))
 		return (0);
-	newNode->id = id;
-	newNode->veinnode = veinnode;
-	newNode->next = NULL;
+	newnode->id = id;
+	newnode->veinnode = veinnode;
+	newnode->next = NULL;
 	if (*traffic)
 	{
-		newNode->parent = curNode;
-		curNode->next = newNode;
+		newnode->parent = curnode;
+		curnode->next = newnode;
 	}
 	else
 	{
-		newNode->parent = NULL;	
-		*traffic = newNode;
+		newnode->parent = NULL;	
+		*traffic = newnode;
 	}
-	// *((*inputList) ? inputList : &(curNode->next)) = newNode;
+	// *((*inputList) ? inputList : &(curnode->next)) = newnode;
 	return (1);
 }

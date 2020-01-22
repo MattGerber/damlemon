@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/22 17:19:12 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/22 17:36:36 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int	main(void)
 	
 	initheart(&heart);
 	while (get_next_line(0, &(heart->buff))) {
-			addInputNode(&(heart->input), heart->buff);
+			addinputnode(&(heart->input), heart->buff);
 	}
-	putInputList(heart->input);
-	ft_putendl(validateInput(heart->input) ? "input OK!" : "bad validation");
+	putinputlist(heart->input);
+	ft_putendl(validateinput(heart->input) ? "input OK!" : "bad validation");
 	initroomnodes(&heart);
 	if(!bfs(heart))
 		erexit("no paths");
