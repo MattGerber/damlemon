@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:36:38 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/21 16:57:51 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/22 10:16:31 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,17 @@ int		pushq(t_queue **queue, t_queue **parent, t_network **node)
 	// *((*queue) ? queue : &(curNode->next)) = newNode;
 	return (1);
 }
+
+// int		inveinids(t_veinids *veinids, int id)
+// {
+// 	while (veinids)
+// 	{
+// 		if (veinids->id == id)
+// 			return (1);
+// 		veinids = veinids->next;
+// 	}
+// 	return (0);
+// }
 
 void	freeq(t_queue *queue, t_veinids *veinids, t_vein **curvein)
 {

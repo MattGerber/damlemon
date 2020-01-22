@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 20:18:59 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/21 16:50:33 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/22 17:01:35 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,16 @@ void	initroomnodes(t_heart **heart)
 		input = input->next;
 	}
 	setstartend(heart);
+}
+
+void	resetvisits(t_heart **heart)
+{
+	t_input	*input;
+	
+	input = (*heart)->input;
+	while (input)
+	{
+		input->roomnode->visited = 0;
+		input = input->next;
+	}
 }
