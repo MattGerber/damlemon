@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/23 09:42:41 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/23 15:07:28 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@ typedef struct				s_veinids
 	struct s_veinids		*next;
 }							t_veinids;
 
-
-typedef struct				s_inputchecks
-{
-	int						start;
-	int						end;
-	int						ants;
-	int						rooms;
-	int						links;
-}							t_inputchecks;
-
 typedef struct				s_network
 {
 	int						id;
@@ -48,6 +38,15 @@ typedef struct				s_network
 	int						start;
 	int						end;
 }							t_network;
+
+typedef struct				s_inputchecks
+{
+	struct s_network		**start;
+	struct s_network		**end;
+	int						ants;
+	int						rooms;
+	int						links;
+}							t_inputchecks;
 
 typedef struct				s_vein
 {
@@ -69,7 +68,7 @@ typedef struct				s_heart
 	int						ants;
 	char					*buff;
 	struct s_input			*input;
-	struct s_inputChecks	*inputChecks;
+	struct s_inputchecks	*inputchecks;
 	struct s_network		*network;
 	struct s_artery			*artery;
 	struct s_traffic		*traffic;
@@ -96,7 +95,7 @@ void						freeinputlist(t_input **inputlist);
 int							isants(char *line);
 int							isroom(char *line);
 int							islink(char *line, t_input *roomNames);
-int							validateinput(t_input *inputnode);
+int							validateinput(t_heart **heart);
 void						erexit(char *errMsg);
 void						putinputlist(t_input *inputlist);
 void						putinputchecks(t_inputchecks *checks);
@@ -112,6 +111,8 @@ void						resetvisits(t_heart **heart);
 int							bfs(t_heart **heart);
 void						beat(t_heart **heart);
 void						initroomnodes(t_heart **heart);
-
+void						putnetworknode(t_network *node);
+void						putnetwork(t_network *node);
+void						cleaninput(t_heart **heart);
 
 #endif

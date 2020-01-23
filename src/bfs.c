@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/23 10:15:53 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/23 15:33:49 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	initvisited(t_heart **heart)
 			input = (*heart)->input;
 			while (input && (input->roomnode->id != vein->node->id))
 				input = input->next;
-			if (input && (input->roomnode->id != vein->node->id))
-				input->roomnode->id = 1;
+			if (input && (input->roomnode->id == vein->node->id))
+				input->roomnode->visited = 1;
 			vein = vein->next;
 		}
 		artery = artery->next;
@@ -82,7 +82,10 @@ int		search(t_heart **heart, t_vein **curvein)//fix to find 1 path at a time
 		q = q->next;
 	}
 	if (!q->node->end)
+	{
+		//is gon leak here need to free the q
 		return (0);
+	}
 	while (q->parent)
 	{
 		addveinids(q->node->id, &veinids);
@@ -101,8 +104,8 @@ int		bfs(t_heart **heart)
 	i = 0;
 	while (1)
 	{
-		artery = addarterynode(&(*heart)->artery, ++i);
 		initvisited(heart);
+		artery = addarterynode(&(*heart)->artery, ++i);
 		if (!search(heart, &(artery->vein)))
 			break ;
 		artery->ants = veinlen(artery->vein);

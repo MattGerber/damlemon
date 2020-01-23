@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:05 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/23 11:30:39 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/23 12:22:41 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	isants(char *line)
 {
-	return (ft_isonly(line, ft_isdigit) ? 1 : 0);
+	return (ft_isonly(line, ft_isdigit));
 }//test lines if only contains digits and therefore is ants
 
 int	isroom(char *line)
@@ -45,7 +45,7 @@ int	islink(char *line, t_input *roomNames)
 	char **arr;
 	
 	arr = ft_strsplit(line, '-');
-	if ((ft_arrlen(arr) != 2) || (roomNames && ((!(roomnameexists(arr[0], roomNames))) || (!roomnameexists(arr[1], roomNames)))))
+	if ((ft_arrlen(arr) != 2) || (roomNames && ((!(roomnameexists(arr[0], roomNames))) || (!roomnameexists(arr[1], roomNames)))) || ft_strequ(arr[0], arr[1]))
 		return (0);//checks for 1 dash in link
 	while (arr[0])
     	free((arr++)[0]);

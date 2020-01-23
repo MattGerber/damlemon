@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 09:36:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/23 11:31:06 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/23 13:15:39 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int		addinputnode(t_input **inputList, char *line)
 	if (!(newnode = (t_input*)malloc(sizeof(t_input))))
 		return (0);
 	newnode->line = line;
+	newnode->roomnode = NULL;
 	newnode->next = NULL;
 	if (*inputList)
 		curnode->next = newnode;
 	else
 		*inputList = newnode;
-	// *((*inputList) ? inputList : &(curnode->next)) = newnode;
 	return (1);
 }
 
@@ -46,10 +46,10 @@ void	freeinputlist(t_input **inputlist)
 void	initchecks(t_inputchecks **checks)
 {
 	(*checks)->ants = 0;
-	(*checks)->end = 0;
+	(*checks)->end = NULL;
 	(*checks)->links = 0;
 	(*checks)->rooms = 0;
-	(*checks)->start = 0;
+	(*checks)->start = NULL;
 }
 
 int		runinputchecks(t_input *inputnode, t_inputchecks **inputchecks)
@@ -67,7 +67,7 @@ int		runinputchecks(t_input *inputnode, t_inputchecks **inputchecks)
 		}
 		else if (isroom(inputnode->line))
 		{
-			if (!(*inputchecks)->ants || (*inputchecks)->links || ((inputnode->line)[0] == 'L'))
+			if (!(*inputchecks)->ants || (*inputchecks)->links)
 				return (0);
 			(*inputchecks)->rooms = 1;
 			addinputnode(&roomnames, ft_strsub(inputnode->line, 0, ft_strnchr(inputnode->line, ' ')));
@@ -82,33 +82,30 @@ int		runinputchecks(t_input *inputnode, t_inputchecks **inputchecks)
 		{
 			if ((!inputnode->next) || (!isroom(inputnode->next->line)) || (*inputchecks)->start)
 				return (0);
-			(*inputchecks)->start = 1;
+			(*inputchecks)->start = &inputnode->next->roomnode;
 		}
 		else if (ft_strequ(inputnode->line, "##end") == 1)
 		{
 			if ((!inputnode->next) || (!isroom(inputnode->next->line)) || (*inputchecks)->end)
 				return (0);
-			(*inputchecks)->end = 1;
+			(*inputchecks)->end = &inputnode->next->roomnode;
 		}
 		else if ((inputnode->line)[0] != '#')
 			return (0);
 		inputnode = inputnode->next;
 	}
+	//check name dupes
 	freeinputlist(&roomnames);
 	return ((*inputchecks)->ants && (*inputchecks)->rooms && (*inputchecks)->links && (*inputchecks)->start && (*inputchecks)->end);
 }
 
-int		validateinput(t_input *inputnode)
+int		validateinput(t_heart **heart)
 {
-	t_inputchecks	*checks;
-	int				ret;
-
-	checks = (t_inputchecks*)malloc(sizeof(t_inputchecks));
-	initchecks(&checks);
-	ret = runinputchecks(inputnode, &checks);
+	(*heart)->inputchecks = (t_inputchecks*)malloc(sizeof(t_inputchecks));
+	initchecks(&(*heart)->inputchecks);
 	// putInputchecks(checks);
-	free (checks);
-	return (ret);
+	return (runinputchecks((*heart)->input, &(*heart)->inputchecks));
+	
 	//todo
 	//name dupes in rooms
 	//dupe links
