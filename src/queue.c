@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:36:38 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/22 17:31:49 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/23 09:47:34 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	freeq(t_queue *queue, t_veinids *veinids, t_vein **curvein)
 	{
 		temp = veinids;
 		while (temp && temp->next && (temp->id != queue->node->id))
-			temp = temp->id;
+			temp = temp->next;
 		if (temp->id == queue->node->id)
 			addveinnode(curvein, queue->node);
 		if (queue->next)

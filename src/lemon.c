@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/22 17:36:36 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/23 09:43:26 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*test(char *str)
 
 void	initheart(t_heart **heart)
 {
-	(*heart)->ants= NULL;
+	(*heart)->ants= 0;
 	(*heart)->artery= NULL;
 	(*heart)->buff= NULL;
 	(*heart)->input= NULL;
@@ -43,8 +43,8 @@ int	main(void)
 	putinputlist(heart->input);
 	ft_putendl(validateinput(heart->input) ? "input OK!" : "bad validation");
 	initroomnodes(&heart);
-	if(!bfs(heart))
+	if(!bfs(&heart))
 		erexit("no paths");
-	beat(heart);
+	beat(&heart);
 	return (0);
 }

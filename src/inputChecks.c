@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:05 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/22 17:33:53 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/23 11:30:39 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	isants(char *line)
 	return (ft_isonly(line, ft_isdigit) ? 1 : 0);
 }//test lines if only contains digits and therefore is ants
 
-int	isRoom(char *line)
+int	isroom(char *line)
 {
 	char **arr;
 	

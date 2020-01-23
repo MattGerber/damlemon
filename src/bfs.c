@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/22 17:32:19 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/23 10:15:53 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ void	addveinids(int id, t_veinids **veinids)
 	curnode = *veinids;
 	while (curnode && curnode->next)
 		curnode = curnode->next;
-	if (!(newnode = (t_veinids*)malloc(sizeof(t_veinids))))
-		return (0);
+	newnode = (t_veinids*)malloc(sizeof(t_veinids));
 	newnode->id = id;
 	newnode->next = NULL;
 	if (*veinids)
@@ -56,7 +55,6 @@ void	addveinids(int id, t_veinids **veinids)
 	else
 		*veinids = newnode;
 	// *((*veinids) ? veinids : &(curnode->next)) = newnode;
-	return (1);
 }
 
 void	freeveinids(t_veinids **veinids)
@@ -103,7 +101,7 @@ int		bfs(t_heart **heart)
 	i = 0;
 	while (1)
 	{
-		artery = addarteryNode(&(*heart)->artery, ++i);
+		artery = addarterynode(&(*heart)->artery, ++i);
 		initvisited(heart);
 		if (!search(heart, &(artery->vein)))
 			break ;

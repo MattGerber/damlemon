@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/17 14:29:38 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/23 09:47:03 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ void	beat(t_heart **heart)
 		while (blood)
 		{
 			if (blood->ants)
-				addant((*heart)->traffic, i++, blood->vein);
+				addant(&(*heart)->traffic, i++, blood->vein);
 			blood = blood->next;
 		}
 		valve = (*heart)->traffic;
 		while (valve)
 		{
-			removeparkedants(&((*heart)->traffic));
+			removeparkedants(heart);
 			valve->veinnode = valve->veinnode->next;
 			ft_putchar('L');
 			ft_putnbr(valve->id);

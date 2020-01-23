@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 09:36:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/22 17:35:28 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/23 11:31:06 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ int		addinputnode(t_input **inputList, char *line)
 	return (1);
 }
 
-void	freeinputlist(t_input **inputList)
+void	freeinputlist(t_input **inputlist)
 {
-	if (*inputList)
+	if (*inputlist)
 	{
-		if ((*inputList)->next != NULL)
-			freeinputlist(&((*inputList)->next));
-		free(*inputList);
+		if ((*inputlist)->next != NULL)
+			freeinputlist(&((*inputlist)->next));
+		free((*inputlist)->line);
+		free(*inputlist);
 	}
 }
 
@@ -71,7 +72,7 @@ int		runinputchecks(t_input *inputnode, t_inputchecks **inputchecks)
 			(*inputchecks)->rooms = 1;
 			addinputnode(&roomnames, ft_strsub(inputnode->line, 0, ft_strnchr(inputnode->line, ' ')));
 		}
-		else if (isLink(inputnode->line, roomnames))
+		else if (islink(inputnode->line, roomnames))
 		{
 			if (!(*inputchecks)->ants || !(*inputchecks)->rooms)
 				return (0);
@@ -97,7 +98,7 @@ int		runinputchecks(t_input *inputnode, t_inputchecks **inputchecks)
 	return ((*inputchecks)->ants && (*inputchecks)->rooms && (*inputchecks)->links && (*inputchecks)->start && (*inputchecks)->end);
 }
 
-int		validateInput(t_input *inputnode)
+int		validateinput(t_input *inputnode)
 {
 	t_inputchecks	*checks;
 	int				ret;
