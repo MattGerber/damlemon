@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 20:18:59 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/23 14:31:25 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/24 14:29:48 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,65 @@ t_network	**poplinks(t_input *links, t_input *input, int linkcount)
 	t_network	**linksarr;
 	t_input		*temp;
 	int			i;
-		
+
+	// ft_putendl("");
+	// ft_putendl("{poplinks {links}}");
+	// putinputlist(links);
 	linksarr = (t_network**)malloc(sizeof(t_network*) * (linkcount + 1));
+	// ft_putendl("");
+	// ft_putendl("linkcount : ");
+	// ft_putnbr(linkcount);
+	// ft_putendl("");
+	// ft_putendl("");
+	// ft_putendl("{input list}");
+	// putinputlist(input);
+	// ft_putendl("");
+	
 	i = 0;
 	while (links)
 	{
 		temp = input;
-		while(temp && temp->next && (temp = temp->next))
-			if (temp->roomnode && ft_strequ(temp->roomnode->name, links->line))
+		
+	// 	ft_putendl("");
+	// ft_putendl("{temp input list}");
+	// putinputlist(temp);
+	// ft_putendl("");
+	// ft_putendl("links line");
+	// ft_putendl(links->line);
+	// ft_putendl("");
+	putinputlist(temp);
+		while(temp)
+		{
+
+			ft_putendl("");
+			ft_putendl("{temp line}");
+			ft_putendl(temp->line);
+			ft_putendl("{temp roomnode name}");
+			
+			ft_putendl((temp->roomnode) ? temp->roomnode->name : "{no roomnode}");
+			ft_putendl("");
+			if (isroom(temp->line) && ft_strequ(temp->roomnode->name, links->line))
 				break ;
+			temp = temp->next;
+		}
+		ft_putendl("HERHEHRHHR");
+		ft_putendl(temp->roomnode->name);
 		linksarr[i] = temp->roomnode;
+		ft_putendl("HERE2");
 		i++;
 		links = links->next;
 	}
 	linksarr[i] = NULL;
+	// i = 0;
+	// ft_putendl("");
+	// ft_putendl("{linksarr}");
+	// while (linksarr[i])
+	// {
+	// 	ft_putstr("index [");
+	// 	ft_putnbr(i++);
+	// 	ft_putstr("] = ");
+	// 	ft_putendl(linksarr[i]->name);
+	// };
 	return(linksarr);
 }
 
@@ -56,8 +101,28 @@ void	compilelinks(t_network *node, t_input *map, t_input *inputnodes)
 		}
 		map = map->next;
 	}
+	// ft_putendl("");
+	// ft_putstr("node name {");
+	// ft_putstr(node->name);
+	// ft_putendl("} links");
+	// putinputlist(links);
+	// ft_putendl("");
 	node->links = poplinks(links, inputnodes, i);
 	freeinputlist(&links);
+}
+
+void	notenoughlinks(t_heart **heart)
+{
+	t_input	*temp;
+
+	temp = (*heart)->input;
+	while(!islink(temp->line, NULL))
+	{
+	ft_putendl("HERE!");
+		if (temp->roomnode)
+			compilelinks(temp->roomnode, temp, (*heart)->input);
+		temp = temp->next;
+	}
 }
 
 void	initroomnodes(t_heart **heart)
@@ -81,10 +146,10 @@ void	initroomnodes(t_heart **heart)
 			input->roomnode->visited = 0;
 			while (arr[0])
     			free((arr++)[0]);
-			compilelinks(input->roomnode, input, (*heart)->input);
 		}
 		input = input->next;
 	}
+	notenoughlinks(heart);
 	(*(*heart)->inputchecks->start)->start = 1;
 	(*(*heart)->inputchecks->end)->start = 0;
 }
