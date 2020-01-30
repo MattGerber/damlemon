@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 20:18:59 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/30 13:59:45 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/30 14:23:48 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,11 @@ void	initroomnodes(t_heart **heart)
 {
 	t_input	*input;
 	char	**arr;
+	int		id;
 	
 	(*heart)->ants = ft_atoi((*heart)->input->line);
 	input = (*heart)->input->next;
+	id = 1;
 	while (!islink(input->line, NULL))
 	{
 		if (isroom(input->line))
@@ -96,12 +98,12 @@ void	initroomnodes(t_heart **heart)
 			input->roomnode->start = 0;
 			input->roomnode->end = 0;
 			input->roomnode->visited = 0;
+			input->roomnode->id = id++;
 			while (arr[0])
     			free((arr++)[0]);
 		}
 		input = input->next;
 	}
-	
 	notenoughlinks(heart);
 	(*(*heart)->inputchecks->start)->start = 1;
 	(*(*heart)->inputchecks->end)->end = 1;

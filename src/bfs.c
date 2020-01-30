@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/23 15:33:49 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/30 14:17:45 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int		bfs(t_heart **heart)
 	t_artery	*artery;
 	
 	i = 0;
+	artery = NULL;
 	while (1)
 	{
 		initvisited(heart);
