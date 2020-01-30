@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/30 13:53:16 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/30 15:51:18 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,10 @@ void						putinputlist(t_input *inputlist, int putnetwork);
 void						putinputchecks(t_inputchecks *checks);
 int							veinlen(t_vein *vein);
 int							addant(t_traffic **traffic, int	id, t_vein	*veinnode);
-int							pushq(t_queue **queue, t_queue **parent, t_network **node);
+int							pushq(t_queue **queue, t_queue *parent, t_network *node);
 int							addveinnode(t_vein **vein, t_network *room);
 void						freeq(t_queue *queue, t_veinids *veinids, t_vein **curvein);
-t_artery					*addarterynode(t_artery **artery, int id);
+int							addarterynode(t_artery **artery, int id);
 int							veinlen(t_vein *vein);
 void						popart(t_artery *artery);
 void						resetvisits(t_heart **heart);
@@ -115,5 +115,6 @@ void						putnetworknode(t_network *node);
 void						putnetwork(t_network *node);
 void						cleaninput(t_heart **heart);
 void						putinputnetwork(t_input *input);
+void						putartery(t_artery *artery, int showvein);
 
 #endif

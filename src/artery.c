@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/23 09:36:51 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/30 15:58:35 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		veinlen(t_vein *vein)
 	return (i);
 }
 
-t_artery		*addarterynode(t_artery **artery, int id)
+int		addarterynode(t_artery **artery, int id)
 {
 	t_artery *curnode;
 	t_artery *newnode;
@@ -44,7 +44,8 @@ t_artery		*addarterynode(t_artery **artery, int id)
 	else
 		*artery = newnode;
 	// *((*artery) ? artery : &(curnode->next)) = newnode;
-	return (newnode);
+	ft_putendl("gfdshijnodfgsijn");
+	return (1);
 }
 
 void	popart(t_artery *artery)

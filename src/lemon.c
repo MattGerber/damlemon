@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/30 14:23:16 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/30 14:39:36 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int	main(void)
 	// ft_putendl("suck my muthafuckin balls~~~~~~~~~~~~~~~~~~~~~~~");
 	heart->network = *heart->inputchecks->start;
 	cleaninput(&heart);
-	putinputlist(heart->input, 1);
-	// if(!bfs(&heart))
-		// erexit("no paths");
+	// putinputlist(heart->input, 1);
+	if(!bfs(&heart))
+		erexit("no paths");
 	// 	//here
 	// beat(&heart);
 	return (0);

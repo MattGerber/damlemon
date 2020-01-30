@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/30 14:17:45 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/30 16:09:57 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,20 @@ void	freeveinids(t_veinids **veinids)
 	free(*veinids);
 }
 
-int		search(t_heart **heart, t_vein **curvein)//fix to find 1 path at a time
+int		search(t_heart **heart, t_artery *artery)//fix to find 1 path at a time
 {
 	t_queue		*q;
 	t_veinids	*veinids;
 	int			i;
 
-	pushq(&q, NULL, &(*heart)->network);
+	pushq(&q, NULL, (*heart)->network);
 	while (q)
 	{
-		i = 0;
-		while (q->node->links[i])
+		i = -1;
+		while (q->node->links[++i])
 			if (!(q->node->links[i]->visited))
-				pushq(&q, &q, &(q->node->links[i++]));
+				pushq(&q, q, q->node->links[i]);
+		q->node->visited = 1;
 		if (!q->next || q->node->end)
 			break ;
 		q = q->next;
@@ -86,12 +87,13 @@ int		search(t_heart **heart, t_vein **curvein)//fix to find 1 path at a time
 		//is gon leak here need to free the q
 		return (0);
 	}
+	veinids = NULL;
 	while (q->parent)
 	{
 		addveinids(q->node->id, &veinids);
 		q = q->parent;
 	}
-	freeq(q, veinids, curvein);
+	freeq(q, veinids, &(artery->vein));
 	freeveinids(&veinids);
 	return (1);
 }
@@ -102,12 +104,18 @@ int		bfs(t_heart **heart)
 	t_artery	*artery;
 	
 	i = 0;
-	artery = NULL;
 	while (1)
 	{
 		initvisited(heart);
-		artery = addarterynode(&(*heart)->artery, ++i);
-		if (!search(heart, &(artery->vein)))
+		// putartery((*heart)->artery, 1);
+		// putinputlist((*heart)->input, 1);
+		ft_putendl("HERE~~~~~~~");
+		addarterynode(&(*heart)->artery, ++i);
+		// ft_putendl("GO FUCK YOURSELF");
+		artery = (*heart)->artery;
+		while (artery->next)
+			artery = artery->next;
+		if (!search(heart, artery))
 			break ;
 		artery->ants = veinlen(artery->vein);
 	}

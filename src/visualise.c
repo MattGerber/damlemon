@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 09:47:52 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/30 14:07:00 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/30 15:39:06 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,36 @@ void	putinputnetwork(t_input *input)
 		if (input->roomnode)
 			putnetworknode(input->roomnode);
 		input = input->next;
+	}
+}
+
+void	putvein(t_vein *vein)
+{
+	if (vein)
+	{
+		ft_putstr(vein->node->name);
+		if (vein->next)
+			ft_putstr(" --> ");
+		vein = vein->next;
+	}
+}
+
+void	putartery(t_artery *artery, int showvein)
+{
+	while (artery)
+	{
+		ft_putendl("~~~~~~~~~~");
+		ft_putnbr(artery->id);
+		ft_putendl("{artery ID}");
+		ft_putnbr(artery->ants);
+		ft_putendl("{ants}");
+		if (showvein)
+		{
+			ft_putstr("{vein} ");
+			putvein(artery->vein);
+			ft_putendl("");
+		}
+		ft_putendl("~~~~~~~~~~");
+		artery = artery->next;
 	}
 }
