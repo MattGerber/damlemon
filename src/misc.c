@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:01:47 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/23 15:07:20 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/30 14:04:37 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		addcleannode(t_input **inputList, t_network *node)
 		curnode = curnode->next;
 	if (!(newnode = (t_input*)malloc(sizeof(t_input))))
 		return (0);
+	newnode->line = NULL;
 	newnode->roomnode = node;
 	newnode->next = NULL;
 	if (*inputList)
@@ -37,6 +38,7 @@ void	cleaninput(t_heart **heart)
 	t_input *clean;
 
 	temp = (*heart)->input;
+	clean = NULL;
 	while (temp)
 	{
 		if (temp->roomnode)
