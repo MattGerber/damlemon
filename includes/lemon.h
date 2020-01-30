@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/23 15:07:28 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/30 13:53:16 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int							isroom(char *line);
 int							islink(char *line, t_input *roomNames);
 int							validateinput(t_heart **heart);
 void						erexit(char *errMsg);
-void						putinputlist(t_input *inputlist);
+void						putinputlist(t_input *inputlist, int putnetwork);
 void						putinputchecks(t_inputchecks *checks);
 int							veinlen(t_vein *vein);
 int							addant(t_traffic **traffic, int	id, t_vein	*veinnode);
@@ -114,5 +114,6 @@ void						initroomnodes(t_heart **heart);
 void						putnetworknode(t_network *node);
 void						putnetwork(t_network *node);
 void						cleaninput(t_heart **heart);
+void						putinputnetwork(t_input *input);
 
 #endif

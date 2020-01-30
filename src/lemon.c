@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/23 15:37:33 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/30 13:54:03 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	initheart(t_heart **heart)
 {
-	(*heart)->ants= 0;
-	(*heart)->artery= NULL;
-	(*heart)->buff= NULL;
-	(*heart)->input= NULL;
-	(*heart)->inputchecks= NULL;
-	(*heart)->network= NULL;
-	(*heart)->queue= NULL;
-	(*heart)->traffic= NULL;
+	(*heart)->ants = 0;
+	(*heart)->artery = NULL;
+	(*heart)->input = NULL;
+	(*heart)->inputchecks = NULL;
+	(*heart)->network = NULL;
+	(*heart)->queue = NULL;
+	(*heart)->traffic = NULL;
+	(*heart)->buff = NULL;
 }
 
 
@@ -29,21 +29,22 @@ void	initheart(t_heart **heart)
 int	main(void)
 {
 	t_heart	*heart;
-	
+
 	heart = (t_heart*)malloc(sizeof(t_heart));
 	initheart(&heart);
 	while (get_next_line(0, &(heart->buff)))
 		addinputnode(&(heart->input), heart->buff);
-	putinputlist(heart->input);
+	// putinputlist(heart->input);
 	ft_putendl(validateinput(&heart) ? "input OK!" : "bad validation");
-	//poplinks isnt working as intedned
 	initroomnodes(&heart);
+	// ft_putendl("suck my muthafuckin balls~~~~~~~~~~~~~~~~~~~~~~~");
 	heart->network = *heart->inputchecks->start;
-	putnetwork(heart->network);
-	cleaninput(&heart);
-	if(!bfs(&heart))
-		erexit("no paths");
-		//here
-	beat(&heart);
+	putinputlist(heart->input, 1);
+	// putinputnetwork(heart->input);
+	// cleaninput(&heart);
+	// if(!bfs(&heart))
+	// 	erexit("no paths");
+	// 	//here
+	// beat(&heart);
 	return (0);
 }

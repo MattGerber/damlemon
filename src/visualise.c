@@ -6,17 +6,19 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 09:47:52 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/23 14:14:49 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/30 13:52:14 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
 
-void	putinputlist(t_input *curnode)
+void	putinputlist(t_input *curnode, int putnetwork)
 {
 	while (curnode)
 	{
 		ft_putendl(curnode->line);
+		if (putnetwork && curnode->roomnode)
+			putnetworknode(curnode->roomnode);
 		curnode = curnode->next;
 	};
 }
@@ -74,4 +76,14 @@ void	putnetwork(t_network *node)
 	putnetworknode(node);
 	while (node->links[i])
 		putnetwork(node->links[i++]);
+}
+
+void	putinputnetwork(t_input *input)
+{
+	while(input)
+	{
+		if (input->roomnode)
+			putnetworknode(input->roomnode);
+		input = input->next;
+	}
 }
