@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:36:38 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/31 14:51:35 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/31 15:56:03 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,8 @@ int		pushq(t_queue **queue, t_queue *parent, t_network *node)
 		curnode->next = newnode;
 	else
 		*queue = newnode;
-	// *((*queue) ? queue : &(curnode->next)) = newnode;
 	return (1);
 }
-
-// int		inveinids(t_veinids *veinids, int id)
-// {
-// 	while (veinids)
-// 	{
-// 		if (veinids->id == id)
-// 			return (1);
-// 		veinids = veinids->next;
-// 	}
-// 	return (0);
-// }
 
 void	freeq(t_queue **queue, t_veinids *veinids, t_vein **curvein)
 {
@@ -54,13 +42,16 @@ void	freeq(t_queue **queue, t_veinids *veinids, t_vein **curvein)
 		temp = veinids;
 		while (temp && temp->next && (temp->id != (*queue)->node->id))
 			temp = temp->next;
-		if (temp->id == (*queue)->node->id)
+		(*queue)->node->visited = 0;
+		if (temp && (temp->id == (*queue)->node->id))
 		{
 			tmp = *curvein;
 			while (tmp && (tmp->node->id != (*queue)->node->id))
 				tmp = tmp->next;
 			if (!tmp)
 				addveinnode(curvein, (*queue)->node);
+			if (!((*queue)->node->start || (*queue)->node->end))
+				(*queue)->node->visited = 1;
 		}
 		if ((*queue)->next)
 			freeq(&((*queue)->next), veinids, curvein);

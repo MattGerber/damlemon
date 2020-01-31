@@ -6,14 +6,11 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/31 14:53:41 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/31 15:59:10 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
 void	initheart(t_heart *heart)
 {
@@ -27,16 +24,13 @@ void	initheart(t_heart *heart)
 	heart->buff = NULL;
 }
 
-
-
 int	main(void)
 {
 	t_heart	*heart;
-	int fd = open("maps/long.map", O_RDONLY);
 
 	heart = (t_heart*)malloc(sizeof(t_heart));
 	initheart(heart);
-	while (get_next_line(fd, &(heart->buff)))
+	while (get_next_line(0, &(heart->buff)))
 		addinputnode(&(heart->input), heart->buff);
 	if (validateinput(&heart) ? "input OK!" : "bad validation")
 	{
@@ -48,8 +42,4 @@ int	main(void)
 			erexit("no paths");
 		beat(&heart);
 	}
-	close(fd);
-	return (0);
 }
-
-//initvisited could be rewrote to be faster if needed

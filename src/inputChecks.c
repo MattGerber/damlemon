@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:05 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/23 12:22:41 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/31 16:13:51 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	isants(char *line)
 {
 	return (ft_isonly(line, ft_isdigit));
-}//test lines if only contains digits and therefore is ants
+}
 
 int	isroom(char *line)
 {
@@ -27,7 +27,7 @@ int	isroom(char *line)
 	while (arr[0])
     	free((arr++)[0]);
 	return (1);
-}//tests if line is a valid room
+}
 
 int	roomnameexists(char *name, t_input *roomNames)
 {
@@ -46,8 +46,26 @@ int	islink(char *line, t_input *roomNames)
 	
 	arr = ft_strsplit(line, '-');
 	if ((ft_arrlen(arr) != 2) || (roomNames && ((!(roomnameexists(arr[0], roomNames))) || (!roomnameexists(arr[1], roomNames)))) || ft_strequ(arr[0], arr[1]))
-		return (0);//checks for 1 dash in link
+		return (0);
 	while (arr[0])
     	free((arr++)[0]);
+	return (1);
+}
+
+int	roomdupes(t_input *roomnames)
+{
+	t_input	*temp;
+	
+	while (roomnames->next)
+	{
+		temp = roomnames->next;
+		while (temp)
+		{
+			if (ft_strequ(roomnames->line, temp->line))
+				return (0);
+			temp = temp->next;
+		}
+		roomnames = roomnames->next;
+	}
 	return (1);
 }

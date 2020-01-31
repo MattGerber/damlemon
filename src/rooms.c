@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 20:18:59 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/31 09:40:20 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/31 15:52:56 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,17 +107,4 @@ void	initroomnodes(t_heart **heart)
 	notenoughlinks(heart);
 	(*(*heart)->inputchecks->start)->start = 1;
 	(*(*heart)->inputchecks->end)->end = 1;
-}
-
-void	resetvisits(t_heart *heart)
-{
-	t_input	*input;
-	
-	input = heart->input;
-	while (input)
-	{
-		if (input->roomnode)
-			input->roomnode->visited = 0;
-		input = input->next;
-	}
 }

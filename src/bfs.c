@@ -6,39 +6,12 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/31 14:36:18 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/31 15:55:15 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
 
-void	initvisited(t_heart *heart)
-{
-	t_input	*input;
-	t_vein	*vein;
-	t_artery	*artery;
-
-	artery = heart->artery;
-	resetvisits(heart);
-	while (artery)
-	{
-		vein = artery->vein;
-		while (!(vein->node->end))
-		{
-			input = heart->input;
-			while (input && (input->roomnode->id != vein->node->id))
-				input = input->next;
-			if (input && (input->roomnode->id == vein->node->id))
-				input->roomnode->visited = 1;
-			vein = vein->next;
-		}
-		artery = artery->next;
-	}
-};
-
-
-
-//write addveinids
 void	addveinids(int id, t_veinids **veinids)
 {
 	t_veinids *curnode;
@@ -54,7 +27,6 @@ void	addveinids(int id, t_veinids **veinids)
 		curnode->next = newnode;
 	else
 		*veinids = newnode;
-	// *((*veinids) ? veinids : &(curnode->next)) = newnode;
 }
 
 void	freeveinids(t_veinids **veinids)
@@ -64,7 +36,7 @@ void	freeveinids(t_veinids **veinids)
 	free(*veinids);
 }
 
-int		search(t_heart *heart, t_artery *artery)//fix to find 1 path at a time
+int		search(t_heart *heart, t_artery *artery)
 {
 	t_queue		*q;
 	t_veinids	*veinids;
@@ -86,7 +58,7 @@ int		search(t_heart *heart, t_artery *artery)//fix to find 1 path at a time
 	}
 	if (!q->node->end)
 	{
-		//is gon leak here need to free the q
+		freeq(&q, NULL, &(artery->vein));
 		return (0);
 	}
 	veinids = NULL;
@@ -109,7 +81,6 @@ int		bfs(t_heart *heart)
 	i = 0;
 	while (1)
 	{
-		initvisited(heart);
 		addarterynode(&heart->artery, ++i);
 		artery = heart->artery;
 		while (artery->next)

@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 09:36:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/23 13:15:39 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/31 16:18:06 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ int		runinputchecks(t_input *inputnode, t_inputchecks **inputchecks)
 				return (0);
 			(*inputchecks)->end = &inputnode->next->roomnode;
 		}
-		else if ((inputnode->line)[0] != '#')
+		else if (!inputnode->line || (inputnode->line)[0] != '#')
 			return (0);
 		inputnode = inputnode->next;
 	}
-	//check name dupes
+	(*inputchecks)->rooms = roomdupes(roomnames);
 	freeinputlist(&roomnames);
 	return ((*inputchecks)->ants && (*inputchecks)->rooms && (*inputchecks)->links && (*inputchecks)->start && (*inputchecks)->end);
 }
@@ -103,10 +103,6 @@ int		validateinput(t_heart **heart)
 {
 	(*heart)->inputchecks = (t_inputchecks*)malloc(sizeof(t_inputchecks));
 	initchecks(&(*heart)->inputchecks);
-	// putInputchecks(checks);
 	return (runinputchecks((*heart)->input, &(*heart)->inputchecks));
-	
-	//todo
-	//name dupes in rooms
 	//dupe links
 }
