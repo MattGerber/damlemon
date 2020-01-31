@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:26 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/22 17:32:55 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/31 16:29:31 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ int		addveinnode(t_vein **vein, t_network *room)
 		curnode->next = newnode;
 	else
 		*vein = newnode;
-	// *((*vein) ? vein : &(curnode->next)) = newnode;
 	return (1);
 }

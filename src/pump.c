@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/31 13:22:47 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/31 16:26:15 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@ void	initants(t_heart **heart)
 	t_artery	*artrunner;
 	t_artery	*shortvein;
 	
-	// artrunner = (*heart)->artery;
-	// while (artrunner)
-	// {
-	// 	artrunner->ants = veinlen(artrunner->vein);
-	// 	artrunner = artrunner->next;
-	// }
 	while ((*heart)->ants)
 	{
 		shortvein = (*heart)->artery;
@@ -44,7 +38,6 @@ void	initants(t_heart **heart)
 	}	
 }
 
-//write removeparkedants
 void	removeparkedants(t_heart **heart)
 {
 	t_traffic	*valve;
@@ -53,7 +46,6 @@ void	removeparkedants(t_heart **heart)
 	valve = (*heart)->traffic;
 	temp = NULL;
 	while (valve)
-	{
 		if (valve->veinnode->node->end)
 		{
 			if (!temp)
@@ -73,7 +65,6 @@ void	removeparkedants(t_heart **heart)
 		}
 		else
 			valve = valve->next;
-	}
 }
 
 void	beat(t_heart **heart)
