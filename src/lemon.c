@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/31 10:46:04 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/31 13:24:07 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,15 @@ int	main(void)
 	initheart(heart);
 	while (get_next_line(fd, &(heart->buff)))
 		addinputnode(&(heart->input), heart->buff);
-	// putinputlist(heart->input);
 	ft_putendl(validateinput(&heart) ? "input OK!" : "bad validation");
 	initroomnodes(&heart);
-	// ft_putendl("suck my muthafuckin balls~~~~~~~~~~~~~~~~~~~~~~~");
 	heart->network = *heart->inputchecks->start;
+	putinputlist(heart->input, 0);
 	cleaninput(&heart);
-	// putinputlist(heart->input, 1);
 	if(!bfs(heart))
 		erexit("no paths");
 	// 	//here
-	// beat(&heart);
+	beat(&heart);
 	close(fd);
 	return (0);
 }

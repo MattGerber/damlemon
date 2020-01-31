@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/31 11:55:07 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/31 13:23:11 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int		search(t_heart *heart, t_artery *artery)//fix to find 1 path at a time
 		addveinids(q->node->id, &veinids);
 		q = q->parent;
 	}
+	addveinids(q->node->id, &veinids);
 	freeq(&q, veinids, &(artery->vein));
 	freeveinids(&veinids);
 	return (1);
@@ -108,11 +109,7 @@ int		bfs(t_heart *heart)
 	while (1)
 	{
 		initvisited(heart);
-		// putartery((*heart)->artery, 1);
-		// putinputlist((*heart)->input, 1);
-		ft_putendl("HERE~~~~~~~");
 		addarterynode(&heart->artery, ++i);
-		// ft_putendl("GO FUCK YOURSELF");
 		artery = heart->artery;
 		while (artery->next)
 			artery = artery->next;

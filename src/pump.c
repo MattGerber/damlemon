@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/23 09:47:03 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/31 13:22:47 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	initants(t_heart **heart)
 	t_artery	*artrunner;
 	t_artery	*shortvein;
 	
-	artrunner = (*heart)->artery;
-	while (artrunner)
-	{
-		artrunner->ants = veinlen(artrunner->vein);
-		artrunner = artrunner->next;
-	}
+	// artrunner = (*heart)->artery;
+	// while (artrunner)
+	// {
+	// 	artrunner->ants = veinlen(artrunner->vein);
+	// 	artrunner = artrunner->next;
+	// }
 	while ((*heart)->ants)
 	{
 		shortvein = (*heart)->artery;
@@ -33,6 +33,8 @@ void	initants(t_heart **heart)
 				shortvein = artrunner;
 			artrunner = artrunner->next;
 		}
+		shortvein->ants++;
+		(*heart)->ants--;
 	}
 	artrunner = (*heart)->artery;
 	while (artrunner)
@@ -69,6 +71,8 @@ void	removeparkedants(t_heart **heart)
 				valve = temp->next;
 			}
 		}
+		else
+			valve = valve->next;
 	}
 }
 
@@ -87,23 +91,27 @@ void	beat(t_heart **heart)
 		while (blood)
 		{
 			if (blood->ants)
+			{	
 				addant(&(*heart)->traffic, i++, blood->vein);
+				blood->ants--;
+			}
 			blood = blood->next;
 		}
+		removeparkedants(heart);
 		valve = (*heart)->traffic;
 		while (valve)
 		{
-			removeparkedants(heart);
 			valve->veinnode = valve->veinnode->next;
 			ft_putchar('L');
 			ft_putnbr(valve->id);
 			ft_putchar('-');
 			ft_putstr(valve->veinnode->node->name);
 			if (valve->next)
-				ft_putchar(' ');
+				ft_putstr(" ");
 			valve = valve->next;
 		}
 		if (!(*heart)->traffic)
 			break ;
+		ft_putendl("");
 	}
 }

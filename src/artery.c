@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/30 15:58:35 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/31 13:23:16 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int		addarterynode(t_artery **artery, int id)
 		curnode->next = newnode;
 	else
 		*artery = newnode;
-	// *((*artery) ? artery : &(curnode->next)) = newnode;
-	ft_putendl("gfdshijnodfgsijn");
 	return (1);
 }
 
