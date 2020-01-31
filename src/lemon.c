@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/31 13:24:07 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/31 14:53:41 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,22 @@ void	initheart(t_heart *heart)
 int	main(void)
 {
 	t_heart	*heart;
-	int fd = open("test.map", O_RDONLY);
+	int fd = open("maps/long.map", O_RDONLY);
 
 	heart = (t_heart*)malloc(sizeof(t_heart));
 	initheart(heart);
 	while (get_next_line(fd, &(heart->buff)))
 		addinputnode(&(heart->input), heart->buff);
-	ft_putendl(validateinput(&heart) ? "input OK!" : "bad validation");
-	initroomnodes(&heart);
-	heart->network = *heart->inputchecks->start;
-	putinputlist(heart->input, 0);
-	cleaninput(&heart);
-	if(!bfs(heart))
-		erexit("no paths");
-	// 	//here
-	beat(&heart);
+	if (validateinput(&heart) ? "input OK!" : "bad validation")
+	{
+		initroomnodes(&heart);
+		heart->network = *heart->inputchecks->start;
+		putinputlist(heart->input, 0);
+		cleaninput(&heart);
+		if(!bfs(heart))
+			erexit("no paths");
+		beat(&heart);
+	}
 	close(fd);
 	return (0);
 }

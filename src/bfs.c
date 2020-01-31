@@ -6,7 +6,7 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/31 13:23:11 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/31 14:36:18 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	initvisited(t_heart *heart)
 	while (artery)
 	{
 		vein = artery->vein;
-		while (vein)
+		while (!(vein->node->end))
 		{
 			input = heart->input;
 			while (input && (input->roomnode->id != vein->node->id))
@@ -72,13 +72,14 @@ int		search(t_heart *heart, t_artery *artery)//fix to find 1 path at a time
 
 	q = NULL;
 	pushq(&q, NULL, heart->network);
-	while (q)
+	while (q && !(q->node->end))
 	{
 		i = -1;
 		while (q->node->links[++i])
 			if (!(q->node->links[i]->visited))
 				pushq(&q, q, q->node->links[i]);
-		q->node->visited = 1;
+		if (!(q->node->end))
+			q->node->visited = 1;
 		if (!q->next || q->node->end)
 			break ;
 		q = q->next;

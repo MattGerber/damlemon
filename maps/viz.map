@@ -1,0 +1,26 @@
+5
+##start
+start 950 150
+2 800 350
+#comment
+3 800 50
+4 800 250
+5 450 50
+6 50 250
+7 200 400
+##end
+end 450 250
+end-4
+end-6
+start-3
+4-3
+5-2
+3-5
+# another comment
+4-2
+2-start
+7-6
+7-2
+7-4
+6-5
+#another comment
