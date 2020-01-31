@@ -6,26 +6,26 @@
 /*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/30 16:09:57 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/01/31 11:55:07 by bwebb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
 
-void	initvisited(t_heart **heart)
+void	initvisited(t_heart *heart)
 {
 	t_input	*input;
 	t_vein	*vein;
 	t_artery	*artery;
 
-	artery = (*heart)->artery;
+	artery = heart->artery;
 	resetvisits(heart);
 	while (artery)
 	{
 		vein = artery->vein;
 		while (vein)
 		{
-			input = (*heart)->input;
+			input = heart->input;
 			while (input && (input->roomnode->id != vein->node->id))
 				input = input->next;
 			if (input && (input->roomnode->id == vein->node->id))
@@ -64,13 +64,14 @@ void	freeveinids(t_veinids **veinids)
 	free(*veinids);
 }
 
-int		search(t_heart **heart, t_artery *artery)//fix to find 1 path at a time
+int		search(t_heart *heart, t_artery *artery)//fix to find 1 path at a time
 {
 	t_queue		*q;
 	t_veinids	*veinids;
 	int			i;
 
-	pushq(&q, NULL, (*heart)->network);
+	q = NULL;
+	pushq(&q, NULL, heart->network);
 	while (q)
 	{
 		i = -1;
@@ -93,12 +94,12 @@ int		search(t_heart **heart, t_artery *artery)//fix to find 1 path at a time
 		addveinids(q->node->id, &veinids);
 		q = q->parent;
 	}
-	freeq(q, veinids, &(artery->vein));
+	freeq(&q, veinids, &(artery->vein));
 	freeveinids(&veinids);
 	return (1);
 }
 
-int		bfs(t_heart **heart)
+int		bfs(t_heart *heart)
 {
 	int	i;
 	t_artery	*artery;
@@ -110,15 +111,15 @@ int		bfs(t_heart **heart)
 		// putartery((*heart)->artery, 1);
 		// putinputlist((*heart)->input, 1);
 		ft_putendl("HERE~~~~~~~");
-		addarterynode(&(*heart)->artery, ++i);
+		addarterynode(&heart->artery, ++i);
 		// ft_putendl("GO FUCK YOURSELF");
-		artery = (*heart)->artery;
+		artery = heart->artery;
 		while (artery->next)
 			artery = artery->next;
 		if (!search(heart, artery))
 			break ;
 		artery->ants = veinlen(artery->vein);
 	}
-	popart((*heart)->artery);
-	return((*heart)->artery ? 1 : 0);
+	popart(heart->artery);
+	return(heart->artery ? 1 : 0);
 }
