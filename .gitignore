@@ -1,0 +1,4 @@
+
+*.gch
+a.out
+includes/lemon.h.gch
