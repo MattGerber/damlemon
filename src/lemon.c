@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/04/24 15:14:33 by ben              ###   ########.fr       */
+/*   Updated: 2020/04/24 17:50:08 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(void)
 		cleaninput(&heart);
 		if(!bfs(heart))
 			erexit("no paths");
+		printf("here\n");
 		beat(&heart);
 	}
 }

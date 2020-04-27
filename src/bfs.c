@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/31 15:55:15 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/04/27 17:51:40 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,22 @@ void	freeveinids(t_veinids **veinids)
 	if ((*veinids)->next)
 		freeveinids(&(*veinids)->next);
 	free(*veinids);
+}
+
+void	cutedge(t_inputchecks *inchecks)
+{
+	int			count;
+	int			cutedge;
+	t_network	**links;
+
+	count = -1;
+	links = (*inchecks->start)->links;
+	while(links[++count])
+		if (links[count]->id == (*inchecks->end)->id)
+			cutedge = count;
+	if (count != cutedge)
+		links[cutedge] = links[count];
+	links[count] = NULL;
 }
 
 int		search(t_heart *heart, t_artery *artery)
@@ -70,6 +86,8 @@ int		search(t_heart *heart, t_artery *artery)
 	addveinids(q->node->id, &veinids);
 	freeq(&q, veinids, &(artery->vein));
 	freeveinids(&veinids);
+	if (artery->vein->next->node->end)
+		cutedge(heart->inputchecks);
 	return (1);
 }
 
