@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/04/27 17:51:40 by ben              ###   ########.fr       */
+/*   Updated: 2020/04/29 17:54:17 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int		search(t_heart *heart, t_artery *artery)
 	int			i;
 
 	q = NULL;
-	pushq(&q, NULL, heart->network);
+	printf("the  memory address of heart->inputchecks->end is: %p\n", *heart->inputchecks->end);
+	pushq(&q, NULL, heart->network);//this is deleting inputchecks->end->room
 	while (q && !(q->node->end))
 	{
 		i = -1;
@@ -95,7 +96,7 @@ int		bfs(t_heart *heart)
 {
 	int	i;
 	t_artery	*artery;
-	
+
 	i = 0;
 	while (1)
 	{

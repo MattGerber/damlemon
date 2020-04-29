@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inputList.c                                        :+:      :+:    :+:   */
+/*   inputlist.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 09:36:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/31 16:18:06 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/04/29 15:32:02 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	initchecks(t_inputchecks **checks)
 int		runinputchecks(t_input *inputnode, t_inputchecks **inputchecks)
 {
 	t_input	*roomnames;
-	
+
 	roomnames = NULL;
 	while (inputnode)
 	{
@@ -63,7 +63,7 @@ int		runinputchecks(t_input *inputnode, t_inputchecks **inputchecks)
 		{
 			if ((*inputchecks)->links || (*inputchecks)->rooms || (*inputchecks)->ants )
 				return (0);
-			(*inputchecks)->ants = 1;	
+			(*inputchecks)->ants = 1;
 		}
 		else if (isroom(inputnode->line))
 		{
@@ -82,7 +82,7 @@ int		runinputchecks(t_input *inputnode, t_inputchecks **inputchecks)
 		{
 			if ((!inputnode->next) || (!isroom(inputnode->next->line)) || (*inputchecks)->start)
 				return (0);
-			(*inputchecks)->start = &inputnode->next->roomnode;
+			(*inputchecks)->start = &(inputnode->next->roomnode);
 		}
 		else if (ft_strequ(inputnode->line, "##end") == 1)
 		{
