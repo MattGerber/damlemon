@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/04/30 14:15:09 by ben              ###   ########.fr       */
+/*   Updated: 2020/04/30 17:00:50 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,15 @@ int	main(void)
 	heart = malloc(sizeof(t_heart));
 	initheart(heart);
 	while (get_next_line(0, &(heart->buff)))
-		addinputnode(&(heart->input), heart->buff);
-	if (validateinput(heart) ? "input OK!" : "bad validation")
+		addinputnode(&heart->input, heart->buff);
+	if (validateinput(heart))
 	{
 		initroomnodes(heart);
 		heart->network = *heart->inputchecks->start;
 		putinputlist(heart->input, 0);
-		// cleaninput(heart);
 		if(!bfs(heart))
 			erexit("no paths");
-		// printf("here\n");
-		beat(&heart);
+		initants(heart);
+		beat(heart, heart->artery, 1);
 	}
 }

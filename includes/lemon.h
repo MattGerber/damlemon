@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/04/30 14:09:39 by ben              ###   ########.fr       */
+/*   Updated: 2020/04/30 17:01:04 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ int							addarterynode(t_artery **artery, int id);
 int							veinlen(t_vein *vein);
 void						popart(t_artery *artery);
 int							bfs(t_heart *heart);
-void						beat(t_heart **heart);
 void						initroomnodes(t_heart *heart);
 void						putnetworknode(t_network *node);
 void						putnetwork(t_network *node);
@@ -116,5 +115,7 @@ void						cleaninput(t_heart *heart);
 void						putinputnetwork(t_input *input);
 void						putartery(t_artery *artery, int showvein);
 int							roomdupes(t_input *roomnames);
+void						beat(t_heart *heart, t_artery *blood, int id);
+void						initants(t_heart *heart);
 
 #endif
