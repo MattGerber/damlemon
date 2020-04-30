@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/04/30 17:01:35 by ben              ###   ########.fr       */
+/*   Updated: 2020/04/30 17:09:58 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	putants(t_heart *heart)
 		if (valve->veinnode->node->end)
 		{
 			tmp = valve;
+			// (tmp->parent) ? tmp->parent = tmp->next ? tmp->next->parent = tmp->parent;
 			if (tmp->parent)
 				tmp->parent = tmp->next;
 			else
@@ -68,6 +69,7 @@ void	putants(t_heart *heart)
 		else
 			valve = valve->next;
 	}
+	ft_putendl("");
 }
 
 void	beat(t_heart *heart, t_artery *blood, int id)
@@ -83,7 +85,6 @@ void	beat(t_heart *heart, t_artery *blood, int id)
 		blood = blood->next;
 	}
 	putants(heart);
-	ft_putendl("");
 	if (heart->traffic)
 		beat(heart, heart->artery, id);
 }
