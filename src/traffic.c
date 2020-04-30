@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   traffic.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:35:46 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/22 17:33:19 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/04/30 10:57:13 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		addant(t_traffic **traffic, int	id, t_vein	*veinnode)
 	curnode = *traffic;
 	while (curnode && curnode->next)
 		curnode = curnode->next;
-	if (!(newnode = (t_traffic*)malloc(sizeof(t_traffic))))
+	if (!(newnode = malloc(sizeof(t_traffic))))
 		return (0);
 	newnode->id = id;
 	newnode->veinnode = veinnode;
@@ -32,7 +32,7 @@ int		addant(t_traffic **traffic, int	id, t_vein	*veinnode)
 	}
 	else
 	{
-		newnode->parent = NULL;	
+		newnode->parent = NULL;
 		*traffic = newnode;
 	}
 	// *((*inputList) ? inputList : &(curnode->next)) = newnode;

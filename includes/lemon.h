@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/04/29 17:25:04 by ben              ###   ########.fr       */
+/*   Updated: 2020/04/30 14:09:39 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,11 @@ typedef struct				s_queue
 }							t_queue;
 
 int							addinputnode(t_input **inputlist, char *line);
-void						freeinputlist(t_input **inputlist);
+void						freeinputlist(t_input *inputlist);
 int							isants(char *line);
 int							isroom(char *line);
 int							islink(char *line, t_input *roomNames);
-int							validateinput(t_heart **heart);
+int							validateinput(t_heart *heart);
 void						erexit(char *errMsg);
 void						putinputlist(t_input *inputlist, int putnetwork);
 void						putinputchecks(t_inputchecks *checks);
@@ -109,10 +109,10 @@ int							veinlen(t_vein *vein);
 void						popart(t_artery *artery);
 int							bfs(t_heart *heart);
 void						beat(t_heart **heart);
-void						initroomnodes(t_heart **heart);
+void						initroomnodes(t_heart *heart);
 void						putnetworknode(t_network *node);
 void						putnetwork(t_network *node);
-void						cleaninput(t_heart **heart);
+void						cleaninput(t_heart *heart);
 void						putinputnetwork(t_input *input);
 void						putartery(t_artery *artery, int showvein);
 int							roomdupes(t_input *roomnames);

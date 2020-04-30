@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   artery.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/31 13:23:16 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/04/30 10:56:28 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		addarterynode(t_artery **artery, int id)
 	curnode = *artery;
 	while (curnode && curnode->next)
 		curnode = curnode->next;
-	if (!(newnode = (t_artery*)malloc(sizeof(t_artery))))
+	if (!(newnode = malloc(sizeof(t_artery))))
 		return (0);
 	newnode->id = id;
 	newnode->vein = NULL;
@@ -49,7 +49,7 @@ int		addarterynode(t_artery **artery, int id)
 void	popart(t_artery *artery)
 {
 	t_artery	*prev;
-	
+
 	prev = NULL;
 	while (artery && artery->next)
 	{

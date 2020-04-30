@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/04/29 17:54:17 by ben              ###   ########.fr       */
+/*   Updated: 2020/04/30 14:25:42 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	addveinids(int id, t_veinids **veinids)
 	curnode = *veinids;
 	while (curnode && curnode->next)
 		curnode = curnode->next;
-	newnode = (t_veinids*)malloc(sizeof(t_veinids));
+	newnode = malloc(sizeof(t_veinids));
 	newnode->id = id;
 	newnode->next = NULL;
 	if (*veinids)
@@ -59,7 +59,7 @@ int		search(t_heart *heart, t_artery *artery)
 	int			i;
 
 	q = NULL;
-	printf("the  memory address of heart->inputchecks->end is: %p\n", *heart->inputchecks->end);
+	// printf("the  memory address of heart->inputchecks->end is: %p\n", *heart->inputchecks->end);
 	pushq(&q, NULL, heart->network);//this is deleting inputchecks->end->room
 	while (q && !(q->node->end))
 	{

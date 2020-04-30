@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   misc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:01:47 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/30 14:04:37 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/04/30 14:26:37 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		addcleannode(t_input **inputList, t_network *node)
 	curnode = *inputList;
 	while (curnode && curnode->next)
 		curnode = curnode->next;
-	if (!(newnode = (t_input*)malloc(sizeof(t_input))))
+	if (!(newnode = malloc(sizeof(t_input))))
 		return (0);
 	newnode->line = NULL;
 	newnode->roomnode = node;
@@ -32,12 +32,35 @@ int		addcleannode(t_input **inputList, t_network *node)
 	return (1);
 }
 
-void	cleaninput(t_heart **heart)
+// void	fetchstartend(t_heart *heart)
+// {
+// 	t_input	*temp;
+// 	int		i;
+
+// 	i = 0;
+// 	temp = heart->input;
+// 	while (i < 2)
+// 	{
+// 		if (temp->roomnode->start)
+// 		{
+// 			heart->inputchecks->start = temp->roomnode;
+// 			i++;
+// 		}
+// 		if (temp->roomnode->end)
+// 		{
+// 			heart->inputchecks->end = temp->roomnode;
+// 			i++;
+// 		}
+// 		temp = temp->next;
+// 	}
+// }
+
+void	cleaninput(t_heart *heart)
 {
 	t_input	*temp;
 	t_input *clean;
 
-	temp = (*heart)->input;
+	temp = heart->input;
 	clean = NULL;
 	while (temp)
 	{
@@ -45,6 +68,7 @@ void	cleaninput(t_heart **heart)
 			addcleannode(&clean, temp->roomnode);
 		temp = temp->next;
 	}
-	freeinputlist(&(*heart)->input);
-	(*heart)->input = clean;
+	freeinputlist(heart->input);
+	heart->input = clean;
+	// fetchstartend(heart);
 }

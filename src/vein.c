@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vein.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:26 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/31 16:29:31 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/04/30 10:57:18 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		addveinnode(t_vein **vein, t_network *room)
 	curnode = *vein;
 	while (curnode && curnode->next)
 		curnode = curnode->next;
-	if (!(newnode = (t_vein*)malloc(sizeof(t_vein))))
+	if (!(newnode = malloc(sizeof(t_vein))))
 		return (0);
 	newnode->node = room;
 	newnode->next = NULL;
