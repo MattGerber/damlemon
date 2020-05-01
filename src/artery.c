@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/04/30 10:56:28 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/01 15:57:18 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		veinlen(t_vein *vein)
 	return (i);
 }
 
-int		addarterynode(t_artery **artery, int id)
+t_artery	*addarterynode(t_artery **artery, int id)
 {
 	t_artery *curnode;
 	t_artery *newnode;
@@ -34,7 +34,7 @@ int		addarterynode(t_artery **artery, int id)
 	while (curnode && curnode->next)
 		curnode = curnode->next;
 	if (!(newnode = malloc(sizeof(t_artery))))
-		return (0);
+		return (NULL);
 	newnode->id = id;
 	newnode->vein = NULL;
 	newnode->ants = 0;
@@ -43,7 +43,7 @@ int		addarterynode(t_artery **artery, int id)
 		curnode->next = newnode;
 	else
 		*artery = newnode;
-	return (1);
+	return (newnode);
 }
 
 void	popart(t_artery *artery)

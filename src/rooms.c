@@ -6,38 +6,32 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 20:18:59 by bwebb             #+#    #+#             */
-/*   Updated: 2020/04/30 14:27:10 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/01 15:50:45 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
 
-t_network	**poplinks(t_input *links, t_input *input, int linkcount)
+t_network	**poplinks(t_input *links, t_input *inputlist, int linkcount)
 {
 	t_network	**linksarr;
 	t_input		*temp;
-	int			i;
 
 	linksarr = malloc(sizeof(t_network*) * (linkcount + 1));
-	i = 0;
+	linkcount = 0;
 	while (links)
 	{
-		temp = input;
-		while(temp)
-		{
-			if (isroom(temp->line) && ft_strequ(temp->roomnode->name, links->line))
-				break ;
+		temp = inputlist;
+		while(temp && !(isroom(temp->line) && ft_strequ(temp->roomnode->name, links->line)))
 			temp = temp->next;
-		}
-		linksarr[i] = temp->roomnode;
-		i++;
+		linksarr[linkcount++] = temp->roomnode;
 		links = links->next;
 	}
-	linksarr[i] = NULL;
+	linksarr[linkcount] = NULL;
 	return(linksarr);
 }
 
-void	compilelinks(t_network *node, t_input *map, t_input *inputnodes)
+void	compilelinks(t_network *roomnode, t_input *inputlistlinks, t_input *inputlist)
 {
 	t_input		*links;
 	char	**arr;
@@ -45,35 +39,35 @@ void	compilelinks(t_network *node, t_input *map, t_input *inputnodes)
 
 	i = 0;
 	links = NULL;
-	while (map)
+	while (inputlistlinks)
 	{
-		if (islink(map->line, NULL))
+		if (islink(inputlistlinks->line, NULL))
 		{
-			arr = ft_strsplit(map->line, '-');
-			if (ft_strequ(arr[0], node->name) || ft_strequ(arr[1], node->name))
+			arr = ft_strsplit(inputlistlinks->line, '-');
+			if (ft_strequ(arr[0], roomnode->name) || ft_strequ(arr[1], roomnode->name))
 			{
-				addinputnode(&links, ft_strdup(arr[ft_strequ(arr[0], node->name)]));
+				addinputnode(&links, ft_strdup(arr[ft_strequ(arr[0], roomnode->name)]));
 				i++;
 			}
 			while (arr[0])
     			free((arr++)[0]);
 		}
-		map = map->next;
+		inputlistlinks = inputlistlinks->next;
 	}
-	node->links = poplinks(links, inputnodes, i);
+	roomnode->links = poplinks(links, inputlist, i);
 	freeinputlist(links);
 }
 
-void	notenoughlinks(t_heart *heart)
+void	notenoughlinks(t_heart *heart, t_input	*inputlistlinks)
 {
-	t_input	*temp;
+	t_input	*inputlist;
 
-	temp = heart->input;
-	while(!islink(temp->line, NULL))
+	inputlist = heart->input;
+	while(!islink(inputlist->line, NULL))
 	{
-		if (temp->roomnode)
-			compilelinks(temp->roomnode, temp, heart->input);
-		temp = temp->next;
+		if (inputlist->roomnode)
+			compilelinks(inputlist->roomnode, inputlistlinks, heart->input);
+		inputlist = inputlist->next;
 	}
 }
 
@@ -104,7 +98,7 @@ void	initroomnodes(t_heart *heart)
 		}
 		input = input->next;
 	}
-	notenoughlinks(heart);
+	notenoughlinks(heart, input);
 	(*heart->inputchecks->start)->start = 1;
 	(*heart->inputchecks->end)->end = 1;
 }

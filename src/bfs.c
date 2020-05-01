@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/04/30 14:25:42 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/01 16:03:35 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ int		search(t_heart *heart, t_artery *artery)
 	int			i;
 
 	q = NULL;
-	// printf("the  memory address of heart->inputchecks->end is: %p\n", *heart->inputchecks->end);
-	pushq(&q, NULL, heart->network);//this is deleting inputchecks->end->room
+	pushq(&q, NULL, heart->network);
 	while (q && !(q->node->end))
 	{
 		i = -1;
@@ -98,16 +97,8 @@ int		bfs(t_heart *heart)
 	t_artery	*artery;
 
 	i = 0;
-	while (1)
-	{
-		addarterynode(&heart->artery, ++i);
-		artery = heart->artery;
-		while (artery->next)
-			artery = artery->next;
-		if (!search(heart, artery))
-			break ;
+	while (search(heart, artery = addarterynode(&heart->artery, ++i)))
 		artery->ants = veinlen(artery->vein);
-	}
 	popart(heart->artery);
 	return(heart->artery ? 1 : 0);
 }

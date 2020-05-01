@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/04/30 17:01:04 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/01 16:02:16 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int							addant(t_traffic **traffic, int	id, t_vein	*veinnode);
 int							pushq(t_queue **queue, t_queue *parent, t_network *node);
 int							addveinnode(t_vein **vein, t_network *room);
 void						freeq(t_queue **queue, t_veinids *veinids, t_vein **curvein);
-int							addarterynode(t_artery **artery, int id);
+t_artery					*addarterynode(t_artery **artery, int id);
 int							veinlen(t_vein *vein);
 void						popart(t_artery *artery);
 int							bfs(t_heart *heart);
