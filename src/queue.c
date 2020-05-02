@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:36:38 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/02 16:45:14 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/02 19:03:05 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,12 @@ int		pushq(t_queue **queue, t_queue *parent, t_network *node)
 
 void	freeq(t_queue *q)
 {
-	if (q->next)
-		freeq(q->next);
-	if ((q->node->visited != 2) || (q->node->end))
-		q->node->visited = 0;
-	free(q);
+	if (q)
+	{
+		if (q->next)
+			freeq(q->next);
+		if (q->node && ((q->node->visited != 2) || (q->node->end)))
+			q->node->visited = 0;
+		free(q);
+	}
 }

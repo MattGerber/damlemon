@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 09:36:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/04/30 14:57:29 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/02 19:26:07 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ void	freeinputlist(t_input *inputlist)
 {
 	if (inputlist)
 	{
-		if (inputlist->next != NULL)
+		if (inputlist->next)
 			freeinputlist(inputlist->next);
-		free(inputlist->line);
+		if (inputlist->line)
+			free(inputlist->line);
+		if (inputlist->roomnode)
+			freeroom(inputlist->roomnode);
 		free(inputlist);
 	}
 }

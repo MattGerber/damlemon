@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/04/30 17:09:58 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/02 18:33:02 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,22 @@ void	initants(t_heart *heart)
 
 void	putants(t_heart *heart)
 {
-	t_traffic	*valve;
+	t_traffic	*ant;
 	t_traffic	*tmp;
 
-	valve = heart->traffic;
-	while (valve)
+	ant = heart->traffic;
+	while (ant)
 	{
-		valve->veinnode = valve->veinnode->next;
+		ant->veinnode = ant->veinnode->next;
 		ft_putchar('L');
-		ft_putnbr(valve->id);
+		ft_putnbr(ant->id);
 		ft_putchar('-');
-		ft_putstr(valve->veinnode->node->name);
-		if (valve->next)
+		ft_putstr(ant->veinnode->node->name);
+		if (ant->next)
 			ft_putstr(" ");
-		if (valve->veinnode->node->end)
+		if (ant->veinnode->node->end)
 		{
-			tmp = valve;
+			tmp = ant;
 			// (tmp->parent) ? tmp->parent = tmp->next ? tmp->next->parent = tmp->parent;
 			if (tmp->parent)
 				tmp->parent = tmp->next;
@@ -63,11 +63,11 @@ void	putants(t_heart *heart)
 				heart->traffic = tmp->next;
 			if (tmp->next)
 				tmp->next->parent = tmp->parent;
-			valve = tmp->next;
+			ant = tmp->next;
 			free(tmp);
 		}
 		else
-			valve = valve->next;
+			ant = ant->next;
 	}
 	ft_putendl("");
 }

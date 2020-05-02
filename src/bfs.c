@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/02 16:51:35 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/02 17:54:11 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,22 @@ int		search(t_heart *heart, t_artery *artery)
 
 	q = NULL;
 	pushq(&q, NULL, heart->network);
-	while (q && !(q->node->end))
+	while (1)//this is ew but idk what do do about it
 	{
 		i = -1;
 		while (q->node->links[++i])
 			if (!(q->node->links[i]->visited))
 				pushq(&q, q, q->node->links[i]);
 		q->node->visited = 1;
-		if (!q->next || q->node->end)
+		if ((q->next == NULL) || (q->node->end))
 			break ;
 		q = q->next;
 	}
 	i = (q->node->end) ? 1 : 0;
-	while (addveinnode(&(artery->vein), q->node))
-		q = q->parent;
+	while ((i && addveinnode(&(artery->vein), q->node)) || (!q->node->start))
+		q = q->parent;//unescessary memory saving
 	freeq(q);
-	if (artery->vein && artery->vein->next && artery->vein->next->node->end)
+	if (i && artery->vein->next->node->end)
 		cutedge(heart->inputchecks);
 	return (i);
 }

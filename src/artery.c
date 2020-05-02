@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/01 15:57:18 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/02 19:10:50 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,29 @@ void	popart(t_artery *artery)
 {
 	t_artery	*prev;
 
-	prev = NULL;
-	while (artery && artery->next)
-	{
-		prev = artery;
-		artery = artery->next;
-	};
 	if (artery)
+	{	
+		prev = NULL;
+		while (artery->next)
+		{
+			prev = artery;
+			artery = artery->next;
+		};
+		freevein(artery->vein);
 		free(artery);
-	if (prev)
-		prev->next = NULL;
+		if (prev)
+			prev->next = NULL;
+	}
+}
+
+void	freeartery(t_artery *artery)
+{
+	if (artery)
+	{
+		if (artery->next)
+			freeartery(artery->next);
+		if (artery->vein)
+			freevein(artery->vein);
+		free(artery);
+	}
 }

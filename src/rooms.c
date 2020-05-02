@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 20:18:59 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/01 15:50:45 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/02 19:21:45 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,16 @@ void	initroomnodes(t_heart *heart)
 	notenoughlinks(heart, input);
 	(*heart->inputchecks->start)->start = 1;
 	(*heart->inputchecks->end)->end = 1;
+}
+
+void	freeroom(t_network *room)
+{
+	if (room)
+	{
+		if (room->name)
+			free(room->name);
+		if (room->links)
+			free(room->links);
+		free(room);
+	}
 }
