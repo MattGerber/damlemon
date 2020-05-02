@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pump.c                                             :+:      :+:    :+:   */
+/*   ants.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/02 18:33:02 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/02 21:03:04 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,48 @@ void	putants(t_heart *heart)
 	ft_putendl("");
 }
 
-void	beat(t_heart *heart, t_artery *blood, int id)
+int		addant(t_traffic **traffic, int	id, t_vein	*veinnode)
 {
-	blood = heart->artery;
-	while (blood)
+	t_traffic *curnode;
+	t_traffic *newnode;
+
+	curnode = *traffic;
+	while (curnode && curnode->next)
+		curnode = curnode->next;
+	if (!(newnode = malloc(sizeof(t_traffic))))
+		return (0);
+	newnode->id = id;
+	newnode->veinnode = veinnode;
+	newnode->next = NULL;
+	if (*traffic)
 	{
-		if (blood->ants)
-		{
-			addant(&heart->traffic, id++, blood->vein);
-			blood->ants--;
-		}
-		blood = blood->next;
+		newnode->parent = curnode;
+		curnode->next = newnode;
 	}
-	putants(heart);
-	if (heart->traffic)
-		beat(heart, heart->artery, id);
+	else
+	{
+		newnode->parent = NULL;
+		*traffic = newnode;
+	}
+	// *((*inputList) ? inputList : &(curnode->next)) = newnode;
+	return (1);
+}
+
+void	qants(t_heart *heart, t_artery *artery, int id)
+{
+	int		waiting;
+
+	waiting = 1;
+	while (waiting)
+	{
+		waiting = 0;
+		artery = heart->artery;
+		while (artery)
+		{
+			if (artery->ants && (artery->ants -= addant(&heart->traffic, id++, artery->vein)))
+					waiting = 1;
+			artery = artery->next;
+		}
+		putants(heart);
+	}
 }

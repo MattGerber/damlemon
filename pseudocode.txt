@@ -1,0 +1,103 @@
+all of these methods are my version and by no means the best
+
+general stuff:
+all my data is stored in link lists that are stored in what i call the "heart"
+this way i can access everthing from one place
+because most data is stored in linked lists and are malloced, they can be referenced with single star pointers
+its important to initialise everything to null to avoid segfaults and incorrect data
+
+lets gooo:
+
+malloc heart
+initialise heart
+
+getnextline data
+    stored in link list in heart
+
+validate data
+    valid?
+        rooms
+        links
+    check for
+        start room
+        end room
+        ants
+        links
+        duplicates
+    error on trash input
+
+initialise rooms
+    malloc
+    generate ids
+    split, convert, and store data
+    
+//i store my links in an array but you could use a link list
+//i store a pointer to a room that is linked
+
+initialise links
+    iterate over rooms
+    malloc list
+    add all connected rooms
+
+print input
+//as per pdf
+
+//i am using Breadth First Search which is not the best method but we are
+//dealing with graph traversing in a buffered network and i only have so much time
+
+//bfs finds the shortest route which i store and then remove from the search
+//and repeat. this isnt the "best" but we get 100% for just getting 1 route and
+//115% for multiple so idk. this is a simple way to do multi routing
+
+//going with the theme of heart, my routes are called veins and are stored in
+//a link list called artery
+
+//my bfs works by starting at the beginning and adding all linked rooms to a link list queue
+//it iterates until it finds the end then backtracks by going to the previous node
+//which added it onto the queue until it gets back to the start
+//while it is back tracking i record which rooms it took and save that as a route
+//you can also bfs starting from the end
+
+search
+    q
+        push start onto q
+        add all linked rooms to q
+        iterate through q and repeat^
+        exit on finished q or end room
+    backtrack
+        record route
+    save route
+    free q
+repeat until no routes
+
+//i push ants down paths by:
+//saving the paths lengths
+//find shortest path
+//add 1 to path length
+//decrease one ant from total
+//repeat until ants are finished
+//remove saved paths' lengths from current paths' lengths
+//then just push ants down their paths until they run out
+
+initialise ants
+    path ants = path length
+    while ants
+        find shortest path
+        ++path ants
+        --total ants
+    path ants -= path length
+
+//if there are ants at the start of a path they are added to a q and moved accordingly
+
+pushq
+    while waiting ants
+        iterate over paths
+            push 1 ant to q
+        iterate over q
+            move ants
+                print
+    while q
+        move ants
+            print
+
+free all the things
