@@ -6,35 +6,11 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/01 16:03:35 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/02 16:51:35 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
-
-void	addveinids(int id, t_veinids **veinids)
-{
-	t_veinids *curnode;
-	t_veinids *newnode;
-
-	curnode = *veinids;
-	while (curnode && curnode->next)
-		curnode = curnode->next;
-	newnode = malloc(sizeof(t_veinids));
-	newnode->id = id;
-	newnode->next = NULL;
-	if (*veinids)
-		curnode->next = newnode;
-	else
-		*veinids = newnode;
-}
-
-void	freeveinids(t_veinids **veinids)
-{
-	if ((*veinids)->next)
-		freeveinids(&(*veinids)->next);
-	free(*veinids);
-}
 
 void	cutedge(t_inputchecks *inchecks)
 {
@@ -55,7 +31,6 @@ void	cutedge(t_inputchecks *inchecks)
 int		search(t_heart *heart, t_artery *artery)
 {
 	t_queue		*q;
-	t_veinids	*veinids;
 	int			i;
 
 	q = NULL;
@@ -66,29 +41,18 @@ int		search(t_heart *heart, t_artery *artery)
 		while (q->node->links[++i])
 			if (!(q->node->links[i]->visited))
 				pushq(&q, q, q->node->links[i]);
-		if (!(q->node->end))
-			q->node->visited = 1;
+		q->node->visited = 1;
 		if (!q->next || q->node->end)
 			break ;
 		q = q->next;
 	}
-	if (!q->node->end)
-	{
-		freeq(&q, NULL, &(artery->vein));
-		return (0);
-	}
-	veinids = NULL;
-	while (q->parent)
-	{
-		addveinids(q->node->id, &veinids);
+	i = (q->node->end) ? 1 : 0;
+	while (addveinnode(&(artery->vein), q->node))
 		q = q->parent;
-	}
-	addveinids(q->node->id, &veinids);
-	freeq(&q, veinids, &(artery->vein));
-	freeveinids(&veinids);
-	if (artery->vein->next->node->end)
+	freeq(q);
+	if (artery->vein && artery->vein->next && artery->vein->next->node->end)
 		cutedge(heart->inputchecks);
-	return (1);
+	return (i);
 }
 
 int		bfs(t_heart *heart)

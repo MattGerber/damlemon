@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/01 16:02:16 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/02 16:39:40 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@ typedef	struct		s_input
 	struct s_network		*roomnode;
 	struct s_input			*next;
 }							t_input;
-
-typedef struct				s_veinids
-{
-	int						id;
-	struct s_veinids		*next;
-}							t_veinids;
 
 typedef struct				s_network
 {
@@ -103,7 +97,7 @@ int							veinlen(t_vein *vein);
 int							addant(t_traffic **traffic, int	id, t_vein	*veinnode);
 int							pushq(t_queue **queue, t_queue *parent, t_network *node);
 int							addveinnode(t_vein **vein, t_network *room);
-void						freeq(t_queue **queue, t_veinids *veinids, t_vein **curvein);
+void						freeq(t_queue *q);
 t_artery					*addarterynode(t_artery **artery, int id);
 int							veinlen(t_vein *vein);
 void						popart(t_artery *artery);
