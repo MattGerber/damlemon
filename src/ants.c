@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/02 21:03:04 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/02 21:34:17 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	initants(t_heart *heart)
 		artrunner->ants -= veinlen(artrunner->vein);
 		artrunner = artrunner->next;
 	}
+	heart->ants = 1;
 }
 
 void	putants(t_heart *heart)
@@ -99,21 +100,18 @@ int		addant(t_traffic **traffic, int	id, t_vein	*veinnode)
 	return (1);
 }
 
-void	qants(t_heart *heart, t_artery *artery, int id)
+int		qants(t_heart *heart)
 {
-	int		waiting;
+	int		i;
+	t_artery *artery;
 
-	waiting = 1;
-	while (waiting)
+	i = heart->ants;
+	artery = heart->artery;
+	while (artery)
 	{
-		waiting = 0;
-		artery = heart->artery;
-		while (artery)
-		{
-			if (artery->ants && (artery->ants -= addant(&heart->traffic, id++, artery->vein)))
-					waiting = 1;
-			artery = artery->next;
-		}
-		putants(heart);
+		if (artery->ants)
+			artery->ants -= addant(&heart->traffic, heart->ants++, artery->vein);
+		artery = artery->next;
 	}
+	return (heart->ants - i);
 }

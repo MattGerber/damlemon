@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/02 21:03:33 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/02 21:37:41 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	main(void)
 		if(!bfs(heart))
 			erexit("no paths");
 		initants(heart);
-		qants(heart, heart->artery, 1);
+		while (qants(heart))
+			putants(heart);
 		while (heart->traffic)
 			putants(heart);
 	}
