@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/02 21:34:17 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/04 13:06:34 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	initants(t_heart *heart)
 		artrunner->ants -= veinlen(artrunner->vein);
 		artrunner = artrunner->next;
 	}
-	heart->ants = 1;
 }
 
 void	putants(t_heart *heart)
@@ -86,32 +85,38 @@ int		addant(t_traffic **traffic, int	id, t_vein	*veinnode)
 	newnode->id = id;
 	newnode->veinnode = veinnode;
 	newnode->next = NULL;
-	if (*traffic)
-	{
-		newnode->parent = curnode;
+	newnode->parent = (curnode) ? curnode : NULL;
+	if (curnode)
 		curnode->next = newnode;
-	}
 	else
-	{
-		newnode->parent = NULL;
 		*traffic = newnode;
-	}
-	// *((*inputList) ? inputList : &(curnode->next)) = newnode;
 	return (1);
 }
 
-int		qants(t_heart *heart)
+void	qants(t_heart *heart)
 {
-	int		i;
+	int		id;
 	t_artery *artery;
 
-	i = heart->ants;
-	artery = heart->artery;
-	while (artery)
+	id = 1;
+	heart->ants = 1;
+	while (heart->ants)
 	{
-		if (artery->ants)
-			artery->ants -= addant(&heart->traffic, heart->ants++, artery->vein);
-		artery = artery->next;
+		artery = heart->artery;
+		heart->ants = 0;
+		while (artery)
+		{
+			if (artery->ants)
+			{
+				if (!addant(&heart->traffic, id++, artery->vein))
+					erexit(heart, "out of memory");
+				artery->ants--;
+				heart->ants = 1;
+			}
+			artery = artery->next;
+		}
+		putants(heart);
 	}
-	return (heart->ants - i);
+	while (heart->traffic)
+		putants(heart);
 }

@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/02 21:37:41 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/04 13:16:40 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,18 @@ void	initheart(t_heart *heart)
 
 void    freeheart(t_heart *heart)
 {
-    freeartery(heart->artery);
-    free(heart->inputchecks);
-    freeinputlist(heart->input);
-    free(heart);
+	if (heart)
+	{
+		freeartery(heart->artery);
+		if (heart->inputchecks)
+			free(heart->inputchecks);
+		freeinputlist(heart->input);
+		freetraffic(heart->traffic);
+		freeq(heart->queue);
+		if (heart->buff)
+			free(heart->buff);
+		free(heart);
+	}
 }
 
 int	main(void)
@@ -46,12 +54,9 @@ int	main(void)
 		heart->network = *heart->inputchecks->start;
 		putinputlist(heart->input, 0);
 		if(!bfs(heart))
-			erexit("no paths");
+			erexit(heart, "no paths");
 		initants(heart);
-		while (qants(heart))
-			putants(heart);
-		while (heart->traffic)
-			putants(heart);
+		qants(heart);
 	}
 	freeheart(heart);
 }

@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/14 11:19:07 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/04 13:11:26 by ben              ###   ########.fr       */
+/*   Created: 2020/05/04 13:08:09 by ben               #+#    #+#             */
+/*   Updated: 2020/05/04 13:16:04 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
 
-void	erexit(t_heart *heart, char *errMsg)
+void    freetraffic(t_traffic *traffic)
 {
-	ft_putstr(errMsg);
-	freeheart(heart);
-	exit(1);
+    if (traffic)
+    {
+        if (traffic->next)
+            freetraffic(traffic->next);
+        free(traffic);
+    }
 }
