@@ -6,23 +6,22 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:36:38 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/04 13:18:44 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/04 14:27:09 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
 
-int		pushq(t_queue **queue, t_queue *parent, t_network *node)
+void	pushq(t_queue **queue, t_queue *parent, t_network *node, t_heart *heart)
 {
 	t_queue *curnode;
 	t_queue *newnode;
 
 	curnode = *queue;
-
 	while (curnode && curnode->next)
 		curnode = curnode->next;
 	if (!(newnode = malloc(sizeof(t_queue))))
-		return (0);
+		erexit(heart, 2);
 	newnode->parent = parent ? parent : NULL;
 	newnode->node = node;
 	newnode->next = NULL;
@@ -30,7 +29,6 @@ int		pushq(t_queue **queue, t_queue *parent, t_network *node)
 		curnode->next = newnode;
 	else
 		*queue = newnode;
-	return (1);
 }
 
 void	freeq(t_queue *q)

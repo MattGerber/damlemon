@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/04 13:11:06 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/04 14:31:57 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,18 +87,17 @@ typedef struct				s_queue
 int							addinputnode(t_input **inputlist, char *line);
 void						freeinputlist(t_input *inputlist);
 int							isants(char *line);
-int							isroom(char *line);
-int							islink(char *line, t_input *roomNames);
+int							isroom(char *line, t_heart *heart);
+int							islink(char *line, t_input *roomNames, t_heart *heart);
 int							validateinput(t_heart *heart);
-void						erexit(t_heart *heart, char *errMsg);
+void						erexit(t_heart *heart, int errorcode);
 void						putinputlist(t_input *inputlist, int putnetwork);
 void						putinputchecks(t_inputchecks *checks);
 int							veinlen(t_vein *vein);
 int							addant(t_traffic **traffic, int	id, t_vein	*veinnode);
-int							pushq(t_queue **queue, t_queue *parent, t_network *node);
-int							addveinnode(t_vein **vein, t_network *room);
+void						pushq(t_queue **queue, t_queue *parent, t_network *node, t_heart *heart);
 void						freeq(t_queue *q);
-t_artery					*addarterynode(t_artery **artery, int id);
+t_artery					*addarterynode(t_heart *heart, int id);
 int							veinlen(t_vein *vein);
 void						popart(t_artery *artery);
 int							bfs(t_heart *heart);

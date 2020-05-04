@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 09:36:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/02 19:26:07 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/04 14:36:00 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,14 @@ void	initchecks(t_inputchecks *checks)
 	checks->start = NULL;
 }
 
-int		runinputchecks(t_input *inputnode, t_inputchecks *inputchecks)
+int		runinputchecks(t_heart *heart)
 {
 	t_input	*roomnames;
+	t_input *inputnode;
+	t_inputchecks *inputchecks;
 
+	inputnode = heart->input;
+	inputchecks =  heart->inputchecks;
 	roomnames = NULL;
 	while (inputnode)
 	{
@@ -68,14 +72,15 @@ int		runinputchecks(t_input *inputnode, t_inputchecks *inputchecks)
 				return (0);
 			inputchecks->ants = 1;
 		}
-		else if (isroom(inputnode->line))
+		else if (isroom(inputnode->line, heart))
 		{
 			if (!inputchecks->ants || inputchecks->links)
 				return (0);
 			inputchecks->rooms = 1;
-			addinputnode(&roomnames, ft_strsub(inputnode->line, 0, ft_strnchr(inputnode->line, ' ')));
+			if (!(addinputnode(&roomnames, ft_strsub(inputnode->line, 0, ft_strnchr(inputnode->line, ' ')))))
+				erexit(heart, 2);
 		}
-		else if (islink(inputnode->line, roomnames))
+		else if (islink(inputnode->line, roomnames, heart))
 		{
 			if (!inputchecks->ants || !inputchecks->rooms)
 				return (0);
@@ -83,13 +88,13 @@ int		runinputchecks(t_input *inputnode, t_inputchecks *inputchecks)
 		}
 		else if (ft_strequ(inputnode->line, "##start") == 1)
 		{
-			if ((!inputnode->next) || (!isroom(inputnode->next->line)) || inputchecks->start)
+			if ((!inputnode->next) || (!isroom(inputnode->next->line, heart)) || inputchecks->start)
 				return (0);
 			inputchecks->start = &inputnode->next->roomnode;
 		}
 		else if (ft_strequ(inputnode->line, "##end") == 1)
 		{
-			if ((!inputnode->next) || (!isroom(inputnode->next->line)) || inputchecks->end)
+			if ((!inputnode->next) || (!isroom(inputnode->next->line, heart)) || inputchecks->end)
 				return (0);
 			inputchecks->end = &inputnode->next->roomnode;
 		}
@@ -104,8 +109,9 @@ int		runinputchecks(t_input *inputnode, t_inputchecks *inputchecks)
 
 int		validateinput(t_heart *heart)
 {
-	heart->inputchecks = malloc(sizeof(t_inputchecks));
+	if (!(heart->inputchecks = malloc(sizeof(t_inputchecks))))
+		erexit(heart, 2);
 	initchecks(heart->inputchecks);
-	return (runinputchecks(heart->input, heart->inputchecks));
+	return (runinputchecks(heart));
 	//dupe links
 }

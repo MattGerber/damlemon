@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/04 13:06:34 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/04 14:34:07 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	qants(t_heart *heart)
 			if (artery->ants)
 			{
 				if (!addant(&heart->traffic, id++, artery->vein))
-					erexit(heart, "out of memory");
+					erexit(heart, 2);
 				artery->ants--;
 				heart->ants = 1;
 			}

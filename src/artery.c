@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/02 19:10:50 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/04 14:32:58 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,24 @@ int		veinlen(t_vein *vein)
 	return (i);
 }
 
-t_artery	*addarterynode(t_artery **artery, int id)
+t_artery	*addarterynode(t_heart *heart, int id)
 {
 	t_artery *curnode;
 	t_artery *newnode;
 
-	curnode = *artery;
+	curnode = heart->artery;
 	while (curnode && curnode->next)
 		curnode = curnode->next;
 	if (!(newnode = malloc(sizeof(t_artery))))
-		return (NULL);
+		erexit(heart, 2);
 	newnode->id = id;
 	newnode->vein = NULL;
 	newnode->ants = 0;
 	newnode->next = NULL;
-	if (*artery)
+	if (curnode)
 		curnode->next = newnode;
 	else
-		*artery = newnode;
+		heart->artery = newnode;
 	return (newnode);
 }
 
@@ -51,7 +51,7 @@ void	popart(t_artery *artery)
 	t_artery	*prev;
 
 	if (artery)
-	{	
+	{
 		prev = NULL;
 		while (artery->next)
 		{
@@ -62,17 +62,5 @@ void	popart(t_artery *artery)
 		free(artery);
 		if (prev)
 			prev->next = NULL;
-	}
-}
-
-void	freeartery(t_artery *artery)
-{
-	if (artery)
-	{
-		if (artery->next)
-			freeartery(artery->next);
-		if (artery->vein)
-			freevein(artery->vein);
-		free(artery);
 	}
 }
