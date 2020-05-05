@@ -6,17 +6,114 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/04 14:34:07 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/05 16:02:39 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
+
+void	sortpaths(t_heart *heart)
+{
+	int			sorted;
+	t_artery	*artery;
+	t_artery	*prev;
+
+	sorted = 0;
+	if (!heart->artery || !heart->artery->next)
+		return ;
+	while (!sorted)
+	{
+		artery = heart->artery;
+		sorted = 1;
+		prev = NULL;
+		while (artery)
+			if (artery->next && (artery->ants > artery->next->ants))
+			{
+				if (prev)
+					prev->next = artery->next;
+				else
+					heart->artery = artery->next;
+				artery->next = artery->next->next;
+				if (prev)
+					prev->next->next = artery;
+				else
+					heart->artery->next = artery;
+				sorted = 0;
+				prev = prev->next;
+			}
+			else
+			{
+				prev = artery;
+				artery = artery->next;
+			}
+	}
+}
+
+int		arterylength(t_artery *artery)
+{
+	int	i;
+
+	i = 0;
+	while(artery)
+	{
+		i++;
+		artery = artery->next;
+	}
+	return (i);
+}
+
+void	initantsv2(t_heart *heart)
+{
+	int			*pathdifs;
+	int			arterylen;
+	int			i;
+	int			counter;
+	t_artery	*artery;
+
+	sortpaths(heart);
+	arterylen = arterylength(heart);
+	pathdifs = malloc(sizeof(int) * arterylen);
+	if (arterylen)
+	{
+		i = 0;
+		artery = heart->artery;
+		while (artery->next)
+		{
+			pathdifs[i++] = artery->next->ants - artery->ants;
+			artery = artery->next;
+		}
+		//reset pathlengths to 0?
+		i = 0;
+		while (i < arterylen)
+		{
+			counter = 0;
+			artery = heart->artery;
+			while(counter < i)
+			{
+				if (heart->ants > pathdifs[counter])
+				{
+					artery->ants += pathdifs[counter];
+				}
+				else
+				{
+					
+				}
+
+				counter++;
+				artery = artery->next;
+			}
+			i++;
+
+		}
+	}
+}
 
 void	initants(t_heart *heart)
 {
 	t_artery	*artrunner;
 	t_artery	*shortvein;
 
+	initantsv2(heart);
 	while (heart->ants)
 	{
 		shortvein = heart->artery;
