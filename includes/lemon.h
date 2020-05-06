@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/04 14:31:57 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/06 11:35:44 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct				s_artery
 {
 	int						id;
 	int						ants;
+	int						veinlen;
 	struct s_vein			*vein;
 	struct s_artery			*next;
 }							t_artery;
@@ -64,7 +65,7 @@ typedef struct				s_heart
 	struct s_input			*input;
 	struct s_inputchecks	*inputchecks;
 	struct s_network		*network;
-	struct s_artery			*artery;
+	struct s_artery			**artery;
 	struct s_traffic		*traffic;
 	struct s_queue			*queue;
 }							t_heart;

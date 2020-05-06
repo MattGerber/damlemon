@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/04 14:51:48 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/06 09:11:37 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ void    freeheart(t_heart *heart)
 {
 	if (heart)
 	{
-		freeartery(heart->artery);
+		freeartery(*heart->artery);
+		if (heart->artery)
+			free(heart->artery);
 		if (heart->inputchecks)
 			free(heart->inputchecks);
 		freeinputlist(heart->input);

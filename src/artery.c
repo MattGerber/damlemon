@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/04 14:32:58 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/06 11:36:38 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,20 @@ t_artery	*addarterynode(t_heart *heart, int id)
 	t_artery *curnode;
 	t_artery *newnode;
 
-	curnode = heart->artery;
+	curnode = *heart->artery;
 	while (curnode && curnode->next)
 		curnode = curnode->next;
 	if (!(newnode = malloc(sizeof(t_artery))))
 		erexit(heart, 2);
 	newnode->id = id;
 	newnode->vein = NULL;
+	newnode->veinlen;
 	newnode->ants = 0;
 	newnode->next = NULL;
 	if (curnode)
 		curnode->next = newnode;
 	else
-		heart->artery = newnode;
+		*heart->artery = newnode;
 	return (newnode);
 }
 

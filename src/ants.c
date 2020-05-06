@@ -6,48 +6,11 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/05 16:02:39 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/06 11:40:21 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
-
-void	sortpaths(t_heart *heart)
-{
-	int			sorted;
-	t_artery	*artery;
-	t_artery	*prev;
-
-	sorted = 0;
-	if (!heart->artery || !heart->artery->next)
-		return ;
-	while (!sorted)
-	{
-		artery = heart->artery;
-		sorted = 1;
-		prev = NULL;
-		while (artery)
-			if (artery->next && (artery->ants > artery->next->ants))
-			{
-				if (prev)
-					prev->next = artery->next;
-				else
-					heart->artery = artery->next;
-				artery->next = artery->next->next;
-				if (prev)
-					prev->next->next = artery;
-				else
-					heart->artery->next = artery;
-				sorted = 0;
-				prev = prev->next;
-			}
-			else
-			{
-				prev = artery;
-				artery = artery->next;
-			}
-	}
-}
 
 int		arterylength(t_artery *artery)
 {
@@ -62,76 +25,145 @@ int		arterylength(t_artery *artery)
 	return (i);
 }
 
+void	sortartery(t_heart *heart)
+{
+	int			counter;
+	int			sorted;
+	t_artery	*tmp;
+
+	sorted = 0;
+	while(!sorted)
+	{
+		counter = 0;
+		sorted = 1;
+		while(heart->artery[counter] && heart->artery[counter + 1])
+		{
+			if (heart->artery[counter] > heart->artery[counter + 1])
+			{
+				tmp = heart->artery[counter];
+				heart->artery[counter] = heart->artery[counter + 1];
+				heart->artery[counter + 1] = tmp;
+				if (counter - 1 >= 0)
+					heart->artery[counter - 1]->next = heart->artery[counter];
+				heart->artery[counter + 1]->next = heart->artery[counter]->next;
+				heart->artery[counter]->next = heart->artery[counter + 1];
+				sorted = 0;
+			}
+			counter++;
+		}
+	}
+}
+
+void	reinitartery(t_heart *heart)
+{
+	t_artery	*temp;
+	int			counter;
+
+	temp = *heart->artery;
+	if (!(heart->artery = malloc(sizeof(t_artery *) * (arterylength(temp) + 1))))
+		erexit(heart, 2);
+	counter = 0;
+	while(temp)
+	{
+		heart->artery[counter] = temp;
+		counter++;
+		temp = temp->next;
+	}
+	heart->artery[counter] = temp;
+}
+
+int		*initpathdifs(t_heart *heart)
+{
+	int		*pathdifs;
+	int		counter;
+
+	counter = 0;
+	if (!(pathdifs = malloc(sizeof(int) * arterylength(*heart->artery))))
+		erexit(heart, 2);
+	while(heart->artery[counter + 1])
+	{
+		pathdifs[counter] = heart->artery[counter + 1] - heart->artery[counter];
+		counter++;
+	}
+	pathdifs[counter] = NULL;
+	return (pathdifs);
+}
+
 void	initantsv2(t_heart *heart)
 {
 	int			*pathdifs;
+	int			counter1;
+	int			counter2;
 	int			arterylen;
-	int			i;
-	int			counter;
-	t_artery	*artery;
 
+	reinitartery(heart);
 	sortpaths(heart);
-	arterylen = arterylength(heart);
-	pathdifs = malloc(sizeof(int) * arterylen);
-	if (arterylen)
+	pathdifs = initpathdifs(heart);
+	counter1 = 0;
+	counter2 = 0;
+	arterylen = arterylength(*heart->artery);
+	while (heart->artery[counter1])
 	{
-		i = 0;
-		artery = heart->artery;
-		while (artery->next)
+		counter2 += pathdifs[counter1] * (counter1 + 1);
+		counter1++;
+	}
+	counter1 = 0;
+	//counter1 = (counter2 < heart->ants) ?  : ;
+	if (counter2 < heart->ants)
+		while (heart->artery[counter1])
 		{
-			pathdifs[i++] = artery->next->ants - artery->ants;
-			artery = artery->next;
+			heart->artery[counter1]->ants = heart->artery[arterylen - 1]->ants - heart->artery[counter1]->ants;
+			counter1++;
 		}
-		//reset pathlengths to 0?
-		i = 0;
-		while (i < arterylen)
+	else
+	{
+		counter2 = 0;
+		while (heart->artery[counter2])
+			heart->artery[counter2++] = 0;
+		while (pathdifs[counter1])
 		{
-			counter = 0;
-			artery = heart->artery;
-			while(counter < i)
-			{
-				if (heart->ants > pathdifs[counter])
-				{
-					artery->ants += pathdifs[counter];
-				}
-				else
-				{
-					
-				}
-
-				counter++;
-				artery = artery->next;
-			}
-			i++;
-
+			counter2 = 0;
+			if (heart->ants < (pathdifs[counter1] * (counter1 + 1)))
+				break ;
+			while (counter2 <= counter1)
+				heart->artery[counter2++]->ants += pathdifs[counter1];
+			heart->ants -= pathdifs[counter1] * (counter1 + 1);
+			counter1++;
 		}
+	}
+	counter2 = 0;
+	while (counter2 < counter1)
+	{
+		heart->artery[counter2]->ants += heart->ants / counter1;
+		counter2++;
+	}
+	heart->ants &= counter1;
+	counter1 = 0;
+	while (heart->ants)
+	{
+		heart->artery[counter1]->ants++;
+		heart->ants++;
+		counter1++;
 	}
 }
 
 void	initants(t_heart *heart)
 {
 	t_artery	*artrunner;
-	t_artery	*shortvein;
+	t_artery	*shortpath;
 
-	initantsv2(heart);
 	while (heart->ants)
 	{
-		shortvein = heart->artery;
-		artrunner = shortvein->next;
+		shortpath = *heart->artery;
+		artrunner = shortpath->next;
 		while (artrunner)
 		{
-			if (artrunner->ants < shortvein->ants)
-				shortvein = artrunner;
+			if (artrunner->veinlen < shortpath->veinlen)
+				shortpath = artrunner;
 			artrunner = artrunner->next;
 		}
-		shortvein->ants++;
+		shortpath->ants++;
 		heart->ants--;
-	}
-	artrunner = heart->artery;
-	while (artrunner)
-	{
-		artrunner->ants -= veinlen(artrunner->vein);
-		artrunner = artrunner->next;
 	}
 }
 
@@ -199,7 +231,7 @@ void	qants(t_heart *heart)
 	heart->ants = 1;
 	while (heart->ants)
 	{
-		artery = heart->artery;
+		artery = *heart->artery;
 		heart->ants = 0;
 		while (artery)
 		{
