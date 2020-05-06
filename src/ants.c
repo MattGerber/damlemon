@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/06 11:40:21 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/06 15:39:18 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		arterylength(t_artery *artery)
 	return (i);
 }
 
-void	sortartery(t_heart *heart)
+void	sortpaths(t_heart *heart)
 {
 	int			counter;
 	int			sorted;
@@ -58,9 +58,12 @@ void	reinitartery(t_heart *heart)
 {
 	t_artery	*temp;
 	int			counter;
+	int			artlen;
 
 	temp = *heart->artery;
-	if (!(heart->artery = malloc(sizeof(t_artery *) * (arterylength(temp) + 1))))
+	artlen = arterylength(temp) + 1;
+	free(heart->artery);
+	if (!(heart->artery = malloc(sizeof(t_artery *) * artlen)))
 		erexit(heart, 2);
 	counter = 0;
 	while(temp)
@@ -82,14 +85,14 @@ int		*initpathdifs(t_heart *heart)
 		erexit(heart, 2);
 	while(heart->artery[counter + 1])
 	{
-		pathdifs[counter] = heart->artery[counter + 1] - heart->artery[counter];
+		pathdifs[counter] = heart->artery[counter + 1]->veinlen - heart->artery[counter]->veinlen;
 		counter++;
 	}
-	pathdifs[counter] = NULL;
+	pathdifs[counter] = 0;
 	return (pathdifs);
 }
 
-void	initantsv2(t_heart *heart)
+void	initants(t_heart *heart)
 {
 	int			*pathdifs;
 	int			counter1;
@@ -112,14 +115,11 @@ void	initantsv2(t_heart *heart)
 	if (counter2 < heart->ants)
 		while (heart->artery[counter1])
 		{
-			heart->artery[counter1]->ants = heart->artery[arterylen - 1]->ants - heart->artery[counter1]->ants;
+			heart->artery[counter1]->ants = heart->artery[arterylen - 1]->veinlen - heart->artery[counter1]->veinlen;
 			counter1++;
 		}
 	else
 	{
-		counter2 = 0;
-		while (heart->artery[counter2])
-			heart->artery[counter2++] = 0;
 		while (pathdifs[counter1])
 		{
 			counter2 = 0;
@@ -147,7 +147,7 @@ void	initantsv2(t_heart *heart)
 	}
 }
 
-void	initants(t_heart *heart)
+void	initantsold(t_heart *heart)
 {
 	t_artery	*artrunner;
 	t_artery	*shortpath;

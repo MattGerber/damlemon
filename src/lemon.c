@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/06 09:11:37 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/06 15:26:34 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	initheart(t_heart *heart)
 {
 	heart->ants = 0;
-	heart->artery = NULL;
+	heart->artery = malloc(sizeof(t_artery **));
+	*heart->artery = NULL;
 	heart->input = NULL;
 	heart->inputchecks = NULL;
 	heart->network = NULL;

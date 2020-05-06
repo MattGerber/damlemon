@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/06 11:36:38 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/06 15:27:17 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_artery	*addarterynode(t_heart *heart, int id)
 		erexit(heart, 2);
 	newnode->id = id;
 	newnode->vein = NULL;
-	newnode->veinlen;
+	newnode->veinlen = 0;
 	newnode->ants = 0;
 	newnode->next = NULL;
 	if (curnode)
