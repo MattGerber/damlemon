@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/06 15:26:34 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/06 16:00:16 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	main(void)
 	putinputlist(heart->input, 0);
 	if(!bfs(heart))
 		erexit(heart, 1);
+	reinitartery(heart);
+	sortpaths(heart);
 	initants(heart);
 	qants(heart);
 	freeheart(heart);

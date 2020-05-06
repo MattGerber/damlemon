@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/06 15:27:17 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/06 16:01:56 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,17 @@ void	popart(t_artery *artery)
 		if (prev)
 			prev->next = NULL;
 	}
+}
+
+int		arterylength(t_artery *artery)
+{
+	int	i;
+
+	i = 0;
+	while(artery)
+	{
+		i++;
+		artery = artery->next;
+	}
+	return (i);
 }
