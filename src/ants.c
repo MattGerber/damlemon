@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/06 16:49:32 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/08 12:29:42 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	putants(t_heart *heart)
 		{
 			tmp = ant;
 			if (tmp->parent)
-				tmp->parent = tmp->next;
+				tmp->parent->next = tmp->next;
 			else
 				heart->traffic = tmp->next;
 			if (tmp->next)
@@ -88,7 +88,8 @@ void	qants(t_heart *heart)
 			}
 			artery = artery->next;
 		}
-		putants(heart);
+		if (heart->ants)
+			putants(heart);
 	}
 	while (heart->traffic)
 		putants(heart);
