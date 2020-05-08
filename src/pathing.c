@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 16:48:51 by ben               #+#    #+#             */
-/*   Updated: 2020/05/06 16:49:17 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/08 11:26:54 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,18 +113,19 @@ void	initants(t_heart *heart)
 	while (heart->artery[counter1])
 		counter2 += heart->artery[arterylen - 1]->veinlen - heart->artery[counter1++]->veinlen;
 	counter1 = 0;
-	if (counter2 < heart->ants)
+	if ((counter2) && (counter2 < heart->ants))
 		while (heart->artery[counter1])
 		{
 			heart->artery[counter1]->ants = heart->artery[arterylen - 1]->veinlen - heart->artery[counter1]->veinlen;
+			heart->ants -= heart->artery[counter1]->ants;
 			counter1++;
 		}
 	else
-		counter1 = slowassign(heart);
+		counter1 = (counter2) ? slowassign(heart) : 1;
 	counter2 = 0;
 	while (counter2 < counter1)
 		heart->artery[counter2++]->ants += heart->ants / counter1;
-	heart->ants &= counter1;
+	heart->ants %= counter1;
 	counter1 = 0;
 	while (counter1 < heart->ants)
 		heart->artery[counter1++]->ants++;
