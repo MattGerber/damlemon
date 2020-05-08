@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 16:48:51 by ben               #+#    #+#             */
-/*   Updated: 2020/05/08 11:26:54 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/08 11:44:16 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	initants(t_heart *heart)
 			counter1++;
 		}
 	else
-		counter1 = (counter2) ? slowassign(heart) : 1;
+		counter1 = (counter2) ? slowassign(heart) : arterylen;
 	counter2 = 0;
 	while (counter2 < counter1)
 		heart->artery[counter2++]->ants += heart->ants / counter1;
