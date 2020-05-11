@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 16:48:51 by ben               #+#    #+#             */
-/*   Updated: 2020/05/08 11:44:16 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/11 12:00:17 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,12 @@ void	reinitartery(t_heart *heart)
 	temp = *heart->artery;
 	artlen = arterylength(temp) + 1;
 	free(heart->artery);
+	heart->artery = NULL;
 	if (!(heart->artery = malloc(sizeof(t_artery *) * artlen)))
+	{
+		freeartery(temp);
 		erexit(heart, 2);
+	}
 	counter = 0;
 	while(temp)
 	{

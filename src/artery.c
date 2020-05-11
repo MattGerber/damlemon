@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/11 11:32:55 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/11 12:05:55 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,7 @@ void	popart(t_heart *heart)
 		if (prev)
 			prev->next = NULL;
 		else
-		{
 			*heart->artery = NULL;
-			heart->artery = NULL;
-		}
 	}
 }
 

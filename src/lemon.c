@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/11 11:35:49 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/11 11:51:27 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,6 @@ void	initheart(t_heart *heart)
 	heart->queue = NULL;
 	heart->traffic = NULL;
 	heart->buff = NULL;
-}
-
-void    freeheart(t_heart *heart)
-{
-	if (heart)
-	{
-		if (heart->artery)
-			freeartery(*heart->artery);
-		if (heart->inputchecks)
-			free(heart->inputchecks);
-		freeinputlist(heart->input);
-		freetraffic(heart->traffic);
-		freeq(heart->queue);
-		if (heart->buff)
-			free(heart->buff);
-		free(heart);
-	}
 }
 
 int	main(void)

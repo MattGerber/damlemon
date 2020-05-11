@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/11 11:31:00 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/11 11:52:26 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,6 @@ void						freetraffic(t_traffic *traffic);
 void						reinitartery(t_heart *heart);
 void						sortpaths(t_heart *heart);
 int							arterylength(t_artery *artery);
+void						freeheart(t_heart *heart);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:08:09 by ben               #+#    #+#             */
-/*   Updated: 2020/05/04 14:33:11 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/11 11:53:38 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,26 @@ void	freeartery(t_artery *artery)
 		if (artery->vein)
 			freevein(artery->vein);
 		free(artery);
+	}
+}
+
+void    freeheart(t_heart *heart)
+{
+	if (heart)
+	{
+		if (heart->artery)
+        {
+            if (*heart->artery)
+                freeartery(*heart->artery);
+            free(heart->artery);
+        }
+		if (heart->inputchecks)
+			free(heart->inputchecks);
+		freeinputlist(heart->input);
+		freetraffic(heart->traffic);
+		freeq(heart->queue);
+		if (heart->buff)
+			free(heart->buff);
+		free(heart);
 	}
 }
