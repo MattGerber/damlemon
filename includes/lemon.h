@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/06 16:02:07 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/11 11:31:00 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void						pushq(t_queue **queue, t_queue *parent, t_network *node, t_heart *hear
 void						freeq(t_queue *q);
 t_artery					*addarterynode(t_heart *heart, int id);
 int							veinlen(t_vein *vein);
-void						popart(t_artery *artery);
+void						popart(t_heart *heart);
 int							bfs(t_heart *heart);
 void						initroomnodes(t_heart *heart);
 void						putnetworknode(t_network *node);

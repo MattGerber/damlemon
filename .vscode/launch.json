@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/lemon",
-            "args": ["<", "maps/long.map"],
+            "args": ["<", "maps/valid1.map"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/06 11:37:08 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/11 11:27:41 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ int		bfs(t_heart *heart)
 	i = 0;
 	while (search(heart, artery = addarterynode(heart, ++i)))
 		artery->veinlen = veinlen(artery->vein);
-	popart(*heart->artery);
+	popart(heart);
 	return(heart->artery ? 1 : 0);
 }

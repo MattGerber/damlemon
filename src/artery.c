@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/06 16:01:56 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/11 11:32:55 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,29 @@ t_artery	*addarterynode(t_heart *heart, int id)
 	return (newnode);
 }
 
-void	popart(t_artery *artery)
+void	popart(t_heart *heart)
 {
 	t_artery	*prev;
+	t_artery	*cur;
 
-	if (artery)
+	cur = *heart->artery;
+	if (cur)
 	{
 		prev = NULL;
-		while (artery->next)
+		while (cur->next)
 		{
-			prev = artery;
-			artery = artery->next;
+			prev = cur;
+			cur = cur->next;
 		};
-		freevein(artery->vein);
-		free(artery);
+		freevein(cur->vein);
+		free(cur);
 		if (prev)
 			prev->next = NULL;
+		else
+		{
+			*heart->artery = NULL;
+			heart->artery = NULL;
+		}
 	}
 }
 
