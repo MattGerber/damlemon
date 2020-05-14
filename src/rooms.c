@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 20:18:59 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/04 14:17:58 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/14 15:01:07 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,12 @@ void	compilelinks(t_network *roomnode, t_input *inputlistlinks, t_input *inputli
 			{
 				if (!(addinputnode(&links, ft_strdup(arr[ft_strequ(arr[0], roomnode->name)]))))
 				{
-					while (arr[0])
-    					free((arr++)[0]);
+					freearr(arr);
 					erexit(heart, 2);
 				}
 				i++;
 			}
-			while (arr[0])
-    			free((arr++)[0]);
+			freearr(arr);
 		}
 		inputlistlinks = inputlistlinks->next;
 	}
@@ -97,8 +95,7 @@ void	initroomnodes(t_heart *heart)
 				erexit(heart, 2);
 			if (!(input->roomnode->name = ft_strdup(arr[0])))
 			{
-				while (arr[0])
-    				free((arr++)[0]);
+				freearr(arr);
 				erexit(heart, 2);
 			}
 			input->roomnode->x = ft_atoi(arr[1]);
@@ -107,8 +104,7 @@ void	initroomnodes(t_heart *heart)
 			input->roomnode->end = 0;
 			input->roomnode->visited = 0;
 			input->roomnode->id = id++;
-			while (arr[0])
-    			free((arr++)[0]);
+			freearr(arr);
 		}
 		input = input->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:08:09 by ben               #+#    #+#             */
-/*   Updated: 2020/05/11 11:53:38 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/14 14:57:08 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,18 @@ void    freeheart(t_heart *heart)
 		if (heart->buff)
 			free(heart->buff);
 		free(heart);
+	}
+}
+
+void	freearr(char **arr)
+{
+	int	i;
+
+	if (arr)
+	{
+		i = 0;
+		while (arr[i])
+			free(arr[i++]);
+		free(arr);
 	}
 }
