@@ -7,6 +7,9 @@ valgrind --leak-check=full ./lemon < maps/viz.map
 todo:
 visualiser
 catch empty input file
+duplicate room coords (edit dupe room checker)
+check dupe links
+test all cases
 
 pdf2_1 correct output
 L1-1 L2-2

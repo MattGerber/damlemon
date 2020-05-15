@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:08:09 by ben               #+#    #+#             */
-/*   Updated: 2020/05/14 14:57:08 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/14 16:06:21 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void    freeheart(t_heart *heart)
 		freeinputlist(heart->input);
 		freetraffic(heart->traffic);
 		freeq(heart->queue);
-		if (heart->buff)
-			free(heart->buff);
+		// if (heart->buff)
+			// free(heart->buff);
 		free(heart);
 	}
 }
