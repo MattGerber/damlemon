@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 09:36:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/04 14:36:00 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/19 16:29:11 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int		runinputchecks(t_heart *heart)
 			inputchecks->end = &inputnode->next->roomnode;
 		}
 		else if (!inputnode->line || (inputnode->line)[0] != '#')
-			return (0);
+			return (0);//maybe rewrite these last 3 into 1
 		inputnode = inputnode->next;
 	}
 	inputchecks->rooms = roomdupes(roomnames);

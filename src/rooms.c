@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 20:18:59 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/14 15:01:07 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/19 18:42:26 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ t_network	**poplinks(t_input *links, t_input *inputlist, int linkcount, t_heart 
 	}
 	linksarr[linkcount] = NULL;
 	return(linksarr);
-}
+}//loop throught inputlist and delete room from linkslist when its found in inputlist
 
 void	compilelinks(t_network *roomnode, t_input *inputlistlinks, t_input *inputlist, t_heart *heart)
 {
-	t_input		*links;
+	t_input		*links;//change to link list that can store IDS instead of names of rooms
 	char	**arr;
 	int		i;
 
@@ -67,8 +67,8 @@ void	notenoughlinks(t_heart *heart, t_input	*inputlistlinks)
 {
 	t_input	*inputlist;
 
-	inputlist = heart->input;
-	while(!islink(inputlist->line, NULL, heart))
+	inputlist = heart->input;//set to second in list to skip ants
+	while(!islink(inputlist->line, NULL, heart))//while not end of inputlsit
 	{
 		if (inputlist->roomnode)
 			compilelinks(inputlist->roomnode, inputlistlinks, heart->input, heart);

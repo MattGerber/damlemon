@@ -14,6 +14,7 @@ make file
 comment code
 readability update
 fix README
+rewrite addarterynode and popart to add to the start of the list for increased speed?
 
 pdf2_1 correct output
 L1-1 L2-2
