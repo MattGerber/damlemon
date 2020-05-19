@@ -10,6 +10,10 @@ catch empty input file
 duplicate room coords (edit dupe room checker)
 check dupe links
 test all cases
+make file
+comment code
+readability update
+fix README
 
 pdf2_1 correct output
 L1-1 L2-2
