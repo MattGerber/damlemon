@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 16:48:51 by ben               #+#    #+#             */
-/*   Updated: 2020/05/11 12:00:17 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/21 18:15:40 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	sortpaths(t_heart *heart)
 {
 	int			counter;
-	int			sorted;
+	int			sorted;//change to bool
 	t_artery	*tmp;
 
 	sorted = 0;
@@ -25,7 +25,7 @@ void	sortpaths(t_heart *heart)
 		sorted = 1;
 		while(heart->artery[counter] && heart->artery[counter + 1])
 		{
-			if (heart->artery[counter] > heart->artery[counter + 1])
+			if (heart->artery[counter]->veinlen > heart->artery[counter + 1]->veinlen)
 			{
 				tmp = heart->artery[counter];
 				heart->artery[counter] = heart->artery[counter + 1];
@@ -45,7 +45,7 @@ void	reinitartery(t_heart *heart)
 {
 	t_artery	*temp;
 	int			counter;
-	int			artlen;
+	int			artlen;//remove this var
 
 	temp = *heart->artery;
 	artlen = arterylength(temp) + 1;
@@ -109,28 +109,31 @@ void	initants(t_heart *heart)
 {
 	int			counter1;
 	int			counter2;
-	int			arterylen;
+	int			arterylen;//make var for heart->artery
 
 	counter1 = 0;
 	counter2 = 0;
 	arterylen = arterylength(*heart->artery);
+	
 	while (heart->artery[counter1])
 		counter2 += heart->artery[arterylen - 1]->veinlen - heart->artery[counter1++]->veinlen;
 	counter1 = 0;
+	
 	if ((counter2) && (counter2 < heart->ants))
 		while (heart->artery[counter1])
 		{
 			heart->artery[counter1]->ants = heart->artery[arterylen - 1]->veinlen - heart->artery[counter1]->veinlen;
-			heart->ants -= heart->artery[counter1]->ants;
+			heart->ants -= heart->artery[counter1]->ants;//remove this line
 			counter1++;
-		}
+		}//minus counter2 from heart ants after the while
 	else
 		counter1 = (counter2) ? slowassign(heart) : arterylen;
 	counter2 = 0;
 	while (counter2 < counter1)
 		heart->artery[counter2++]->ants += heart->ants / counter1;
 	heart->ants %= counter1;
+	
 	counter1 = 0;
 	while (counter1 < heart->ants)
-		heart->artery[counter1++]->ants++;
+		heart->artery[counter1++]->ants++;//return counyter1
 }

@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/08 12:37:06 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/21 18:20:37 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ int		addant(t_traffic **traffic, int	id, t_vein	*veinnode)
 void	qants(t_heart *heart)
 {
 	int		id;
-	t_artery *artery;
+	t_artery *artery;//add bool instead of heart ants
 
 	id = 1;
 	heart->ants = 1;
-	while (heart->ants)
+	while (heart->ants)//while artery[sat-level]->ants
 	{
 		artery = *heart->artery;
 		heart->ants = 0;
