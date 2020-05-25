@@ -1,3 +1,5 @@
+
+
 gcc src/*.c Libft/libft.a includes/lemon.h -o lemon
 ./lemon < maps/test.map
 https://github.com/bentenjamin/Libft.git
@@ -30,3 +32,11 @@ L2-end L3-end L4-6 L5-4
 L4-end L5-end
 
 Credit to https://github.com/gwasserfall && https://github.com/Ayano2000 for map files
+
+## Using Libft after a fresh clone:
+
+On the initial clone, the Libft directory will be empty.
+
+To initialise the directory run `git init submodule` followed by `git submodule update` to get the data for the appropriate commit for the current branch in the parent project.
+
+If during the course of work, the submodule is updated and you would like the updated data on your branch, run `git submodule update --remote Libft`.
