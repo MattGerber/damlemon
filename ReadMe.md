@@ -7,6 +7,7 @@ https://github.com/microsoft/vscode-cpptools/issues/811
 valgrind --leak-check=full ./lemon < maps/viz.map
 
 ## To-Do:
+
 * visualiser
 * catch empty input file
 * duplicate room coords (edit dupe room checker)
@@ -42,3 +43,13 @@ On the initial clone, the Libft directory will be empty.
 To initialise the directory run `git submodule init` followed by `git submodule update` to get the data for the appropriate commit for the current branch in the parent project.
 
 If during the course of work, the submodule is updated and you would like the updated data on your branch, run `git submodule update --remote Libft`.
+
+## Adding source files:
+
+When adding a `<filename>.c` file to the `src` directory, remember to include a rule for this file in the root `Makefile`.
+
+Eg:
+
+If `example.c` is added to `src`, ensure that `example.o` is added to the `Makefile` like this:
+
+    OBJ_LEM += $(OBJ_DIR)example.o
