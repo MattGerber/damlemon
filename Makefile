@@ -18,10 +18,10 @@ OPTIONS = -I$(INC_DIR) -I./Libft -lft -L./Libft
 HDR = ./includes/lemon.h
 
 OBJ_LEM = $(OBJ_DIR)inputchecks.o $(OBJ_DIR)inputlist.o
-OBJ_LEM += $(OBJ_DIR)lemon.o $(OBJ_DIR)misc.o $(OBJ_DIR)pump.o
+OBJ_LEM += $(OBJ_DIR)lemon.o $(OBJ_DIR)ants.o $(OBJ_DIR)free.o
 OBJ_LEM += $(OBJ_DIR)artery.o $(OBJ_DIR)bfs.o $(OBJ_DIR)error.o
 OBJ_LEM += $(OBJ_DIR)queue.o $(OBJ_DIR)rooms.o $(OBJ_DIR)testing.o
-OBJ_LEM += $(OBJ_DIR)traffic.o $(OBJ_DIR)vein.o $(OBJ_DIR)visualise.o
+OBJ_LEM += $(OBJ_DIR)visualise.o $(OBJ_DIR)pathing.o
 
 all: $(LIB) $(NAME_LEM)
 
