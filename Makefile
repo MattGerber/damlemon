@@ -7,48 +7,27 @@
 #                                                         #
 ##########################################################
 
-LIB = libft
-NAME_LEM = lemon
-CC = gcc
-FLAGS = -Wall -Werror -Wextra
-SRC_DIR = ./src/
-INC_DIR = ./includes/
-OBJ_DIR = ./src/
-OPTIONS = -I$(INC_DIR) -I./Libft -lft -L./Libft
-HDR = ./includes/lemon.h
-SRC_LEM = $(SRC_DIR)*.c
 
-all: $(LIB) $(NAME_LEM)
 
-$(LIB): makelib
-	@echo "[$(LIB)] compiled"
+all:
+	@(cd Libft; $(MAKE) all)
+	@(cd src; $(MAKE) all)
 
-$(NAME_LEM): $(SRC_LEM)
-	@$(CC) $(FLAGS) $(OPTIONS) $(SRC_LEM) -o $(NAME_LEM)
-	@echo "[$(NAME_LEM)] compiled"
-
-clean: cleanlib
-	@/bin/rm -f $(OBJ_LEM)
-	@echo "Object files removed"
-
-fclean: fcleanlib
-	@/bin/rm -f $(NAME_LEM)
-	@echo "[$(NAME_LEM)] removed"
-
-re: fclean all
-
-makelib:
-	@$(MAKE) -C ./Libft all
-
-relib:
-	@$(MAKE) -C ./Libft re
-
-cleanlib:
+clean: 
 	@$(MAKE) -C ./Libft clean
 
 fcleanlib:
 	@$(MAKE) -C ./Libft fclean
-	@echo "[$(LIB)] removed"
+
+fcleanlemon:
+	@$(MAKE) -C ./src fclean
+
+fclean: fcleanlib fcleanlemon
+
+re: fclean all
+
+
+
 
 #OBJS specifies which files to compile as part of the project
 OBJ_VIS = vis/*.c

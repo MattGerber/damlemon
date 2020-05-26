@@ -2,6 +2,7 @@
 *.gch
 a.out
 includes/lemon.h.gch
-*.o
-*.a
+*/*.o
+*/*.a
 lemon
+lem-in
