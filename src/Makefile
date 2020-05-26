@@ -6,14 +6,14 @@
 #    By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/26 20:47:24 by rbolton           #+#    #+#              #
-#    Updated: 2020/05/26 21:13:57 by rbolton          ###   ########.fr        #
+#    Updated: 2020/05/26 21:58:45 by rbolton          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem-in
 SRC = ./*.c
 LIBS = -I/src ../Libft/libft.a 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -g -Wall -Werror -Wextra
 
 all: $(NAME)
 
