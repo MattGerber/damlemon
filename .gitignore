@@ -6,3 +6,4 @@ includes/lemon.h.gch
 */*.a
 lemon
 lem-in
+.dSYM
