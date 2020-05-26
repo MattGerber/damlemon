@@ -16,34 +16,29 @@ INC_DIR = ./includes/
 OBJ_DIR = ./src/
 OPTIONS = -I$(INC_DIR) -I./Libft -lft -L./Libft
 HDR = ./includes/lemon.h
-
-OBJ_LEM = $(OBJ_DIR)inputchecks.o $(OBJ_DIR)inputlist.o
-OBJ_LEM += $(OBJ_DIR)lemon.o $(OBJ_DIR)ants.o $(OBJ_DIR)free.o
-OBJ_LEM += $(OBJ_DIR)artery.o $(OBJ_DIR)bfs.o $(OBJ_DIR)error.o
-OBJ_LEM += $(OBJ_DIR)queue.o $(OBJ_DIR)rooms.o $(OBJ_DIR)testing.o
-OBJ_LEM += $(OBJ_DIR)visualise.o $(OBJ_DIR)pathing.o
+SRC_LEM = $(SRC_DIR)*.c
 
 all: $(LIB) $(NAME_LEM)
 
-$(LIB): relib cleanlib
+$(LIB): makelib
 	@echo "[$(LIB)] compiled"
 
-%.o: $(SRC_DIR)%.c $(HDR)
-	@$(CC) $(FLAGS) $(OPTIONS) -c $< -o $@
-
-$(NAME_LEM): $(OBJ_LEM)
-	@$(CC) -o $(NAME_LEM) $(FLAGS) $(OPTIONS) $(OBJ_LEM) 
+$(NAME_LEM): $(SRC_LEM)
+	@$(CC) $(FLAGS) $(OPTIONS) $(SRC_LEM) -o $(NAME_LEM)
 	@echo "[$(NAME_LEM)] compiled"
 
 clean: cleanlib
-	@/bin/rm -f $(SRC_DIR)*.o
+	@/bin/rm -f $(OBJ_LEM)
 	@echo "Object files removed"
 
-fclean: clean fcleanlib
+fclean: fcleanlib
 	@/bin/rm -f $(NAME_LEM)
 	@echo "[$(NAME_LEM)] removed"
 
 re: fclean all
+
+makelib:
+	@$(MAKE) -C ./Libft all
 
 relib:
 	@$(MAKE) -C ./Libft re
@@ -51,5 +46,26 @@ relib:
 cleanlib:
 	@$(MAKE) -C ./Libft clean
 
-fcleanlib: cleanlib
+fcleanlib:
 	@$(MAKE) -C ./Libft fclean
+	@echo "[$(LIB)] removed"
+
+#OBJS specifies which files to compile as part of the project
+OBJ_VIS = vis/*.c
+NAME_VIS = visualiser
+
+#CC specifies which compiler we're using
+
+#COMPILER_FLAGS specifies the additional compilation options we're using
+# -w suppresses all warnings
+COMPILER_FLAGS = -w
+
+#LINKER_FLAGS specifies the libraries we're linking against
+LINKER_FLAGS = -lSDL2
+
+#OBJ_NAME specifies the name of our exectuable
+OBJ_NAME = visualiser
+
+#This is the target that compiles our executable
+$(NAME_VIS) : $(OBJ_VIS)
+	$(CC) $(OBJ_VIS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
