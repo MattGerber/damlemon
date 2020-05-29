@@ -1,0 +1,19 @@
+		//Draw line from one end to another
+		thickLineColor(visualiser->rend, 105, 55, 405, 205, 8, 0xFFFFFFFF);
+		// thickLineColor(visualiser->rend, 25, 15, 10, 20, 8, 0x69420FFF);
+
+
+		//Draws room 1
+		dims.x = 100;
+		dims.y = 50;
+		stringColor(visualiser->rend, dims.x, dims.y - 20, "START", 0xFFFFFFFF);
+		SDL_RenderCopy(visualiser->rend, visualiser->room, NULL, &dims);
+
+		//Draws room 2
+		dims.x = 400;
+		dims.y = 200;
+		stringColor(visualiser->rend, dims.x, dims.y - 20, "END", 0xFFFFFFFF);
+		SDL_RenderCopy(visualiser->rend, visualiser->room, NULL, &dims);
+
+		//presents 
+		SDL_RenderPresent(visualiser->rend);

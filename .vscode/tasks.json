@@ -11,9 +11,10 @@
 				"-Werror",
 				"-Wextra",
 				"${workspaceFolder}/src/*.c",
+				"${workspaceFolder}/vis/*.c",
 				"${workspaceFolder}/Libft/libft.a",
 				"${workspaceFolder}/includes/lemon.h",
-				"-o", "${workspaceFolder}/lemon",
+				"-o", "${workspaceFolder}/visualiser",
 				"--debug"
 			],
 			"options": {

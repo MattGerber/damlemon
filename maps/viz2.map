@@ -1,0 +1,26 @@
+10
+##start
+start 200 150
+xyz 600 150
+#THIS IS A COMMENT
+abc 1000 150
+wtc 1500 350
+wat 1000 550
+long 600 550
+float 200 750
+close 600 950
+nearly 1100 950
+#USE GET_NEXT_LINE
+##end
+end 1650 950
+#ROOM LINKS
+start-xyz
+wtc-wat
+wat-long
+long-float
+xyz-abc
+abc-wtc
+float-close
+close-nearly
+nearly-end
+##invalid commands are ignored

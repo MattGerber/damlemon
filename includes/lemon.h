@@ -122,5 +122,6 @@ void						sortpaths(t_heart *heart);
 int							arterylength(t_artery *artery);
 void						freeheart(t_heart *heart);
 void						freearr(char **arr);
+void						initheart(t_heart *heart);
 
 #endif
