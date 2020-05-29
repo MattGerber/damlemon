@@ -6,4 +6,6 @@ includes/lemon.h.gch
 */*.a
 lemon
 lem-in
-.dSYM
+*.dSYM
+lem-in.dSYM/Contents/Info.plist
+lem-in-time

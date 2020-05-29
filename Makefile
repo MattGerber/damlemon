@@ -26,6 +26,9 @@ fclean: fcleanlib fcleanlemon
 
 re: fclean all
 
+lem-in-time:
+	@$(MAKE) -C ./src lem-in-time
+
 
 
 
