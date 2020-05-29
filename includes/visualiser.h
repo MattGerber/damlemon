@@ -11,25 +11,26 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
+# define KEY_N event.key.keysym.scancode == SDL_SCANCODE_N
+# define KEY_Q event.key.keysym.scancode == SDL_SCANCODE_Q
 
-typedef struct		s_vis
+typedef struct			s_vis
 {
-	SDL_Window		*window;
-	SDL_Renderer	*rend;
-	SDL_Texture		*room;
-	SDL_Texture		*bg;
-	int				close;
-	int				active;
-	double			percent;
-}					t_vis;
+	SDL_Window			*window;
+	SDL_Renderer		*rend;
+	SDL_Texture			*room;
+	SDL_Texture			*bg;
+	SDL_Texture			*ant;
+	int					close;
+	int					active;
+	double				percent;
+}						t_vis;
 
-typedef	struct		s_room
+typedef struct			s_ant
 {
-	char			*name;
-	int				x;
-	int				y;
-	int				type;
-	struct s_room	*next;
-}					t_room;
+	int					id;
+	struct s_network	*room;
+	struct s_ant		*next;
+}						t_ant;
 
 #endif

@@ -32,6 +32,7 @@ t_vis			*init_vis(void)
 	vis->rend = NULL;
 	vis->bg = NULL;
 	vis->room = NULL;
+	vis->ant  = NULL;
 	vis->close = 0;
 	vis->active = 0;
 	vis->percent = 0;
@@ -80,6 +81,7 @@ void			populate_vis(t_vis *vis)
 	vis->rend = init_renderer(vis);
 	vis->bg = init_texture(vis, "/home/mattgerber/Documents/damlemon/vis/resources/bg.jpg");
 	vis->room = init_texture(vis, "/home/mattgerber/Documents/damlemon/vis/resources/sq.png");
+	vis->ant = init_texture(vis, "/home/mattgerber/Documents/damlemon/vis/resources/ant500.png");
 }
 
 void		draw_bg(t_vis *vis)
@@ -118,14 +120,6 @@ void drawlines(t_vis *vis, t_input *input)
 
 }
 
-void	drawants(t_vis *vis, t_input *moves)
-{
-	while(moves)
-	{
-		ft_putendl(moves->line);
-		moves = moves->next;
-	}
-}
 
 void drawrooms(t_vis *vis, t_input *input)
 {
@@ -135,18 +129,18 @@ void drawrooms(t_vis *vis, t_input *input)
 	dims.h = 100;
 	temp = input;
 
-	while(temp->next)
+	while(temp)
 	{
 		if (temp->roomnode)
 		{
 			dims.x = temp->roomnode->x - (100 / 2);
 			dims.y = temp->roomnode->y - (100 / 2);
-			if (temp->roomnode->name == "START")
-				stringColor(vis->rend, dims.x, dims.y - 20, "START", 0xFFFFFFFF);
-			else if (temp->roomnode->name  == "START")
-				stringColor(vis->rend, dims.x, dims.y - 20, "END", 0xFFFFFFFF);
+			if (temp->roomnode->start)
+				stringColor(vis->rend, dims.x, dims.y - 20, "START", 0xFF000000);
+			else if (temp->roomnode->end)
+				stringColor(vis->rend, dims.x, dims.y - 20, "END", 0xFF000000);
 			else
-				stringColor(vis->rend, dims.x, dims.y - 20, temp->roomnode->name, 0xFFFFFFFF);
+				stringColor(vis->rend, dims.x, dims.y - 20, temp->roomnode->name, 0xFF000000);
 			SDL_RenderCopy(vis->rend, vis->room, NULL, &dims);
 		}
 		temp = temp->next;
@@ -166,15 +160,113 @@ void	initheart(t_heart *heart)
 	heart->buff = NULL;
 }
 
+t_ant	*v_initants(int ants)
+{
+	t_ant	*head;
+	t_ant	*list;
+	t_ant	*newnode;
+	int		i;
+
+	i = 1;	
+	head = malloc(sizeof(t_ant));
+	list = head;
+	list->id = i;
+	while (i < ants)
+	{
+		newnode = malloc(sizeof(t_ant));
+		list->next = newnode;
+		list = list->next;
+		i++;
+		list->id = i;
+	}
+	list->next = NULL;
+	return(head);
+}
+
+t_ant	*setstart(t_ant *ant, t_input *input)
+{
+	t_ant		*temp;
+	t_network	*rooms;
+
+	while(input->next)
+	{
+		if (input->roomnode)
+			if (input->roomnode->start)
+				break ;
+		input = input->next;
+	}	
+	temp = ant;
+	rooms = input->roomnode;
+	rooms->visited = 1;
+	while(temp)
+	{
+		temp->room = rooms;
+		temp = temp->next;
+	}
+	return (ant);
+}
+
+void	drawants(t_vis *vis, t_ant *input)
+{
+	SDL_Rect	dims;
+	t_ant	*temp;
+	dims.w = 50;
+	dims.h = 50;
+	temp = input;
+
+	while(temp)
+	{
+		dims.x = temp->room->x - 20;
+		dims.y = temp->room->y - 20;
+		SDL_RenderCopy(vis->rend, vis->ant, NULL, &dims);
+		temp = temp->next;
+	}
+}
+
+
+void	execmove(t_ant	*ants, t_input *moves, t_input *rooms)
+{
+	char	**first;
+	char	**second;
+	t_ant	*anttmp;
+	t_input *roomtmp;
+	int 	i;
+	int		j;
+
+		first = ft_strsplit(moves->line, ' ');
+		anttmp = ants;
+		roomtmp = rooms->next;
+		i = 0;
+		while(first[i])
+		{
+			second = ft_strsplit(first[i], '-');
+
+			while(anttmp->id != v_atoi(second[0]) && anttmp){
+				anttmp = anttmp->next;
+			}
+			while(roomtmp)
+			{
+				if (roomtmp->roomnode)
+				{
+					if(ft_strequ(roomtmp->roomnode->name, second[1]))
+					{
+						anttmp->room = roomtmp->roomnode;
+						break ;
+					}
+				}
+				roomtmp = roomtmp->next;
+			}
+			i++;
+		}
+}
+
 int main()
 {
 	t_vis *visualiser;
 	SDL_Event	event;
-	SDL_Rect	dims;
-	dims.w = 100;
-	dims.h = 100;
 	t_heart	*heart;
 	t_input	*moves;
+	t_ant	*ants;
 
 	heart = malloc(sizeof(t_heart));
 	initheart(heart);
@@ -189,19 +281,26 @@ int main()
 		moves = moves->next;
 	visualiser = init_vis();
 	populate_vis(visualiser);
+	ants = v_initants(heart->ants);
+	setstart(ants, heart->input);
 	while(!(visualiser->close))
 	{
-		SDL_RenderClear(visualiser->rend);
-		draw_bg(visualiser);
-		drawlines(visualiser, heart->input);
-		drawrooms(visualiser, heart->input);
-		drawants(visualiser, moves);
-		SDL_RenderPresent(visualiser->rend);
-		SDL_Delay(1000 / 60);
+			SDL_RenderClear(visualiser->rend);
+			draw_bg(visualiser);
+			drawlines(visualiser, heart->input);
+			drawrooms(visualiser, heart->input);
+			drawants(visualiser, ants);
+			SDL_RenderPresent(visualiser->rend);
+			SDL_Delay(1000 / 60);
 		while (SDL_PollEvent(&event))
 		{
-			if ((event.type == SDL_KEYDOWN) || event.type == SDL_QUIT)
-				visualiser->close = 1;
+			if ((event.type == SDL_KEYDOWN && KEY_Q) || event.type == SDL_QUIT)
+					visualiser->close = 1;
+			if (event.type == SDL_KEYDOWN && KEY_N && !visualiser->active && moves)
+			{
+				execmove(ants, moves,heart->input);
+					moves = moves->next;
+			}
 		}
 	}
 	vis_free(&visualiser);
