@@ -118,6 +118,15 @@ void drawlines(t_vis *vis, t_input *input)
 
 }
 
+void	drawants(t_vis *vis, t_input *moves)
+{
+	while(moves)
+	{
+		ft_putendl(moves->line);
+		moves = moves->next;
+	}
+}
+
 void drawrooms(t_vis *vis, t_input *input)
 {
 	SDL_Rect	dims;
@@ -165,6 +174,7 @@ int main()
 	dims.w = 100;
 	dims.h = 100;
 	t_heart	*heart;
+	t_input	*moves;
 
 	heart = malloc(sizeof(t_heart));
 	initheart(heart);
@@ -174,6 +184,9 @@ int main()
 	if (!validateinput(heart))
 		erexit(heart, 3);
 	initroomnodes(heart);
+	moves = heart->input;
+	while(moves->line[0] != 'L')
+		moves = moves->next;
 	visualiser = init_vis();
 	populate_vis(visualiser);
 	while(!(visualiser->close))
@@ -182,6 +195,7 @@ int main()
 		draw_bg(visualiser);
 		drawlines(visualiser, heart->input);
 		drawrooms(visualiser, heart->input);
+		drawants(visualiser, moves);
 		SDL_RenderPresent(visualiser->rend);
 		SDL_Delay(1000 / 60);
 		while (SDL_PollEvent(&event))
