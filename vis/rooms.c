@@ -42,7 +42,7 @@ void	compilelinks(t_network *roomnode, t_input *inputlistlinks, t_input *inputli
 	links = NULL;
 	while (inputlistlinks)
 	{
-		if (islink(inputlistlinks->line, NULL, heart))
+		if (islink(inputlistlinks->line, NULL, heart) && (inputlistlinks->line[0] != 'L'))
 		{
 			if (!(arr = ft_strsplit(inputlistlinks->line, '-')))
 				erexit(heart, 2);

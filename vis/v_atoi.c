@@ -1,3 +1,5 @@
+#include "../includes/visualiser.h"
+
 int	v_atoi(const char *str)
 {
 	int	i;

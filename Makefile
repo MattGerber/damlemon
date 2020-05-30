@@ -58,7 +58,7 @@ fcleanlib: cleanlib
 
 
 	#OBJS specifies which files to compile as part of the project
-OBJ_VIS = vis/*.c src/error.c src/rooms.c src/ants.c src/artery.c src/free.c src/pathing.c src/queue.c src/testing.c src/bfs.c src/inputchecks.c src/visualise.c
+OBJ_VIS = vis/*.c
 NAME_VIS = visualiser 
 
 #CC specifies which compiler we're using

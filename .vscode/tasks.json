@@ -13,7 +13,7 @@
 				"${workspaceFolder}/src/*.c",
 				"${workspaceFolder}/vis/*.c",
 				"${workspaceFolder}/Libft/libft.a",
-				"${workspaceFolder}/includes/lemon.h",
+				"${workspaceFolder}/includes/visualiser.h",
 				"-o", "${workspaceFolder}/visualiser",
 				"--debug"
 			],

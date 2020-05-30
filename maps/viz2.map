@@ -10,7 +10,7 @@ long 600 550
 float 200 750
 close 600 950
 nearly 1100 950
-#USE GET_NEXT_LINE
+##USE GET_NEXT_LINE
 ##end
 end 1650 950
 #ROOM LINKS

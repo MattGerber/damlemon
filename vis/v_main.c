@@ -81,7 +81,7 @@ void			populate_vis(t_vis *vis)
 	vis->rend = init_renderer(vis);
 	vis->bg = init_texture(vis, "/home/mattgerber/Documents/damlemon/vis/resources/bg.jpg");
 	vis->room = init_texture(vis, "/home/mattgerber/Documents/damlemon/vis/resources/sq.png");
-	vis->ant = init_texture(vis, "/home/mattgerber/Documents/damlemon/vis/resources/ant500.png");
+	vis->ant = init_texture(vis, "/home/mattgerber/Documents/damlemon/vis/resources/sprite1.png");
 }
 
 void		draw_bg(t_vis *vis)
@@ -220,36 +220,35 @@ void	drawants(t_vis *vis, t_ant *input)
 		dims.y = temp->room->y - 20;
 		SDL_RenderCopy(vis->rend, vis->ant, NULL, &dims);
 		temp = temp->next;
+
 	}
 }
 
 
-void	execmove(t_ant	*ants, t_input *moves, t_input *rooms)
+t_network	*execmove(t_ant	*ants, char *move, t_input *rooms, t_vis *vis)
 {
-	char	**first;
 	char	**second;
 	t_ant	*anttmp;
 	t_input *roomtmp;
+	t_network	*previous;
 	int 	i;
-	int		j;
 
-		first = ft_strsplit(moves->line, ' ');
 		anttmp = ants;
-		roomtmp = rooms->next;
+		roomtmp = rooms;
 		i = 0;
-		while(first[i])
-		{
-			second = ft_strsplit(first[i], '-');
+			second = ft_strsplit(move, '-');
 
-			while(anttmp->id != v_atoi(second[0]) && anttmp){
+			while(anttmp->id != v_atoi(second[0])){
 				anttmp = anttmp->next;
 			}
+			
 			while(roomtmp)
 			{
 				if (roomtmp->roomnode)
 				{
 					if(ft_strequ(roomtmp->roomnode->name, second[1]))
 					{
+						previous = anttmp->room;
 						anttmp->room = roomtmp->roomnode;
 						break ;
 					}
@@ -257,7 +256,13 @@ void	execmove(t_ant	*ants, t_input *moves, t_input *rooms)
 				roomtmp = roomtmp->next;
 			}
 			i++;
-		}
+			freearr(second);
+			return(previous)
+}
+
+void	animate(t_ant *ant, t_network *previous)
+{
+
 }
 
 int main()
@@ -265,9 +270,11 @@ int main()
 	t_vis *visualiser;
 	SDL_Event	event;
 	t_heart	*heart;
-	t_input	*moves;
+	t_input	*movelist;
 	t_ant	*ants;
-
+	char	**move;
+	int i;
+	
 	heart = malloc(sizeof(t_heart));
 	initheart(heart);
 	while (get_next_line(0, &(heart->buff)))
@@ -276,9 +283,9 @@ int main()
 	if (!validateinput(heart))
 		erexit(heart, 3);
 	initroomnodes(heart);
-	moves = heart->input;
-	while(moves->line[0] != 'L')
-		moves = moves->next;
+	movelist = heart->input;
+	while(movelist->line[0] != 'L')
+		movelist = movelist->next;
 	visualiser = init_vis();
 	populate_vis(visualiser);
 	ants = v_initants(heart->ants);
@@ -296,10 +303,20 @@ int main()
 		{
 			if ((event.type == SDL_KEYDOWN && KEY_Q) || event.type == SDL_QUIT)
 					visualiser->close = 1;
-			if (event.type == SDL_KEYDOWN && KEY_N && !visualiser->active && moves)
+			if (event.type == SDL_KEYDOWN && KEY_N  && movelist)
 			{
-				execmove(ants, moves,heart->input);
-					moves = moves->next;
+
+				
+					move = ft_strsplit(movelist->line, ' ');
+						i = 0;
+					while (move[i]){
+						execmove(ants, move[i],heart->input, visualiser);
+						animate();
+						drawants(visualiser, ants);
+						i++;
+					}
+					freearr(move);
+					movelist = movelist->next;
 			}
 		}
 	}

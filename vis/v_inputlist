@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lemon.h"
+#include "../includes/visualiser.h"
 
-int		addinputnode(t_input **inputList, char *line)
+int		v_addinputnode(t_input **inputList, char *line)
 {
 	t_input *curnode;
 	t_input *newnode;
@@ -32,12 +32,12 @@ int		addinputnode(t_input **inputList, char *line)
 	return (1);
 }
 
-void	freeinputlist(t_input *inputlist)
+void	v_freeinputlist(t_input *inputlist)
 {
 	if (inputlist)
 	{
 		if (inputlist->next)
-			freeinputlist(inputlist->next);
+			v_freeinputlist(inputlist->next);
 		if (inputlist->line)
 			free(inputlist->line);
 		if (inputlist->roomnode)
@@ -46,7 +46,7 @@ void	freeinputlist(t_input *inputlist)
 	}
 }
 
-void	initchecks(t_inputchecks *checks)
+void	v_initchecks(t_inputchecks *checks)
 {
 	checks->ants = 0;
 	checks->end = NULL;
@@ -55,7 +55,7 @@ void	initchecks(t_inputchecks *checks)
 	checks->start = NULL;
 }
 
-int		runinputchecks(t_heart *heart)
+int		v_runinputchecks(t_heart *heart)
 {
 	t_input *inputnode;
 	t_inputchecks *inputchecks;
@@ -82,11 +82,11 @@ int		runinputchecks(t_heart *heart)
 	return (1);
 }
 
-int		validateinput(t_heart *heart)
+int		v_validateinput(t_heart *heart)
 {
 	if (!(heart->inputchecks = malloc(sizeof(t_inputchecks))))
 		erexit(heart, 2);
-	initchecks(heart->inputchecks);
-	return (runinputchecks(heart));
+	v_initchecks(heart->inputchecks);
+	return (v_runinputchecks(heart));
 	//dupe links
 }

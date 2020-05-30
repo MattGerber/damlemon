@@ -29,8 +29,16 @@ typedef struct			s_vis
 typedef struct			s_ant
 {
 	int					id;
+	int					active;
 	struct s_network	*room;
 	struct s_ant		*next;
 }						t_ant;
+
+int	v_atoi(const char *str);
+int		v_addinputnode(t_input **inputList, char *line);
+void	v_freeinputlist(t_input *inputlist);
+void	v_initchecks(t_inputchecks *checks);
+int		v_runinputchecks(t_heart *heart);
+int		v_validateinput(t_heart *heart);
 
 #endif
