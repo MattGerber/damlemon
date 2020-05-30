@@ -13,6 +13,7 @@
 # define HEIGHT 1080
 # define KEY_N event.key.keysym.scancode == SDL_SCANCODE_N
 # define KEY_Q event.key.keysym.scancode == SDL_SCANCODE_Q
+# define KEY_R event.key.keysym.scancode == SDL_SCANCODE_R
 
 typedef struct			s_vis
 {
@@ -20,7 +21,8 @@ typedef struct			s_vis
 	SDL_Renderer		*rend;
 	SDL_Texture			*room;
 	SDL_Texture			*bg;
-	SDL_Texture			*ant;
+	SDL_Texture			**ant;
+	SDL_Texture			**mirror;
 	int					close;
 	int					active;
 	double				percent;
@@ -31,6 +33,7 @@ typedef struct			s_ant
 	int					id;
 	int					active;
 	struct s_network	*room;
+	struct s_network	*prev;
 	struct s_ant		*next;
 }						t_ant;
 
