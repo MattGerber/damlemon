@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 16:48:51 by ben               #+#    #+#             */
-/*   Updated: 2020/05/21 18:15:40 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/31 12:59:02 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	sortpaths(t_heart *heart)
 {
 	int			counter;
-	int			sorted;//change to bool
+	int			sorted;
 	t_artery	*tmp;
 
 	sorted = 0;
@@ -45,13 +45,11 @@ void	reinitartery(t_heart *heart)
 {
 	t_artery	*temp;
 	int			counter;
-	int			artlen;//remove this var
 
 	temp = *heart->artery;
-	artlen = arterylength(temp) + 1;
 	free(heart->artery);
 	heart->artery = NULL;
-	if (!(heart->artery = malloc(sizeof(t_artery *) * artlen)))
+	if (!(heart->artery = malloc(sizeof(t_artery *) * (arterylength(temp) + 1))))
 	{
 		freeartery(temp);
 		erexit(heart, 2);

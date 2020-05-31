@@ -6,7 +6,7 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/29 15:19:13 by rbolton           #+#    #+#             */
-/*   Updated: 2020/05/29 15:38:28 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/05/31 12:45:33 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,11 @@ int	main(void)
 		erexit(heart, 3);
 	initroomnodes(heart);
 	heart->network = *heart->inputchecks->start;
-	if(!bfs(heart))//NO PRINTING IF NO PATHS
+	if(!bfs(heart))
 		erexit(heart, 1);
-	putinputlist(heart->input, 0);
 	reinitartery(heart);
-	sortpaths(heart);//remove sort 
 	initants(heart);
+  putinputlist(heart->input, 0);
 	qants(heart);
 	freeheart(heart);
 
