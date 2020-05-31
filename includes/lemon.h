@@ -6,7 +6,7 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 17:06:47 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/05/31 18:20:37 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void						cleaninput(t_heart *heart);
 void						putinputnetwork(t_input *input);
 void						putartery(t_artery *artery, int showvein);
 int							roomdupes(t_input *roomnames);
+int             roomcoorddupes(t_heart *heart);
 void						qants(t_heart *heart, int activeveins);
 int							initants(t_heart *heart);
 void    					freevein(t_vein *vein);

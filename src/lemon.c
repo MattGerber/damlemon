@@ -6,7 +6,7 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 17:08:01 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/05/31 18:21:57 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	main(void)
 	if (!validateinput(heart))
 		erexit(heart, 3);
 	initroomnodes(heart);
+  if (!roomcoorddupes(heart))
+    erexit(heart, 3);
 	heart->network = *heart->inputchecks->start;
 	if(!bfs(heart))
 		erexit(heart, 1);

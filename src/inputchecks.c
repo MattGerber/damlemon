@@ -6,7 +6,7 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:05 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 15:21:45 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/05/31 18:43:01 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,27 @@ int	roomdupes(t_input *roomnames)
 			temp = temp->next;
 		}
 		roomnames = roomnames->next;
+	}
+	return (1);
+}
+
+int roomcoorddupes(t_heart *heart)
+{
+  t_input *rooms1;
+  t_input *rooms2;
+  rooms1 = heart->input->next;
+
+	while (rooms1->next)
+	{
+		rooms2 = rooms1->next;
+		while (rooms2)
+		{
+      if (rooms1->roomnode && rooms2->roomnode)
+			  if ((rooms1->roomnode->x == rooms2->roomnode->x) && (rooms1->roomnode->y == rooms2->roomnode->y))
+				  return (0);
+			rooms2 = rooms2->next;
+		}
+		rooms1 = rooms1->next;
 	}
 	return (1);
 }
