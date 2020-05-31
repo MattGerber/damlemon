@@ -26,7 +26,6 @@ int		main()
 			erexit(heart, 2);
 	if (!validateinput(heart))
 		erexit(heart, 3);
-	write(1, "das", 3);
 	initroomnodes(heart);
 	visualiser = init_vis();
 	populate_vis(visualiser);
