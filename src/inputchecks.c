@@ -6,7 +6,7 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:05 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 18:13:45 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/05/31 18:43:01 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,7 @@ int	islink(char *line, t_input *roomNames, t_heart *heart)
 int	roomdupes(t_input *roomnames)
 {
 	t_input	*temp;
-  t_input *start;
-  int coordsdupe;
 
-  start = roomnames;
 	while (roomnames->next)
 	{
 		temp = roomnames->next;
@@ -74,24 +71,26 @@ int	roomdupes(t_input *roomnames)
 		}
 		roomnames = roomnames->next;
 	}
-  coordsdupe = roomcoorddupes(start);
-	return ((1 && (coordsdupe)) ? 1 : 0);
+	return (1);
 }
 
-int roomcoorddupes(t_input *rooms)
+int roomcoorddupes(t_heart *heart)
 {
-  t_input *tmp;
+  t_input *rooms1;
+  t_input *rooms2;
+  rooms1 = heart->input->next;
 
-	while (rooms->next)
+	while (rooms1->next)
 	{
-		tmp = rooms->next;
-		while (tmp)
+		rooms2 = rooms1->next;
+		while (rooms2)
 		{
-			if ((rooms->roomnode->x == tmp->roomnode->x) && (rooms->roomnode->y == tmp->roomnode->y))
-				return (0);
-			tmp = tmp->next;
+      if (rooms1->roomnode && rooms2->roomnode)
+			  if ((rooms1->roomnode->x == rooms2->roomnode->x) && (rooms1->roomnode->y == rooms2->roomnode->y))
+				  return (0);
+			rooms2 = rooms2->next;
 		}
-		rooms = rooms->next;
+		rooms1 = rooms1->next;
 	}
 	return (1);
 }
