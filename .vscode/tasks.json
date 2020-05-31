@@ -10,11 +10,10 @@
 				"-Wall",
 				"-Werror",
 				"-Wextra",
-				// "${workspaceFolder}/src/*.c",
-				"${workspaceFolder}/vis/*.c",
+				"${workspaceFolder}/src/*.c",
 				"${workspaceFolder}/Libft/libft.a",
-				"${workspaceFolder}/includes/visualiser.h",
-				"-o", "${workspaceFolder}/visualiser",
+				"${workspaceFolder}/includes/lemon.h",
+				"-o", "${workspaceFolder}/lem-in",
 				"--debug"
 			],
 			"options": {

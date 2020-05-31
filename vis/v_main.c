@@ -17,8 +17,9 @@ int		main()
 {
 	t_vis		*visualiser;
 	t_heart		*heart;
+	int change;
 
-
+	change = 1;
 	heart = malloc(sizeof(t_heart));
 	initheart(heart);
 	while (get_next_line(0, &(heart->buff)))
@@ -27,6 +28,11 @@ int		main()
 	if (!validateinput(heart))
 		erexit(heart, 3);
 	initroomnodes(heart);
+	// check_coords(heart);
+	while(change)
+	{
+		change = check_coords(heart);
+	}
 	visualiser = init_vis();
 	populate_vis(visualiser);
 	init_loop(visualiser, heart);
