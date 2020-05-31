@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputlist.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 09:36:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/19 16:29:11 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/31 17:30:37 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,13 @@ int		runinputchecks(t_heart *heart)
 	inputnode = heart->input;
 	inputchecks =  heart->inputchecks;
 	roomnames = NULL;
+
+  if (!inputnode)
+     erexit(heart, 3);
+  else if(!(ft_isdigit(inputnode->line[0])))
+     erexit(heart, 3);  
+  else if (inputnode->line[0] == '0')
+    erexit(heart, 3);  
 	while (inputnode)
 	{
 		if (isants(inputnode->line))
@@ -79,8 +86,8 @@ int		runinputchecks(t_heart *heart)
 			inputchecks->rooms = 1;
 			if (!(addinputnode(&roomnames, ft_strsub(inputnode->line, 0, ft_strnchr(inputnode->line, ' ')))))
 				erexit(heart, 2);
-		}
-		else if (islink(inputnode->line, roomnames, heart))
+		}		
+      else if (islink(inputnode->line, roomnames, heart))
 		{
 			if (!inputchecks->ants || !inputchecks->rooms)
 				return (0);
@@ -113,5 +120,4 @@ int		validateinput(t_heart *heart)
 		erexit(heart, 2);
 	initchecks(heart->inputchecks);
 	return (runinputchecks(heart));
-	//dupe links
 }

@@ -6,7 +6,7 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 16:35:44 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/05/31 18:13:35 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,6 @@ void						sortpaths(t_heart *heart);
 int							arterylength(t_artery *artery);
 void						freeheart(t_heart *heart);
 void						freearr(char **arr);
+t_network	      **addlinks(t_input *links, t_input *inputlist, int linkcount, t_heart *heart);
 
 #endif

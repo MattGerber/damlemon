@@ -7,5 +7,4 @@ includes/lemon.h.gch
 lemon
 lem-in
 *.dSYM
-lem-in.dSYM/Contents/Info.plist
-lem-in-time
+*.dSYM/*
