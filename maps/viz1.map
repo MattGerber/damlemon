@@ -1,0 +1,26 @@
+5
+##start
+start 1650 300
+hello 1150 450
+#THIS IS A COMMENT
+wtf 950 850
+qwerty 800 550
+abc 450 150
+#USE GET_NEXT_LINE
+reddit 200 250
+memes 950 200
+##end
+end 450 550
+#ROOM LINKS
+end-qwerty
+end-reddit
+start-wtf
+qwerty-wtf
+abc-hello
+wtf-abc
+qwerty-hello
+hello-start
+memes-reddit
+memes-qwerty
+reddit-abc
+##invalid commands are ignored
