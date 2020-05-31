@@ -1,8 +1,8 @@
-10
+3
 ##start
 start 200 150
 xyz 600 150
-##THIS IS A COMMENT
+#THIS IS A COMMENT
 abc 1000 150
 wtc 1500 350
 wat 1000 550
@@ -28,18 +28,11 @@ nearly-end
 L1-xyz
 L1-abc L2-xyz
 L1-wtc L2-abc L3-xyz
-L1-wat L2-wtc L3-abc L4-xyz
-L1-long L2-wat L3-wtc L4-abc L5-xyz
-L1-float L2-long L3-wat L4-wtc L5-abc L6-xyz
-L1-close L2-float L3-long L4-wat L5-wtc L6-abc L7-xyz
-L1-nearly L2-close L3-float L4-long L5-wat L6-wtc L7-abc L8-xyz
-L1-end L2-nearly L3-close L4-float L5-long L6-wat L7-wtc L8-abc L9-xyz
-L2-end L3-nearly L4-close L5-float L6-long L7-wat L8-wtc L9-abc L10-xyz
-L3-end L4-nearly L5-close L6-float L7-long L8-wat L9-wtc L10-abc
-L4-end L5-nearly L6-close L7-float L8-long L9-wat L10-wtc
-L5-end L6-nearly L7-close L8-float L9-long L10-wat
-L6-end L7-nearly L8-close L9-float L10-long
-L7-end L8-nearly L9-close L10-float
-L8-end L9-nearly L10-close
-L9-end L10-nearly
-L10-end
+L1-wat L2-wtc L3-abc
+L1-long L2-wat L3-wtc
+L1-float L2-long L3-wat
+L1-close L2-float L3-long
+L1-nearly L2-close L3-float
+L1-end L2-nearly L3-close
+L2-end L3-nearly
+L3-end

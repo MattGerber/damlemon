@@ -27,10 +27,12 @@ int		main()
 	if (!validateinput(heart))
 		erexit(heart, 3);
 	initroomnodes(heart);
-	visualiser = init_vis();
+	if (!(visualiser = (t_vis*)malloc(sizeof(t_vis))))
+		vis_error_free(NULL, "vis failed to init");
+	init_vis(visualiser);
 	populate_vis(visualiser);
 	init_loop(visualiser, heart);
-	vis_free(&visualiser);
+	vis_free(visualiser);
 	freeheart(heart);
 	return (0);
 }

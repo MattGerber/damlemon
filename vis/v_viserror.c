@@ -1,25 +1,25 @@
 #include "../includes/visualiser.h"
 
-void	vis_free(t_vis **vis)
+void	vis_free(t_vis *vis)
 {
 	int i;
 
 	i = 0;
-	if (vis && *vis)
+	if (vis)
 	{
-		SDL_DestroyTexture((*vis)->room);
-		SDL_DestroyTexture((*vis)->bg);
-		while((*vis)->ant[i])
-			SDL_DestroyTexture((*vis)->ant[i++]);
-		free((*vis)->ant);
+		SDL_DestroyTexture(vis->room);
+		SDL_DestroyTexture(vis->bg);
+		while(vis->ant[i])
+			SDL_DestroyTexture(vis->ant[i++]);
+		free(vis->ant);
 		i = 0;
-		while((*vis)->mirror[i])
-			SDL_DestroyTexture((*vis)->mirror[i++]);
-		SDL_DestroyRenderer((*vis)->rend);
-		SDL_DestroyWindow((*vis)->window);
+		while(vis->mirror[i])
+			SDL_DestroyTexture(vis->mirror[i++]);
+		free(vis->mirror);
+		SDL_DestroyRenderer(vis->rend);
+		SDL_DestroyWindow(vis->window);
 		SDL_Quit();
-		free(*vis);
-		(*vis) = NULL;
+		free(vis);
 	}
 }
 
