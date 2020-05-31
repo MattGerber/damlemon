@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rooms.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 20:18:59 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/19 18:42:26 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/31 15:37:38 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
 
-t_network	**poplinks(t_input *links, t_input *inputlist, int linkcount, t_heart *heart)
+t_network	**addlinks(t_input *links, t_input *inputlist, int linkcount, t_heart *heart)
 {
 	t_network	**linksarr;
 	t_input		*temp;
@@ -34,7 +34,7 @@ t_network	**poplinks(t_input *links, t_input *inputlist, int linkcount, t_heart 
 
 void	compilelinks(t_network *roomnode, t_input *inputlistlinks, t_input *inputlist, t_heart *heart)
 {
-	t_input		*links;//change to link list that can store IDS instead of names of rooms
+	t_input		*links;
 	char	**arr;
 	int		i;
 
@@ -59,7 +59,7 @@ void	compilelinks(t_network *roomnode, t_input *inputlistlinks, t_input *inputli
 		}
 		inputlistlinks = inputlistlinks->next;
 	}
-	roomnode->links = poplinks(links, inputlist, i, heart);
+	roomnode->links = addlinks(links, inputlist, i, heart);
 	freeinputlist(links);
 }
 
