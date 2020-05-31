@@ -6,7 +6,7 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 16:48:51 by ben               #+#    #+#             */
-/*   Updated: 2020/05/31 16:13:24 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/05/31 17:12:07 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ void	reinitartery(t_heart *heart)
 {
 	t_artery	*temp;
 	int			counter;
-	int			artlen;//remove this var
 
 	temp = *heart->artery;
-	artlen = arterylength(temp) + 1;
 	free(heart->artery);
 	heart->artery = NULL;
-	if (!(heart->artery = malloc(sizeof(t_artery *) * artlen)))
+	if (!(heart->artery = malloc(sizeof(t_artery *) * (arterylength(temp) + 1))))
 	{
 		freeartery(temp);
 		erexit(heart, 2);
