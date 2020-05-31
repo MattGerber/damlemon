@@ -7,59 +7,34 @@
 #                                                         #
 ##########################################################
 
-LIB = libft
-NAME_LEM = lemon
-CC = gcc
-FLAGS = -Wall -Werror -Wextra
-SRC_DIR = ./src/
-INC_DIR = ./includes/
-OBJ_DIR = ./src/
-OPTIONS = ./Libft/libft.a
-HDR = ./includes/lemon.h
 
-OBJ_LEM = src/*.c 
-# OBJ_LEM += $(OBJ_DIR)lemon.o $(OBJ_DIR)ants.o $(OBJ_DIR)free.o 
-# OBJ_LEM += $(OBJ_DIR)artery.o $(OBJ_DIR)bfs.o $(OBJ_DIR)error.o
-# OBJ_LEM += $(OBJ_DIR)queue.o $(OBJ_DIR)rooms.o $(OBJ_DIR)testing.o
-# OBJ_LEM += $(OBJ_DIR)visualise.o $(OBJ_DIR)pathing.o 
 
-all: $(LIB) $(NAME_LEM)
+all:
+	@(cd Libft; $(MAKE) all)
+	@(cd src; $(MAKE) all)
 
-$(LIB): 
-	@$(MAKE) -C Libft
-	@echo "[$(LIB)] compiled"
+clean: 
+	@$(MAKE) -C ./Libft clean
 
-# %.o: $(SRC_DIR)%.c $(HDR)
-# 	@$(CC) $(FLAGS) $(OPTIONS) -c $< -o $@
+fcleanlib:
+	@$(MAKE) -C ./Libft fclean
 
-$(NAME_LEM): $(OBJ_LEM)
-	@$(CC) $(FLAGS) $(OBJ_LEM) $(OPTIONS) -o $(NAME_LEM)
-	@echo "[$(NAME_LEM)] compiled"
-	# gcc src/*.c Libft/libft.a includes/lemon.h -o lemon
+fcleanlemon:
+	@$(MAKE) -C ./src fclean
 
-clean: cleanlib
-	@/bin/rm -f $(SRC_DIR)*.o
-	@echo "Object files removed"
-
-fclean: clean fcleanlib
-	@/bin/rm -f $(NAME_LEM)
-	@echo "[$(NAME_LEM)] removed"
+fclean: fcleanlib fcleanlemon
 
 re: fclean all
 
-relib:
-	@$(MAKE) -C ./Libft re
-
-cleanlib:
-	@$(MAKE) -C ./Libft clean
-
-fcleanlib: cleanlib
-	@$(MAKE) -C ./Libft fclean
+lem-in-time:
+	@$(MAKE) -C ./src lem-in-time
 
 
-	#OBJS specifies which files to compile as part of the project
+
+
+#OBJS specifies which files to compile as part of the project
 OBJ_VIS = vis/*.c
-NAME_VIS = visualiser 
+NAME_VIS = visualiser
 
 #CC specifies which compiler we're using
 

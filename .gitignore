@@ -4,3 +4,9 @@ a.out
 includes/lemon.h.gch
 .vscode
 calv
+*/*.o
+*/*.a
+lemon
+lem-in
+*.dSYM
+*.dSYM/*

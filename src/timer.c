@@ -1,15 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemon.c                                            :+:      :+:    :+:   */
+/*   timer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 18:21:57 by rbolton          ###   ########.fr       */
+/*   Created: 2020/05/29 15:19:13 by rbolton           #+#    #+#             */
+/*   Updated: 2020/05/31 17:12:42 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <time.h>	// for time()
+#include <unistd.h>	// for sleep()
 #include "../includes/lemon.h"
 
 void	initheart(t_heart *heart)
@@ -29,6 +32,10 @@ int	main(void)
 {
 	t_heart	*heart;
 
+  double time_spent = 0.0;
+  time_t begin = time(NULL);
+  clock_t start = clock();
+  
 	heart = malloc(sizeof(t_heart));
 	initheart(heart);
 	while (get_next_line(0, &(heart->buff)))
@@ -37,8 +44,6 @@ int	main(void)
 	if (!validateinput(heart))
 		erexit(heart, 3);
 	initroomnodes(heart);
-  if (!roomcoorddupes(heart))
-    erexit(heart, 3);
 	heart->network = *heart->inputchecks->start;
 	if(!bfs(heart))
 		erexit(heart, 1);
@@ -46,4 +51,10 @@ int	main(void)
   putinputlist(heart->input, 0);
 	qants(heart, initants(heart));
 	freeheart(heart);
+
+  time_t end = time(NULL);
+  clock_t finish = clock();
+  time_spent += (double)(finish - start) / CLOCKS_PER_SEC;
+  printf("\n[Real time elpased: %ld seconds]\n[CPU time elapsed: %f seconds]\n", (end - begin), time_spent);
+  return (0);
 }

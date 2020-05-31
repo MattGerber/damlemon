@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemon.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/14 14:57:42 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/31 18:20:37 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,9 @@ void						cleaninput(t_heart *heart);
 void						putinputnetwork(t_input *input);
 void						putartery(t_artery *artery, int showvein);
 int							roomdupes(t_input *roomnames);
-void						qants(t_heart *heart);
-void						initants(t_heart *heart);
+int             roomcoorddupes(t_heart *heart);
+void						qants(t_heart *heart, int activeveins);
+int							initants(t_heart *heart);
 void    					freevein(t_vein *vein);
 void						freeartery(t_artery *artery);
 void						freeroom(t_network *room);
@@ -122,6 +123,6 @@ void						sortpaths(t_heart *heart);
 int							arterylength(t_artery *artery);
 void						freeheart(t_heart *heart);
 void						freearr(char **arr);
-void						initheart(t_heart *heart);
+t_network	      **addlinks(t_input *links, t_input *inputlist, int linkcount, t_heart *heart);
 
 #endif
