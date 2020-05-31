@@ -37,11 +37,33 @@ typedef struct			s_ant
 	struct s_ant		*next;
 }						t_ant;
 
-int	v_atoi(const char *str);
-int		v_addinputnode(t_input **inputList, char *line);
-void	v_freeinputlist(t_input *inputlist);
-void	v_initchecks(t_inputchecks *checks);
-int		v_runinputchecks(t_heart *heart);
-int		v_validateinput(t_heart *heart);
+int						v_atoi(const char *str);
+int						v_addinputnode(t_input **inputList, char *line);
+void					v_freeinputlist(t_input *inputlist);
+void					v_initchecks(t_inputchecks *checks);
+int						v_runinputchecks(t_heart *heart);
+int						v_validateinput(t_heart *heart);
+void					draw_bg(t_vis *vis);
+void					drawlines(t_vis *vis, t_input *input);
+void					drawrooms(t_vis *vis, t_input *input);
+void							drawants(t_vis *vis, t_ant *input);
+void					*execmove(t_ant	*ants, char *move, t_input *rooms);
+t_vis					*init_vis(void);
+SDL_Window				*init_window(t_vis *vis);
+SDL_Renderer			*init_renderer(t_vis *vis);
+SDL_Texture				*init_texture(t_vis *vis, char *img_path);
+void					populate_vis(t_vis *vis);
+void					vis_free(t_vis **vis);
+void					vis_error_free(t_vis *vis, const char *error);
+SDL_Texture				**setsprites(t_vis *vis);
+SDL_Texture				**setmirror(t_vis *vis);
+void					populate_vis(t_vis *vis);
+t_ant					*v_initants(int ants);
+t_ant					*setstart(t_ant *ant, t_input *input);
+void					drawall(t_vis *visualiser, t_heart *heart, t_ant *ants);
+void					init_loop(t_vis *visualiser, t_heart *heart);
+void					vis_loop(t_vis *visualiser, t_heart *heart, t_ant *ants, t_input *movelist);
+int						eventcheck(t_vis *visualiser, t_heart *heart, t_ant *ants, t_input *movelist);
+void					free_ants(t_ant *ants);
 
 #endif

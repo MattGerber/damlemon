@@ -10,7 +10,7 @@
 				"-Wall",
 				"-Werror",
 				"-Wextra",
-				"${workspaceFolder}/src/*.c",
+				// "${workspaceFolder}/src/*.c",
 				"${workspaceFolder}/vis/*.c",
 				"${workspaceFolder}/Libft/libft.a",
 				"${workspaceFolder}/includes/visualiser.h",
