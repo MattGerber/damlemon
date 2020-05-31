@@ -6,7 +6,7 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 20:18:59 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 22:13:48 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/05/31 23:13:11 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,26 @@ void	compilelinks(t_network *roomnode, t_input *inputlistlinks, t_input *inputli
 			if (ft_strequ(arr[0], roomnode->name) || ft_strequ(arr[1], roomnode->name))
 			{
         tmp = links;
-        if (tmp) 
-        {
-          while (tmp->next)
+        if (!tmp) {
+          if (!(addinputnode(&links, ft_strdup(arr[ft_strequ(arr[0], roomnode->name)]))))
           {
-            ft_putendl("stuck");
+            freearr(arr);
+            erexit(heart, 2);
+          } 
+        } 
+        else
+        {
+          while (tmp)
+          {
             if (tmp->line)
             {
-              if (!(tmp->line == arr[0] || tmp->line == arr[0]))
+              if (!(ft_strequ(tmp->line, arr[0])) && !(ft_strequ(tmp->line, arr[1])))
                 tmp = tmp->next;
               else
                 break;
             }
           }
-          if (tmp->next == NULL && !(tmp->line == arr[0] || tmp->line == arr[0]))
+          if (tmp->next == NULL && !(ft_strequ(tmp->line, arr[0])) && !(ft_strequ(tmp->line, arr[1])))
           {
             if (!(addinputnode(&links, ft_strdup(arr[ft_strequ(arr[0], roomnode->name)]))))
             {
