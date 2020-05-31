@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputchecks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:05 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/14 14:59:57 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/31 16:39:56 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	islink(char *line, t_input *roomNames, t_heart *heart)
 int	roomdupes(t_input *roomnames)
 {
 	t_input	*temp;
+  t_input *start;
+  int coordsdupe;
 
+  start = roomnames;
 	while (roomnames->next)
 	{
 		temp = roomnames->next;
@@ -70,6 +73,25 @@ int	roomdupes(t_input *roomnames)
 			temp = temp->next;
 		}
 		roomnames = roomnames->next;
+	}
+  coordsdupe = roomcoorddupes(start);
+	return ((1 && (coordsdupe)) ? 1 : 0);
+}
+
+int roomcoorddupes(t_input *rooms)
+{
+  t_input *tmp;
+
+	while (rooms->next)
+	{
+		tmp = rooms->next;
+		while (tmp)
+		{
+			if ((rooms->roomnode->x == tmp->roomnode->x) && (rooms->roomnode->y == tmp->roomnode->y))
+				return (0);
+			tmp = tmp->next;
+		}
+		rooms = rooms->next;
 	}
 	return (1);
 }
