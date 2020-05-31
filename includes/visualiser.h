@@ -47,7 +47,7 @@ void					draw_bg(t_vis *vis);
 void					drawlines(t_vis *vis, t_input *input);
 void					drawrooms(t_vis *vis, t_input *input);
 void							drawants(t_vis *vis, t_ant *input);
-void					*execmove(t_ant	*ants, char *move, t_input *rooms);
+void					execmove(t_ant	*ants, char *move, t_input *rooms);
 t_vis					*init_vis(void);
 SDL_Window				*init_window(t_vis *vis);
 SDL_Renderer			*init_renderer(t_vis *vis);

@@ -49,7 +49,7 @@ t_ant	*setstart(t_ant *ant, t_input *input)
 	return (ant);
 }
 
-void	*execmove(t_ant	*ants, char *move, t_input *rooms)
+void	execmove(t_ant	*ants, char *move, t_input *rooms)
 {
 	char	**second;
 	t_ant	*anttmp;
@@ -106,6 +106,7 @@ int		eventcheck(t_vis *visualiser, t_heart *heart, t_ant *ants, t_input *movelis
 		if (event.type == SDL_KEYDOWN && KEY_R && !visualiser->active)
 		{
 			setstart(ants, heart->input);
+			exec = 2;
 		}
 	}
 	return (exec);

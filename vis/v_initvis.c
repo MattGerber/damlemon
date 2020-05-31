@@ -61,6 +61,7 @@ void	vis_loop(t_vis *visualiser, t_heart *heart, t_ant *ants, t_input *movelist)
 {
 	t_ant	*tmp;
 	t_input *tmpmove;
+	int		check;
 
 	tmp = ants;
 	tmpmove = movelist;
@@ -77,8 +78,16 @@ void	vis_loop(t_vis *visualiser, t_heart *heart, t_ant *ants, t_input *movelist)
 			visualiser->percent = 0.01;
 			visualiser->active = 0;
 		}
-		if (eventcheck(visualiser, heart, tmp, tmpmove))
+		check = eventcheck(visualiser, heart, tmp, tmpmove);
+		if (check == 1)
+		{
 			if (tmpmove)
 				tmpmove = tmpmove->next;
+		}
+		else if (check == 2)
+		{
+			setstart(ants, heart->input);
+			tmpmove = movelist;
+		}
 	}
 }
