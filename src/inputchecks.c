@@ -6,7 +6,7 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:05 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 13:13:22 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/05/31 15:21:45 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	isants(char *line)
 {
-	return (line && ft_isonly(line, ft_isdigit));
+	return (ft_isonly(line, ft_isdigit));
 }
 
 int	isroom(char *line, t_heart *heart)

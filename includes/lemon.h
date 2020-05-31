@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemon.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 17:12:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/14 14:57:42 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/31 15:11:50 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ void						sortpaths(t_heart *heart);
 int							arterylength(t_artery *artery);
 void						freeheart(t_heart *heart);
 void						freearr(char **arr);
+t_network	      **addlinks(t_input *links, t_input *inputlist, int linkcount, t_heart *heart);
 
 #endif
