@@ -6,7 +6,7 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:05 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 18:43:01 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/05/31 19:50:20 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	roomnameexists(char *name, t_input *roomNames)
 {
 	while (roomNames)
 	{
-		if (ft_strcmp(name, roomNames->line))
+		if (ft_strequ(name, roomNames->line))
 			return (1);
 		roomNames = roomNames->next;
 	}
