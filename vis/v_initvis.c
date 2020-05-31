@@ -10,8 +10,8 @@ t_vis			*init_vis(void)
 	vis->rend = NULL;
 	vis->bg = NULL;
 	vis->room = NULL;
-	vis->ant  = malloc(11 * sizeof(char *));
-	vis->mirror = malloc(11 * sizeof(char *));
+	vis->ant  =	malloc(11 * sizeof(SDL_Texture *));
+	vis->mirror =	malloc(11 * sizeof(SDL_Texture *));
 	vis->close = 0;
 	vis->active = 0;
 	vis->percent = 0;
