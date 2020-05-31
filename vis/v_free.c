@@ -58,7 +58,6 @@ void    freeheart(t_heart *heart)
 			free(heart->inputchecks);
 		freeinputlist(heart->input);
 		freetraffic(heart->traffic);
-		freeq(heart->queue);
 		free(heart);
 	}
 }

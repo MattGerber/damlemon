@@ -33,7 +33,7 @@ lem-in-time:
 
 
 #OBJS specifies which files to compile as part of the project
-OBJ_VIS = vis/*.c Libft/libft.a
+OBJ_VIS = vis/*.c src/error.c src/inputchecks.c Libft/libft.a
 NAME_VIS = visualiser
 
 #CC specifies which compiler we're using
