@@ -6,7 +6,7 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 15:07:46 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/05/31 17:08:01 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ int	main(void)
 	if(!bfs(heart))
 		erexit(heart, 1);
 	reinitartery(heart);
-	initants(heart);
   putinputlist(heart->input, 0);
-	qants(heart);
+	qants(heart, initants(heart));
 	freeheart(heart);
 }

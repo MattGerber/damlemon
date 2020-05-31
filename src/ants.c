@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ants.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/21 18:20:37 by ben              ###   ########.fr       */
+/*   Updated: 2020/05/31 16:20:14 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	putants(t_heart *heart)
 	t_traffic	*tmp;
 
 	ant = heart->traffic;
+	heart->ants++;
 	while (ant)
 	{
 		ant->veinnode = ant->veinnode->next;
@@ -66,30 +67,20 @@ int		addant(t_traffic **traffic, int	id, t_vein	*veinnode)
 	return (1);
 }
 
-void	qants(t_heart *heart)
+void	qants(t_heart *heart, int activeveins)
 {
 	int		id;
-	t_artery *artery;//add bool instead of heart ants
+	int		counter;
+	int		moves;
 
 	id = 1;
-	heart->ants = 1;
-	while (heart->ants)//while artery[sat-level]->ants
+	moves = 0;
+	while ((heart->artery[counter = 0]->ants > 0) || (heart->traffic))
 	{
-		artery = *heart->artery;
-		heart->ants = 0;
-		while (artery)
-		{
-			if (artery->ants)
-			{
-				if (!addant(&heart->traffic, id++, artery->vein))
-					erexit(heart, 2);
-				artery->ants--;
-				heart->ants = 1;
-			}
-			artery = artery->next;
-		}
+		while((counter < activeveins) && (heart->artery[counter]->ants-- > 0))
+			if (!addant(&heart->traffic, id++, heart->artery[counter++]->vein))
+				erexit(heart, 2);
 		putants(heart);
+		moves++;
 	}
-	while (heart->traffic)
-		putants(heart);
 }
