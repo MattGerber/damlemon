@@ -86,7 +86,7 @@ void	drawants(t_vis *vis, t_ant *input)
 			dims.x = temp->room->x - 20;
 			dims.y = temp->room->y - 20;
 		}
-		i = vis->percent * 1;
+		i = vis->percent * 10;
 
 			if (temp->prev && temp->room->x < temp->prev->x)
 				SDL_RenderCopy(vis->rend, vis->ant[i], NULL, &dims);

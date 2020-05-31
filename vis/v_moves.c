@@ -103,10 +103,10 @@ int		eventcheck(t_vis *visualiser, t_heart *heart, t_ant *ants, t_input *movelis
 			freearr(move);
 			exec = 1;
 		}
-		// if (event.type == SDL_KEYDOWN && KEY_R && !visualiser->active)
-		// {
-		// 	setstart(ants, heart->input);
-		// }
+		if (event.type == SDL_KEYDOWN && KEY_R && !visualiser->active)
+		{
+			setstart(ants, heart->input);
+		}
 	}
 	return (exec);
 }
