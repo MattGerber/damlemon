@@ -62,8 +62,13 @@ int		runinputchecks(t_heart *heart)
 
 	inputnode = heart->input;
 	inputchecks =  heart->inputchecks;
+	if (ft_strequ(inputnode->line,"ERROR"))
+		erexit(heart, 1);
+	else if (ft_strequ(inputnode->line ,"ERROR: Memory allocation failure."))
+		erexit(heart, 2);
 	while (inputnode)
 	{
+		
 		if (ft_strequ(inputnode->line, "##start") == 1)
 		{
 			if ((!inputnode->next) || (!isroom(inputnode->next->line, heart)) || inputchecks->start)
