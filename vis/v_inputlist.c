@@ -96,5 +96,4 @@ int		validateinput(t_heart *heart)
 		erexit(heart, 2);
 	initchecks(heart->inputchecks);
 	return (runinputchecks(heart));
-	//dupe links
 }

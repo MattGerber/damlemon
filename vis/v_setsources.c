@@ -18,7 +18,7 @@ SDL_Texture		*init_texture(t_vis *vis, char *img_path)
 }
 
 /*
-** Creates an array of sprites for they animation 
+** Creates an array of sprites for the animation 
 */
 
 void	setsprites(t_vis *vis)
