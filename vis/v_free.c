@@ -12,6 +12,10 @@
 
 #include "../includes/lemon.h"
 
+/*
+** All the functions to free the structor Lem-in creates
+*/
+
 void    freetraffic(t_traffic *traffic)
 {
     if (traffic)

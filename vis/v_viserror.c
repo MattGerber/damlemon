@@ -1,5 +1,9 @@
 #include "../includes/visualiser.h"
 
+/*
+** Frees visualiser and pointers
+*/
+
 void	vis_free(t_vis **vis)
 {
 	int i;
@@ -23,6 +27,10 @@ void	vis_free(t_vis **vis)
 	}
 }
 
+/*
+** Exits program and prints proper error message
+*/
+
 void	vis_error_free(t_vis *vis, const char *error)
 {
 	if (vis)
@@ -30,6 +38,10 @@ void	vis_error_free(t_vis *vis, const char *error)
 	ft_putstr_fd((char*)error, 2);
 	exit(1);
 }
+
+/*
+** Frees ants linked list
+*/
 
 void	free_ants(t_ant *ants)
 {

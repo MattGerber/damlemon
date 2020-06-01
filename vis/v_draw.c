@@ -1,5 +1,9 @@
 #include "../includes/visualiser.h"
 
+/*
+** Renders the background on the created window
+*/
+
 void		draw_bg(t_vis *vis)
 {
 	SDL_Rect	dims;
@@ -11,6 +15,9 @@ void		draw_bg(t_vis *vis)
 	SDL_RenderCopy(vis->rend, vis->bg, NULL, &dims);
 }
 
+/*
+** Renders links between rooms on the created window
+*/
 
 void drawlines(t_vis *vis, t_input *input)
 {
@@ -36,6 +43,9 @@ void drawlines(t_vis *vis, t_input *input)
 
 }
 
+/*
+** Renders rooms on the created window
+*/
 
 void drawrooms(t_vis *vis, t_input *input)
 {
@@ -62,6 +72,10 @@ void drawrooms(t_vis *vis, t_input *input)
 		temp = temp->next;
 	}
 }
+
+/*
+** Renders rooms on the created window
+*/
 
 void	drawants(t_vis *vis, t_ant *input)
 {
@@ -98,6 +112,10 @@ void	drawants(t_vis *vis, t_ant *input)
 
 	}
 }
+
+/*
+** Calls all the draw function
+*/
 
 void	drawall(t_vis *visualiser, t_heart *heart, t_ant *ants)
 {

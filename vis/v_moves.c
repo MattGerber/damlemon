@@ -1,5 +1,9 @@
 #include "../includes/visualiser.h"
 
+/*
+**	Creates a linked list for the ants that move through the rooms
+*/
+
 t_ant	*v_initants(int ants)
 {
 	t_ant	*head;
@@ -25,6 +29,10 @@ t_ant	*v_initants(int ants)
 	return(head);
 }
 
+/*
+** Set each ant to the starting room
+*/
+
 t_ant	*setstart(t_ant *ant, t_input *input)
 {
 	t_ant		*temp;
@@ -48,6 +56,10 @@ t_ant	*setstart(t_ant *ant, t_input *input)
 	}
 	return (ant);
 }
+
+/*
+** Changes ants current room based on current move being executed
+*/
 
 void	execmove(t_ant	*ants, char *move, t_input *rooms)
 {
@@ -77,6 +89,10 @@ void	execmove(t_ant	*ants, char *move, t_input *rooms)
 			}
 			freearr(second);
 }
+
+/*
+** Checks if any keys are pressed and executes neede functions
+*/
 
 int		eventcheck(t_vis *visualiser, t_heart *heart, t_ant *ants, t_input *movelist)
 {
