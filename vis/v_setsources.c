@@ -1,5 +1,9 @@
 #include "../includes/visualiser.h"
 
+/*
+** Creates a texture from an image and returns so a pointer is created
+*/
+
 SDL_Texture		*init_texture(t_vis *vis, char *img_path)
 {
 	SDL_Surface	*surface;
@@ -12,6 +16,10 @@ SDL_Texture		*init_texture(t_vis *vis, char *img_path)
 		vis_error_free(vis, SDL_GetError());
 	return (texture);
 }
+
+/*
+** Creates an array of sprites for they animation 
+*/
 
 void	setsprites(t_vis *vis)
 {
@@ -30,6 +38,10 @@ void	setsprites(t_vis *vis)
 	vis->ant[10] = NULL;
 }
 
+/*
+** Creates an array of mirror images so sprite can change directions
+*/
+
 void	setmirror(t_vis *vis)
 {
 
@@ -46,6 +58,10 @@ void	setmirror(t_vis *vis)
 	vis->mirror[10] = NULL;
 
 }
+
+/*
+** set pointers in visualiser struct
+*/
 
 void			populate_vis(t_vis *vis)
 {
