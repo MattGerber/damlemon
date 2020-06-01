@@ -12,6 +12,10 @@
 
 #include "../includes/lemon.h"
 
+/*
+** Modified Lem-in file to reuse structure formatted for vis
+*/
+
 int		addinputnode(t_input **inputList, char *line)
 {
 	t_input *curnode;

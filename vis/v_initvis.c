@@ -1,5 +1,9 @@
 #include "../includes/visualiser.h"
 
+/*
+** Mallocs main visualiser structor and sets default values
+*/
+
 t_vis			*init_vis(void)
 {
 	t_vis	*vis;
@@ -18,6 +22,10 @@ t_vis			*init_vis(void)
 	return (vis);
 }
 
+/*
+** Creates the window through SDL and returns it so a pointer can be set to it
+*/
+
 SDL_Window		*init_window(t_vis *vis)
 {
 	SDL_Window	*win;
@@ -30,6 +38,10 @@ SDL_Window		*init_window(t_vis *vis)
 	return (win);
 }
 
+/*
+** Creates the renderer through SDL and returns it so a pointer can be set to it
+*/
+
 SDL_Renderer	*init_renderer(t_vis *vis)
 {
 	SDL_Renderer	*ren;
@@ -40,6 +52,10 @@ SDL_Renderer	*init_renderer(t_vis *vis)
 		vis_error_free(vis, SDL_GetError());
 	return (ren);
 }
+
+/*
+** Initialises everything needed for the main visualiser loop
+*/
 
 void	init_loop(t_vis *visualiser, t_heart *heart)
 {
@@ -56,6 +72,10 @@ void	init_loop(t_vis *visualiser, t_heart *heart)
 	free_ants(ants);
 
 }
+
+/*
+** The main visualiser loop that calls the draw and animation functions
+*/
 
 void	vis_loop(t_vis *visualiser, t_heart *heart, t_ant *ants, t_input *movelist)
 {

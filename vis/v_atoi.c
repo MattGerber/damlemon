@@ -1,5 +1,9 @@
 #include "../includes/visualiser.h"
 
+/*
+** An atoi that ignores character until it finds a number
+*/
+
 int	v_atoi(const char *str)
 {
 	int	i;

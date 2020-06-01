@@ -12,6 +12,10 @@
 
 #include "../includes/lemon.h"
 
+/*
+** Modified Lem-in file to reuse structure formatted for vis
+*/
+
 t_network	**poplinks(t_input *links, t_input *inputlist, int linkcount, t_heart *heart)
 {
 	t_network	**linksarr;

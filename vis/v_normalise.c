@@ -1,5 +1,9 @@
 #include "../includes/visualiser.h"
 
+/*
+** Normalises coordinates so any map can be displayed
+*/
+
 void	normalise_coords(t_heart *heart)
 {	
 	int		bigx = 0;
