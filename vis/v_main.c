@@ -28,11 +28,7 @@ int		main()
 	if (!validateinput(heart))
 		erexit(heart, 3);
 	initroomnodes(heart);
-	// check_coords(heart);
-	while(change)
-	{
-		change = check_coords(heart);
-	}
+	normalise_coords(heart);
 	visualiser = init_vis();
 	populate_vis(visualiser);
 	init_loop(visualiser, heart);

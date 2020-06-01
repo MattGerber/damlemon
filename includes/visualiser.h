@@ -5,7 +5,7 @@
 # include "lemon.h"
 # include <stdbool.h>
 # include <SDL2/SDL.h>
-# include <GL/glew.h>
+// # include <GL/glew.h>
 # include <SDL2/SDL_image.h>
 # include <SDL2/SDL2_gfxPrimitives.h>
 
@@ -65,7 +65,7 @@ void					init_loop(t_vis *visualiser, t_heart *heart);
 void					vis_loop(t_vis *visualiser, t_heart *heart, t_ant *ants, t_input *movelist);
 int						eventcheck(t_vis *visualiser, t_heart *heart, t_ant *ants, t_input *movelist);
 void					free_ants(t_ant *ants);
-void					normalise_coords(t_input *room1);
+void					normalise_coords(t_heart *heart);
 int						check_coords(t_heart *heart);
 
 #endif
