@@ -5,7 +5,6 @@
 # include "lemon.h"
 # include <stdbool.h>
 # include <SDL2/SDL.h>
-// # include <GL/glew.h>
 # include <SDL2/SDL_image.h>
 # include <SDL2/SDL2_gfxPrimitives.h>
 

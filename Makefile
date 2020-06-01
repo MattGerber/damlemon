@@ -9,12 +9,11 @@
 
 
 
-all: $()
+all:
 	@(cd Libft; $(MAKE) all)
 	@(cd src; $(MAKE) all)
-	@(cd vis; $(MAKE) all)
 
-clean: 
+clean:
 	@$(MAKE) -C ./Libft clean
 
 fcleanlib:
@@ -24,11 +23,16 @@ fcleanlemon:
 	@$(MAKE) -C ./src fclean
 
 fcleanvisualiser:
-	@$(MAKE) -C ./vis fclean 
+	@$(MAKE) -C ./vis fclean
 
 fclean: fcleanlib fcleanlemon fcleanvisualiser
+	@rm -f output.txt
 
 re: fclean all
+
+visualiser:
+	@(cd Libft; $(MAKE) all)
+	@(cd vis; $(MAKE) all)
 
 lem-in-time:
 	@$(MAKE) -C ./src lem-in-time
