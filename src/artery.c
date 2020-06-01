@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   artery.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/11 12:05:55 by ben              ###   ########.fr       */
+/*   Updated: 2020/06/01 14:08:24 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
+
+/*
+** 
+*/
 
 int		veinlen(t_vein *vein)
 {

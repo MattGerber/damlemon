@@ -55,7 +55,7 @@ Before making the visualiser, ensure that the correct SDL libs are installed:
 
 If Homebrew is not installed this can be done with the following command:
 
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/Tolsadus/42homebrewfix/master/install.sh)"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 Terminal will need to be restarted after the install.
     
