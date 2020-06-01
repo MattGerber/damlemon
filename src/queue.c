@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   queue.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:36:38 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/04 14:27:09 by ben              ###   ########.fr       */
+/*   Updated: 2020/06/01 15:04:59 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
+
+/*
+** Adds a new t_queue node to the queue and sets it to point to the t_network node passed.
+*/
 
 void	pushq(t_queue **queue, t_queue *parent, t_network *node, t_heart *heart)
 {
@@ -30,6 +34,10 @@ void	pushq(t_queue **queue, t_queue *parent, t_network *node, t_heart *heart)
 	else
 		*queue = newnode;
 }
+
+/*
+** Custom free function to free the queue.
+*/
 
 void	freeq(t_queue *q)
 {

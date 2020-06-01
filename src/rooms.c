@@ -6,11 +6,15 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 20:18:59 by bwebb             #+#    #+#             */
-/*   Updated: 2020/06/01 12:27:39 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/06/01 15:09:36 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
+
+/*
+** Creates the links between the current roomnode and the linked rooms found.
+*/
 
 t_network	**addlinks(t_input *links, t_input *inputlist, int linkcount, t_heart *heart)
 {
@@ -31,6 +35,10 @@ t_network	**addlinks(t_input *links, t_input *inputlist, int linkcount, t_heart 
 	linksarr[linkcount] = NULL;
 	return(linksarr);
 }
+
+/*
+** Runs through the links input and finds links to the current roomnode.
+*/
 
 void	compilelinks(t_network *roomnode, t_input *inputlistlinks, t_input *inputlist, t_heart *heart)
 {
@@ -82,6 +90,11 @@ void	compilelinks(t_network *roomnode, t_input *inputlistlinks, t_input *inputli
 	freeinputlist(links);
 }
 
+/*
+** Loops through the input and stops at each roomnode.
+** When a roomnode is found, calls compileLinks() for that roomnode which compiles and adds the links to the current room.
+*/
+
 void	notenoughlinks(t_heart *heart, t_input	*inputlistlinks)
 {
 	t_input	*inputlist;
@@ -94,6 +107,10 @@ void	notenoughlinks(t_heart *heart, t_input	*inputlistlinks)
 		inputlist = inputlist->next;
 	}
 }
+
+/*
+** Triggers the initialisation of the room network.
+*/
 
 void	initroomnodes(t_heart *heart)
 {
@@ -131,6 +148,10 @@ void	initroomnodes(t_heart *heart)
 	(*heart->inputchecks->start)->start = 1;
 	(*heart->inputchecks->end)->end = 1;
 }
+
+/*
+** Custom free function to free a room in the room network.
+*/
 
 void	freeroom(t_network *room)
 {

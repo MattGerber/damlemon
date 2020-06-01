@@ -6,16 +6,24 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:05 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 19:50:20 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/06/01 14:46:01 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
 
+/*
+** Checks whether the first line of the map has valid ants.
+*/
+
 int	isants(char *line)
 {
 	return (ft_isonly(line, ft_isdigit));
 }
+
+/*
+** Checks whether the current line of the map is a valid room.
+*/
 
 int	isroom(char *line, t_heart *heart)
 {
@@ -31,6 +39,10 @@ int	isroom(char *line, t_heart *heart)
 	return (ret);
 }
 
+/*
+** Checks whether the room name in a link is a room name that exists in the rooms passed in the map.
+*/
+
 int	roomnameexists(char *name, t_input *roomNames)
 {
 	while (roomNames)
@@ -41,6 +53,10 @@ int	roomnameexists(char *name, t_input *roomNames)
 	}
 	return (0);
 }
+
+/*
+** Checks whether the current line of the map is a valid link.
+*/
 
 int	islink(char *line, t_input *roomNames, t_heart *heart)
 {
@@ -55,6 +71,10 @@ int	islink(char *line, t_input *roomNames, t_heart *heart)
 	freearr(arr);
 	return (ret);
 }
+
+/*
+** Checks for duplicate roomnames. Exits with an error if duplicates found.
+*/
 
 int	roomdupes(t_input *roomnames)
 {
@@ -73,6 +93,10 @@ int	roomdupes(t_input *roomnames)
 	}
 	return (1);
 }
+
+/*
+** Checks for duplicate room coordinates. Exits with an error if duplicates found.
+*/
 
 int roomcoorddupes(t_heart *heart)
 {

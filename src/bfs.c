@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 16:28:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/11 12:05:31 by ben              ###   ########.fr       */
+/*   Updated: 2020/06/01 14:40:52 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
+
+/*
+** Handles edge case where start and end are directly linked.
+** Stops BFS from infinitely adding the start-end link.
+*/
 
 void	cutedge(t_inputchecks *inchecks)
 {
@@ -28,6 +33,10 @@ void	cutedge(t_inputchecks *inchecks)
 	links[count] = NULL;
 }
 
+/*
+** Adds a node in the vein/path which points to the relevant roomnode for the current path.
+*/
+
 int		addveinnode(t_vein **vein, t_network *room, t_heart *heart)
 {
 	t_vein *newnode;
@@ -41,6 +50,15 @@ int		addveinnode(t_vein **vein, t_network *room, t_heart *heart)
 	return (room->start != 1);
 }
 
+/*
+** Starting at start, adds rooms to the queue that are one link away.
+** Then starts moving through the queue and adding to the back of the queue all next rooms
+** that are only one link away. Does this until end is found. 
+** Then runs through the queue in reverse looking for the parents that form this path to end
+** and adds the rooms to a vein/path for a new artery node.
+** This is done until no more paths to end exist.
+*/
+
 int		search(t_heart *heart, t_artery *artery)
 {
 	t_queue		*q;
@@ -48,7 +66,7 @@ int		search(t_heart *heart, t_artery *artery)
 
 	q = NULL;
 	pushq(&q, NULL, heart->network, heart);
-	while (1)//this is ew but idk what do do about it
+	while (1)
 	{
 		i = -1;
 		while (q->node->links[++i])
@@ -61,12 +79,16 @@ int		search(t_heart *heart, t_artery *artery)
 	}
 	i = (q->node->end) ? 1 : 0;
 	while ((i && addveinnode(&(artery->vein), q->node, heart)) || (!q->node->start))
-		q = q->parent;//unescessary memory saving
+		q = q->parent;
 	freeq(q);
 	if (i && artery->vein->next->node->end)
 		cutedge(heart->inputchecks);
 	return (i);
 }
+
+/*
+** Triggers the Breadth First Search algorithm.
+*/
 
 int		bfs(t_heart *heart)
 {

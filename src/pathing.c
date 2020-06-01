@@ -6,11 +6,15 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 16:48:51 by ben               #+#    #+#             */
-/*   Updated: 2020/05/31 17:12:07 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/06/01 15:02:25 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
+
+/*
+** Reinitiliases the artery pointer in heart so that each pointer in the doubled pointed artery link list is stored in an array.
+*/
 
 void	reinitartery(t_heart *heart)
 {
@@ -34,6 +38,11 @@ void	reinitartery(t_heart *heart)
 	}
 	heart->artery[counter] = temp;
 }
+
+/*
+** Stores the move difference between each adjacent path in an array.
+** This is used to calculate the optimal ant allocation.
+*/
 
 int		*initpathdifs(t_heart *heart)
 {
@@ -74,11 +83,17 @@ int		slowassign(t_heart *heart)
 	return (counter1);
 }
 
+/*
+** Calls the various functions needed to allocate ants to paths.
+** Returns the number of ants (satpath) needed to saturate the map with ants if each path was as long as the longest path.
+** In other words, counts how many ants could move through each shorter path before with the same move count as moving them through the longest path.
+*/
+
 int		initants(t_heart *heart)
 {
 	int			satpath;
 	int			counter;
-	int			arterylen;//make var for heart->artery
+	int			arterylen;
 
 	satpath = 0;
 	counter = 0;

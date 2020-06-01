@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   testing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 09:47:19 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/31 16:31:34 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/06/01 15:10:25 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
+
+/*
+** Custom functions for the printing of the various structs for testing and dedugging.
+*/
 
 void	putinputchecks(t_inputchecks *checks)
 {

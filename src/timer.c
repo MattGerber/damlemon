@@ -6,7 +6,7 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/29 15:19:13 by rbolton           #+#    #+#             */
-/*   Updated: 2020/05/31 17:12:42 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/06/01 15:12:03 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include <time.h>	// for time()
 #include <unistd.h>	// for sleep()
 #include "../includes/lemon.h"
+
+/*
+** Equivalent of lemon.c, except main includes time stamps for culculating programme runtime.
+*/
 
 void	initheart(t_heart *heart)
 {

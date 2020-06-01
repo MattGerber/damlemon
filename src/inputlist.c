@@ -6,11 +6,15 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 09:36:33 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 17:30:37 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/06/01 14:51:13 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
+
+/*
+** Creates a linked list for input. Each line read is a node in the list.
+*/
 
 int		addinputnode(t_input **inputList, char *line)
 {
@@ -32,6 +36,10 @@ int		addinputnode(t_input **inputList, char *line)
 	return (1);
 }
 
+/*
+** Custom free function for inputlist.
+*/
+
 void	freeinputlist(t_input *inputlist)
 {
 	if (inputlist)
@@ -46,6 +54,10 @@ void	freeinputlist(t_input *inputlist)
 	}
 }
 
+/*
+** Initialises the checking variables which will be used for validation
+*/
+
 void	initchecks(t_inputchecks *checks)
 {
 	checks->ants = 0;
@@ -54,6 +66,11 @@ void	initchecks(t_inputchecks *checks)
 	checks->rooms = 0;
 	checks->start = NULL;
 }
+
+/*
+** Runs through input, checking and setting validation variables.
+** Returns 1 if input checks pass and 0 if they fail.
+*/
 
 int		runinputchecks(t_heart *heart)
 {
@@ -113,6 +130,11 @@ int		runinputchecks(t_heart *heart)
 	freeinputlist(roomnames);
 	return (inputchecks->ants && inputchecks->rooms && inputchecks->links && inputchecks->start && inputchecks->end);
 }
+
+/*
+** Triggers input validation. Returns the result of runinputchecks().
+** Returns 1 if validation passes and 0 if it fails.
+*/
 
 int		validateinput(t_heart *heart)
 {
