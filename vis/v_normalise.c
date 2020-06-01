@@ -43,9 +43,3 @@ void	normalise_coords(t_heart *heart)
 	}
 
 }
-
-// int		find_big()
-// {}
-
-// int		find_small()
-// {}

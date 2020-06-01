@@ -65,6 +65,5 @@ void					vis_loop(t_vis *visualiser, t_heart *heart, t_ant *ants, t_input *movel
 int						eventcheck(t_vis *visualiser, t_heart *heart, t_ant *ants, t_input *movelist);
 void					free_ants(t_ant *ants);
 void					normalise_coords(t_heart *heart);
-int						check_coords(t_heart *heart);
 
 #endif
