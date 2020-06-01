@@ -6,7 +6,7 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 20:18:59 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 23:13:11 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/06/01 11:52:35 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ t_network	**addlinks(t_input *links, t_input *inputlist, int linkcount, t_heart 
 	}
 	linksarr[linkcount] = NULL;
 	return(linksarr);
-}//loop throught inputlist and delete room from linkslist when its found in inputlist
+}
 
 void	compilelinks(t_network *roomnode, t_input *inputlistlinks, t_input *inputlist, t_heart *heart)
 {
 	t_input		*links;
+	t_input		*tmp;
+	char		*linkedroomname;
 	char	**arr;
 	int		i;
-  t_input   *tmp;
-  
 
 	i = 0;
 	links = NULL;
@@ -50,36 +50,29 @@ void	compilelinks(t_network *roomnode, t_input *inputlistlinks, t_input *inputli
 				erexit(heart, 2);
 			if (ft_strequ(arr[0], roomnode->name) || ft_strequ(arr[1], roomnode->name))
 			{
-        tmp = links;
-        if (!tmp) {
-          if (!(addinputnode(&links, ft_strdup(arr[ft_strequ(arr[0], roomnode->name)]))))
-          {
-            freearr(arr);
-            erexit(heart, 2);
-          } 
-        } 
-        else
-        {
-          while (tmp)
-          {
-            if (tmp->line)
-            {
-              if (!(ft_strequ(tmp->line, arr[0])) && !(ft_strequ(tmp->line, arr[1])))
-                tmp = tmp->next;
-              else
-                break;
-            }
-          }
-          if (tmp->next == NULL && !(ft_strequ(tmp->line, arr[0])) && !(ft_strequ(tmp->line, arr[1])))
-          {
-            if (!(addinputnode(&links, ft_strdup(arr[ft_strequ(arr[0], roomnode->name)]))))
-            {
-              freearr(arr);
-              erexit(heart, 2);
-            } 
-          }
-        }
-				i++;
+				tmp = links;
+				linkedroomname = ft_strdup(arr[ft_strequ(arr[0], roomnode->name)]);
+
+				while (tmp)
+				{
+					if (ft_strequ(roomnode->name, linkedroomname))
+						break ;
+					tmp = tmp->next;
+				}
+
+				if (!tmp)
+				{
+					if (!(addinputnode(&links, linkedroomname)))
+					{
+						freearr(arr);
+						free(linkedroomname);
+						freeinputlist(links);
+						erexit(heart, 2);
+					}
+					i++;
+				}
+				else
+					free(linkedroomname);
 			}
 			freearr(arr);
 		}
@@ -92,10 +85,10 @@ void	compilelinks(t_network *roomnode, t_input *inputlistlinks, t_input *inputli
 void	notenoughlinks(t_heart *heart, t_input	*inputlistlinks)
 {
 	t_input	*inputlist;
-
-	inputlist = heart->input;//set to second in list to skip ants
-	while(!islink(inputlist->line, NULL, heart))//while not end of inputlsit
+	inputlist = heart->input;
+	while(!islink(inputlist->line, NULL, heart))
 	{
+
 		if (inputlist->roomnode)
 			compilelinks(inputlist->roomnode, inputlistlinks, heart->input, heart);
 		inputlist = inputlist->next;
