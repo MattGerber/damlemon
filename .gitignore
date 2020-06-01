@@ -10,3 +10,5 @@ lemon
 lem-in
 *.dSYM
 *.dSYM/*
+visualiser
+output.txt
