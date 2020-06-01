@@ -3,7 +3,7 @@ import subprocess
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 output = open(THIS_FOLDER + "/output.txt", "w+")
 my_lemin = os.path.join(THIS_FOLDER, "lem-in")
-for filename in sorted(os.listdir('/Users/rachelbolton/Documents/fresh_lemons/maps')):
+for filename in sorted(os.listdir(THIS_FOLDER + '/maps')):
     my_file = os.path.join(THIS_FOLDER, "maps/" + filename)
     cmd = my_lemin + ' < ' + my_file
     so = os.popen(cmd).read()
