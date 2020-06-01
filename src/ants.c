@@ -6,11 +6,15 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:49:16 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 16:20:14 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/06/01 14:05:39 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
+
+/*
+** Writes the ant moves to stdout.
+*/
 
 void	putants(t_heart *heart)
 {
@@ -46,6 +50,10 @@ void	putants(t_heart *heart)
 	ft_putendl("");
 }
 
+/*
+** Each subsequent call of addant() adds ants to the link list used in putants().
+*/
+
 int		addant(t_traffic **traffic, int	id, t_vein	*veinnode)
 {
 	t_traffic *curnode;
@@ -66,6 +74,10 @@ int		addant(t_traffic **traffic, int	id, t_vein	*veinnode)
 		*traffic = newnode;
 	return (1);
 }
+
+/*
+** Triggers queueing of ants for each vein/path.
+*/
 
 void	qants(t_heart *heart, int activeveins)
 {

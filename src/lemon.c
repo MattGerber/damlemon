@@ -6,11 +6,15 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:26:04 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 18:21:57 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/06/01 14:52:49 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
+
+/*
+** Initialises the heart struct which is passed around as a type of "state store" for the programme.
+*/
 
 void	initheart(t_heart *heart)
 {

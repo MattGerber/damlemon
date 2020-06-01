@@ -41,6 +41,37 @@ To initialise the directory run `git submodule init` followed by `git submodule 
 
 If during the course of work, the submodule is updated and you would like the updated data on your branch, run `git submodule update --remote Libft`.
 
+## Running Lem-in with Visualiser:
+
+Before making the visualiser, ensure that the correct SDL libs are installed:
+- Linux:
+
+      sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-gfx-dev libsdl2-ttf-dev
+
+- MacOS:
+
+      brew install SDL2 SDL2_gfx SDL2_image SDL2_ttf
+
+
+If Homebrew is not installed this can be done with the following command:
+
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+Terminal will need to be restarted after the install.
+    
+To use the visualiser:
+
+1. Run `make visualiser` at the root of the repo.
+1. Run lem-in as described in the previous section and pipe the output to the visualiser: `$ ./lem-in < testfile.map | ./visualiser`
+1. Use the visualiser commands to run through the visualisation.
+
+Visualiser keyboard commands:
+- "n" - Next
+- "r" - Reset
+- "q" - Quit
+
+<img src="vis/resources/visualiser_preview.png">
+
 ## Output Formats:
 
     pdf2_1 correct output

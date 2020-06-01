@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:08:09 by ben               #+#    #+#             */
-/*   Updated: 2020/05/19 17:31:49 by ben              ###   ########.fr       */
+/*   Updated: 2020/06/01 14:42:25 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
+
+/*
+** Customised free functions for each of the struct types used in the project.
+*/
 
 void    freetraffic(t_traffic *traffic)
 {

@@ -6,11 +6,15 @@
 /*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 11:19:07 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/31 12:56:56 by rbolton          ###   ########.fr       */
+/*   Updated: 2020/06/01 14:41:48 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
+
+/*
+** Error handling.
+*/
 
 void	erexit(t_heart *heart, int errorcode)
 {

@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   artery.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rbolton <rbolton@student.wethinkcode.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 22:45:06 by bwebb             #+#    #+#             */
-/*   Updated: 2020/05/11 12:05:55 by ben              ###   ########.fr       */
+/*   Updated: 2020/06/01 14:23:34 by rbolton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemon.h"
+
+/*
+** Counts the length of a vein/path.
+*/
 
 int		veinlen(t_vein *vein)
 {
@@ -24,6 +28,10 @@ int		veinlen(t_vein *vein)
 	}
 	return (i);
 }
+
+/*
+** Adds a node to the link list that holds the paths; essentially a pointer to a new path.
+*/
 
 t_artery	*addarterynode(t_heart *heart, int id)
 {
@@ -47,6 +55,8 @@ t_artery	*addarterynode(t_heart *heart, int id)
 	return (newnode);
 }
 
+
+
 void	popart(t_heart *heart)
 {
 	t_artery	*prev;
@@ -69,6 +79,11 @@ void	popart(t_heart *heart)
 			*heart->artery = NULL;
 	}
 }
+
+/*
+** Counts the number of nodes in the artery. Each node is has a link to a vein/path.
+** Essentially counts the number of paths currently in the heart.
+*/
 
 int		arterylength(t_artery *artery)
 {
